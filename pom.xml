@@ -145,6 +145,14 @@
 		</dependency>
 		<!-- mybatis e 2022.02.13 -->
 		
+		<!-- @Resource in DAO: multi db connection : s 2022.02.13 -->
+		<dependency>
+		    <groupId>javax.annotation</groupId>
+		    <artifactId>javax.annotation-api</artifactId>
+		    <version>1.3.2</version>
+		</dependency>
+		<!-- @Resource in DAO: multi db connection : e 2022.02.13 -->
+		
 		<!-- mysql s 2022.02.25 -->
 		<dependency>
 			<groupId>mysql</groupId>
