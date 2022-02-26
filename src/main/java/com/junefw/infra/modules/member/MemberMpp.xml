@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.junefw.infra.modules.member.MemberMpp">
+
+    <resultMap id="resultMapObj" type="com.junefw.infra.modules.member.Member"></resultMap>
+	
+	<sql id ="selectCommon">
+		from 
+			infrMember a
+		where 1=1
+			<if test="shDelNy != null and !shDelNy.equals('')">AND ifmmDelNy = #{shDelNy}</if>
+			<choose>
+				<when test="shDateOption == 1">and regDate like CONCAT('%',#{shValue},'%')</when>
+				<when test="shDateOption == 2">and ifmmId like CONCAT('%',#{shValue},'%')</when>
+			</choose>
+			<choose>
+				<when test="shOption == 1">and ifmmName like CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 2">and ifmmId like CONCAT('%',#{shValue},'%')</when>
+			</choose>
+			
+	</sql>
+	
+	<select id="selectList" resultMap="resultMapObj">
+		<include refid="Base.selectListUpperForMysql" />
+			select
+				*
+		<include refid="selectCommon" />
+			order by a.ifmmSeq desc
+		<include refid="Base.selectListLowerForMysql" />
+	</select>
+	
+	<select id="selectOneCount" resultType="Integer">
+		select count(*)
+		<include refid="selectCommon" />
+	</select>
+	
+	<select id="selectOne" resultMap="resultMapObj">
+		select
+			a.ifmmSeq
+			,a.ifmmName
+			,a.ifmmId
+		from
+			infrMember a
+		where 1=1
+			and ifmmSeq = #{ifmmSeq}
+	</select>
+	
+	<insert id="insert">
+		insert into infrMember (
+			ifmmName
+			,ifmmId
+			,ifmmDelNy			
+		)
+		values (
+			#{ifmmName}
+			,#{ifmmId}
+			,0
+		)
+		 <selectKey resultType="String" keyProperty="ifmmSeq" order="AFTER">
+			select last_insert_id()
+		 </selectKey>
+	</insert>
+
+	<update id="update">
+		update
+			infrMember
+		set
+			ifmmName = #{ifmmName} 
+		where 1=1
+			and ifmmSeq = #{ifmmSeq}
+	</update>
+	
+	<update id="uelete">
+		update infrMember set ifmmDelNy = 1 where ifmmSeq = #{ifmmSeq}
+	</update>
+	
+	<delete id="delete">
+		delete from infrMember where ifmmSeq = #{ifmmSeq}
+	</delete>
+</mapper>
+
+
+
