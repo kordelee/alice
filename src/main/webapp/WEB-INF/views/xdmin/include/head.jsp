@@ -17,5 +17,7 @@
 	<link href="/resources/common/bootstrap/bootstrap-5.1.3-dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap extra CSS -->    
     <link href="/resources/xdmin/css/bootstrap/sidebars.css" rel="stylesheet">
+    <!-- jquery ui CSS -->    
+    <link href="/resources/common/jquery/jquery-ui-1.13.1.custom/jquery-ui.css" rel="stylesheet">    
     <!-- user css -->
     <link rel="stylesheet" href="/resources/xdmin/css/commonXdmin.css" />

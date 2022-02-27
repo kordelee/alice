@@ -5,7 +5,8 @@
 <!-- head e -->
 
 <style type="text/css">
-	
+
+
 </style>
 </head>
 <body>
@@ -160,8 +161,8 @@
               </select>
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="memDob" class="form-label">생일</label>
-            <input type="text" id="memDob" name="memDob" value="" placeholder="" class="form-control form-control-sm" >          
+            <label for="ifmmDob" class="form-label">생일</label>
+            <input type="text" id="datepicker" name="ifmmDob" value="" placeholder="" class="form-control form-control-sm" >          
         </div>
     </div>    
     <div class="row mt-sm-4">    
@@ -319,7 +320,7 @@
 <script>
 
 	$(document).ready(function(){
-
+		 $( "#datepicker" ).datepicker();
 	}); 
 	
 	var goUrlList = "/member/memberList"; 			/* #-> */
