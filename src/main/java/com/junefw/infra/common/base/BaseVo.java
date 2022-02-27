@@ -27,7 +27,7 @@ public class BaseVo {
 	private Integer shDateOption;
 	private Date shStartDate;
 	private Date shEndDate;
-	private String shOption;
+	private Integer shOption;
 	private String ShValue;
 //	----------
 
@@ -37,7 +37,11 @@ public class BaseVo {
 
 		setTotalRows(totalRows);
 
-		setTotalPages(getTotalRows() / getRowNumToShow());
+		if (getTotalRows() == 0) {
+			setTotalPages(1);
+		} else {
+			setTotalPages(getTotalRows() / getRowNumToShow());
+		}
 
 		if (getTotalRows() % getRowNumToShow() > 0) {
 			setTotalPages(getTotalPages() + 1);
@@ -80,135 +84,135 @@ public class BaseVo {
 	public int getThisPage() {
 		return thisPage;
 	}
-	
+
 	public void setThisPage(int thisPage) {
 		this.thisPage = thisPage;
 	}
-	
+
 	public int getRowNumToShow() {
 		return rowNumToShow;
 	}
-	
+
 	public void setRowNumToShow(int rowNumToShow) {
 		this.rowNumToShow = rowNumToShow;
 	}
-	
+
 	public int getPageNumToShow() {
 		return pageNumToShow;
 	}
-	
+
 	public void setPageNumToShow(int pageNumToShow) {
 		this.pageNumToShow = pageNumToShow;
 	}
-	
+
 	public int getTotalRows() {
 		return totalRows;
 	}
-	
+
 	public void setTotalRows(int totalRows) {
 		this.totalRows = totalRows;
 	}
-	
+
 	public int getTotalPages() {
 		return totalPages;
 	}
-	
+
 	public void setTotalPages(int totalPages) {
 		this.totalPages = totalPages;
 	}
-	
+
 	public int getStartPage() {
 		return startPage;
 	}
-	
+
 	public void setStartPage(int startPage) {
 		this.startPage = startPage;
 	}
-	
+
 	public int getEndPage() {
 		return endPage;
 	}
-	
+
 	public void setEndPage(int endPage) {
 		this.endPage = endPage;
 	}
-	
+
 	public int getStartRnumForOracle() {
 		return startRnumForOracle;
 	}
-	
+
 	public void setStartRnumForOracle(int startRnumForOracle) {
 		this.startRnumForOracle = startRnumForOracle;
 	}
-	
+
 	public int getEndRnumForOracle() {
 		return endRnumForOracle;
 	}
-	
+
 	public void setEndRnumForOracle(int endRnumForOracle) {
 		this.endRnumForOracle = endRnumForOracle;
 	}
-	
+
 	public Integer getRNUM() {
 		return RNUM;
 	}
-	
+
 	public void setRNUM(Integer rNUM) {
 		RNUM = rNUM;
 	}
-	
+
 	public int getStartRnumForMysql() {
 		return startRnumForMysql;
 	}
-	
+
 	public void setStartRnumForMysql(int startRnumForMysql) {
 		this.startRnumForMysql = startRnumForMysql;
 	}
-	
+
 	public Integer getShDelNy() {
 		return shDelNy;
 	}
-	
+
 	public void setShDelNy(Integer shDelNy) {
 		this.shDelNy = shDelNy;
 	}
-	
+
 	public Integer getShDateOption() {
 		return shDateOption;
 	}
-	
+
 	public void setShDateOption(Integer shDateOption) {
 		this.shDateOption = shDateOption;
 	}
-	
+
 	public Date getShStartDate() {
 		return shStartDate;
 	}
-	
+
 	public void setShStartDate(Date shStartDate) {
 		this.shStartDate = shStartDate;
 	}
-	
+
 	public Date getShEndDate() {
 		return shEndDate;
 	}
-	
+
 	public void setShEndDate(Date shEndDate) {
 		this.shEndDate = shEndDate;
 	}
-	
-	public String getShOption() {
+
+	public Integer getShOption() {
 		return shOption;
 	}
-	
-	public void setShOption(String shOption) {
+
+	public void setShOption(Integer shOption) {
 		this.shOption = shOption;
 	}
-	
+
 	public String getShValue() {
 		return ShValue;
 	}
-	
+
 	public void setShValue(String shValue) {
 		ShValue = shValue;
 	}

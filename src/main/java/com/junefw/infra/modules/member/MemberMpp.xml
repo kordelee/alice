@@ -30,7 +30,9 @@
 				*
 		<include refid="selectCommon" />
 			order by a.ifmmSeq desc
+			<include refid="Base.orderByLimitForMysql" />
 		<include refid="Base.selectListLowerForMysql" />
+			
 	</select>
 	
 	<select id="selectOneCount" resultType="Integer">
