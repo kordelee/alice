@@ -2,6 +2,8 @@ package com.junefw.infra.modules.member;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.junefw.infra.common.base.Base;
 
 public class Member extends Base {
@@ -15,6 +17,7 @@ public class Member extends Base {
 	private Date ifmmPwdModDate ;
 	private String ifmmNickname = "";
 	private Integer ifmmGenderCd = 0;
+	@DateTimeFormat(pattern = "yyyy-mm-dd")
 	private Date ifmmDob;
 	private Integer ifmmSavedCd = 0;
 	private Integer ifmmMarriageCd = 0;

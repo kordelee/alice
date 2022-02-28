@@ -55,11 +55,13 @@
 		insert into infrMember (
 			ifmmName
 			,ifmmId
+			,ifmmDob
 			,ifmmDelNy			
 		)
 		values (
 			#{ifmmName}
 			,#{ifmmId}
+			,#{ifmmDob}
 			,0
 		)
 		 <selectKey resultType="String" keyProperty="ifmmSeq" order="AFTER">
