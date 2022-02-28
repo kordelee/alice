@@ -162,7 +162,7 @@
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
             <label for="ifmmDob" class="form-label">생일</label>
-            <input type="text" id="ifmmDob" name="ifmmDob" value="" placeholder="" class="form-control form-control-sm" >          
+            <input type="text" id="ifmmDob" name="ifmmDob" value="<fmt:formatDate value="${rt.ifmmDob }" pattern="yyyy-MM-dd"/>" placeholder="" class="form-control form-control-sm" >          
         </div>
     </div>    
     <div class="row mt-sm-4">    

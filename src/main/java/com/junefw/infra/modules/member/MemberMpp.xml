@@ -45,6 +45,7 @@
 			a.ifmmSeq
 			,a.ifmmName
 			,a.ifmmId
+			,a.ifmmDob
 		from
 			infrMember a
 		where 1=1
@@ -73,7 +74,9 @@
 		update
 			infrMember
 		set
-			ifmmName = #{ifmmName} 
+			ifmmID = #{ifmmId}
+			ifmmName = #{ifmmName}
+			ifmmDob = #{ifmmDob} 
 		where 1=1
 			and ifmmSeq = #{ifmmSeq}
 	</update>
