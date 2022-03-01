@@ -68,7 +68,7 @@
 		values (
 			#{ifmmName}
 			,#{ifmmId}
-			,DATE_FORMAT(#{ifmmDob}, '%Y-%m-%d')
+			,#{ifmmDob}
 			,0
 		)
 		 <selectKey resultType="String" keyProperty="ifmmSeq" order="AFTER">
@@ -83,7 +83,7 @@
 		set
 			ifmmID = #{ifmmId}
 			,ifmmName = #{ifmmName}
-			,ifmmDob = DATE_FORMAT(#{ifmmDob}, '%Y-%m-%d')
+			,ifmmDob = #{ifmmDob}
 		where 1=1
 			and ifmmSeq = #{ifmmSeq}
 	</update>
