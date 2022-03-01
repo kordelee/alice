@@ -112,36 +112,37 @@
 <div id="divSearch" class="container-fluid border px-0 mt-2 py-2 py-sm-3">
     <div class="row row-cols-2 row-cols-sm-6 g-2 px-2">
         <div class="col">
-            <select class="form-select form-select-sm" name="shDelNy" id="shDelNy">
+            <select id="shDelNy" name="shDelNy" class="form-select form-select-sm">
                 <option value="" <c:if test="${empty vo.shDelNy}">selected</c:if>>삭제여부</option>
                 <option value="1" <c:if test="${vo.shDelNy eq 1}">selected</c:if>>Y</option>
                 <option value="0" <c:if test="${vo.shDelNy eq 0}">selected</c:if>>N</option>
             </select>
         </div>
         <div class="col">
-            <select class="form-select form-select-sm" name="shDateOption" id="shDateOption">
+            <select id="shDateOption" name="shDateOption" class="form-select form-select-sm">
                 <option value="" <c:if test="${empty vo.shDateOption}">selected</c:if>>날짜</option>
                 <option value="1" <c:if test="${vo.shDateOption eq 1}">selected</c:if>>등록일</option>
                 <option value="2" <c:if test="${vo.shDateOption eq 2}">selected</c:if>>수정일</option>
+                <option value="3" <c:if test="${vo.shDateOption eq 3}">selected</c:if>>생일</option>
             </select>
         </div>  
         <div class="col">
-            <input class="form-control form-control-sm" type="date" placeholder="시작일" name="shDateStart" id="shDateStart" value="">
+            <input type="text" id="shDateStart" name="shDateStart" value="<c:out value="${vo.shDateStart }"/>" placeholder="시작일" class="form-control form-control-sm">
         </div>              
         <div class="col">
-            <input class="form-control form-control-sm" type="date" placeholder="종료일" name="shDateEnd" id="shDateEnd" value="">
+	        <input type="text" id="shDateEnd" name="shDateEnd" value="<c:out value="${vo.shDateEnd }"/>" placeholder="종료일" class="form-control form-control-sm">
         </div> 
     </div>
     <div class="row row-cols-2 row-cols-sm-6 g-2 mt-1 px-2">
         <div class="col">
-            <select class="form-select form-select-sm" name="shOption" id="shOption">
+            <select id="shOption" name="shOption" class="form-select form-select-sm">
                 <option value="" <c:if test="${empty vo.shOption}">selected</c:if>>검색구분</option>
                 <option value="1" <c:if test="${vo.shOption eq 1}">selected</c:if>>이름</option>
                 <option value="2" <c:if test="${vo.shOption eq 2}">selected</c:if>>아이디</option>
             </select>
         </div>                    
         <div class="col">
-            <input class="form-control form-control-sm" type="text" placeholder="검색어" name="shValue" id="shValue" value="<c:out value="${vo.shValue }"/>">
+            <input type="text" id="shValue" name="shValue" value="<c:out value="${vo.shValue }"/>" placeholder="검색어" class="form-control form-control-sm">
         </div> 
         <div class="col">
 			<button type="button" class="btn btn-warning btn-sm" name="" id="btnSearch"><i class="fas fa-search"></i></button>
@@ -252,6 +253,7 @@
 
 	$(document).ready(function(){
 		divSearchControl();
+		 $("#shDateStart, #shDateEnd").datepicker();
 	}); 
 
 	

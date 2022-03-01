@@ -17,6 +17,7 @@
 			<choose>
 				<when test="shDateOption == 1">and regDate like CONCAT('%',#{shValue},'%')</when>
 				<when test="shDateOption == 2">and ifmmId like CONCAT('%',#{shValue},'%')</when>
+				<when test="shDateOption == 3">and ifmmDob BETWEEN #{shDateStart} AND #{shDateEnd}</when>
 			</choose>
 			<choose>
 				<when test="shOption == 1">and ifmmName like CONCAT('%',#{shValue},'%')</when>

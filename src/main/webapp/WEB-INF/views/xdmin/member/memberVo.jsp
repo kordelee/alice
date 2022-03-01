@@ -5,10 +5,10 @@
 
 <input type="hidden" name="shDelNy" value="<c:out value="${vo.shDelNy}"/>"/>
 <input type="hidden" name="shDateOption" value="<c:out value="${vo.shDateOption}"/>"/>
-<%-- 
-<input type="hidden" name="shStartDate" value="<c:out value="${vo.shStartDate}"/>"/>
-<input type="hidden" name="shEndDate" value="<c:out value="${vo.shEndDate}"/>"/>
- --%>
+
+<input type="hidden" name="shDateStart" value="<c:out value="${vo.shDateStart}"/>"/>
+<input type="hidden" name="shDateEnd" value="<c:out value="${vo.shDateEnd}"/>"/>
+
 <input type="hidden" name="shOption" value="<c:out value="${vo.shOption}"/>"/>
 <input type="hidden" name="shValue" value="<c:out value="${vo.shValue}"/>"/>
 

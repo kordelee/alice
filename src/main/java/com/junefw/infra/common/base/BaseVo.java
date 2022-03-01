@@ -1,7 +1,5 @@
 package com.junefw.infra.common.base;
 
-import java.util.Date;
-
 import com.junefw.infra.common.constants.Constants;
 
 public class BaseVo {
@@ -25,8 +23,8 @@ public class BaseVo {
 //	search
 	private Integer shDelNy = 0;
 	private Integer shDateOption;
-	private Date shStartDate;
-	private Date shEndDate;
+	private String shDateStart;
+	private String shDateEnd;
 	private Integer shOption;
 	private String ShValue;
 //	----------
@@ -185,20 +183,20 @@ public class BaseVo {
 		this.shDateOption = shDateOption;
 	}
 
-	public Date getShStartDate() {
-		return shStartDate;
+	public String getShDateStart() {
+		return shDateStart;
 	}
 
-	public void setShStartDate(Date shStartDate) {
-		this.shStartDate = shStartDate;
+	public void setShDateStart(String shDateStart) {
+		this.shDateStart = shDateStart;
 	}
 
-	public Date getShEndDate() {
-		return shEndDate;
+	public String getShDateEnd() {
+		return shDateEnd;
 	}
 
-	public void setShEndDate(Date shEndDate) {
-		this.shEndDate = shEndDate;
+	public void setShDateEnd(String shDateEnd) {
+		this.shDateEnd = shDateEnd;
 	}
 
 	public Integer getShOption() {
