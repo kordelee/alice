@@ -2,34 +2,31 @@ package com.junefw.infra.modules.member;
 
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.junefw.infra.common.base.Base;
 
 public class Member extends Base {
 	
-	private String ifmmSeq = "";
-	private Integer ifmmAdminNy = 0;
-	private Integer ifmmDormancyNy = 0;
+	private String ifmmSeq;
+	private Integer ifmmAdminNy;
+	private Integer ifmmDormancyNy;
 	private String ifmmName;
 	private String ifmmId;
-	private String ifmmPassword = "";
-	private Date ifmmPwdModDate ;
-	private String ifmmNickname = "";
-	private Integer ifmmGenderCd = 0;
-	@DateTimeFormat(pattern = "yyyy-mm-dd")
-	private Date ifmmDob;
-	private Integer ifmmSavedCd = 0;
-	private Integer ifmmMarriageCd = 0;
-	private Date ifmmMarriageDate;
-	private Integer ifmmChildrenNum = 0;
-	private String ifmmFavoriteColor = "";
-	private String ifmmRecommenderSeq = "";
-	private Integer ifmmEmailConsentNy = 0;
-	private Integer ifmmSmsConsentNy = 0;
-	private Integer ifmmPushConsentNy = 0;
-	private String ifmmDesc = "";
-	private String ifmmDelNy = "";
+	private String ifmmPassword;
+	private Date ifmmPwdModDate;
+	private String ifmmNickname;
+	private Integer ifmmGenderCd;
+	private String ifmmDob;
+	private Integer ifmmSavedCd;
+	private Integer ifmmMarriageCd;
+	private String ifmmMarriageDate;
+	private Integer ifmmChildrenNum;
+	private String ifmmFavoriteColor;
+	private String ifmmRecommenderSeq;
+	private Integer ifmmEmailConsentNy;
+	private Integer ifmmSmsConsentNy;
+	private Integer ifmmPushConsentNy;
+	private String ifmmDesc;
+	private Integer ifmmDelNy;
 //	----------
 	public String getIfmmSeq() {
 		return ifmmSeq;
@@ -85,10 +82,10 @@ public class Member extends Base {
 	public void setIfmmGenderCd(Integer ifmmGenderCd) {
 		this.ifmmGenderCd = ifmmGenderCd;
 	}
-	public Date getIfmmDob() {
+	public String getIfmmDob() {
 		return ifmmDob;
 	}
-	public void setIfmmDob(Date ifmmDob) {
+	public void setIfmmDob(String ifmmDob) {
 		this.ifmmDob = ifmmDob;
 	}
 	public Integer getIfmmSavedCd() {
@@ -103,10 +100,10 @@ public class Member extends Base {
 	public void setIfmmMarriageCd(Integer ifmmMarriageCd) {
 		this.ifmmMarriageCd = ifmmMarriageCd;
 	}
-	public Date getIfmmMarriageDate() {
+	public String getIfmmMarriageDate() {
 		return ifmmMarriageDate;
 	}
-	public void setIfmmMarriageDate(Date ifmmMarriageDate) {
+	public void setIfmmMarriageDate(String ifmmMarriageDate) {
 		this.ifmmMarriageDate = ifmmMarriageDate;
 	}
 	public Integer getIfmmChildrenNum() {
@@ -151,10 +148,10 @@ public class Member extends Base {
 	public void setIfmmDesc(String ifmmDesc) {
 		this.ifmmDesc = ifmmDesc;
 	}
-	public String getIfmmDelNy() {
+	public Integer getIfmmDelNy() {
 		return ifmmDelNy;
 	}
-	public void setIfmmDelNy(String ifmmDelNy) {
+	public void setIfmmDelNy(Integer ifmmDelNy) {
 		this.ifmmDelNy = ifmmDelNy;
 	}
 	

@@ -8,6 +8,7 @@
 
     <resultMap id="resultMapObj" type="com.junefw.infra.modules.member.Member"></resultMap>
 	
+	
 	<sql id ="selectCommon">
 		from 
 			infrMember a
@@ -24,6 +25,7 @@
 			
 	</sql>
 	
+	
 	<select id="selectList" resultMap="resultMapObj">
 		<include refid="Base.selectListUpperForMysql" />
 			select
@@ -35,10 +37,12 @@
 			
 	</select>
 	
+	
 	<select id="selectOneCount" resultType="Integer">
 		select count(*)
 		<include refid="selectCommon" />
 	</select>
+	
 	
 	<select id="selectOne" resultMap="resultMapObj">
 		select
@@ -52,6 +56,7 @@
 			and ifmmSeq = #{ifmmSeq}
 	</select>
 	
+	
 	<insert id="insert">
 		insert into infrMember (
 			ifmmName
@@ -62,7 +67,7 @@
 		values (
 			#{ifmmName}
 			,#{ifmmId}
-			,#{ifmmDob}
+			,DATE_FORMAT(#{ifmmDob}, '%Y-%m-%d')
 			,0
 		)
 		 <selectKey resultType="String" keyProperty="ifmmSeq" order="AFTER">
@@ -70,24 +75,28 @@
 		 </selectKey>
 	</insert>
 
+
 	<update id="update">
 		update
 			infrMember
 		set
 			ifmmID = #{ifmmId}
-			ifmmName = #{ifmmName}
-			ifmmDob = #{ifmmDob} 
+			,ifmmName = #{ifmmName}
+			,ifmmDob = DATE_FORMAT(#{ifmmDob}, '%Y-%m-%d')
 		where 1=1
 			and ifmmSeq = #{ifmmSeq}
 	</update>
+	
 	
 	<update id="uelete">
 		update infrMember set ifmmDelNy = 1 where ifmmSeq = #{ifmmSeq}
 	</update>
 	
+	
 	<delete id="delete">
 		delete from infrMember where ifmmSeq = #{ifmmSeq}
 	</delete>
+	
 </mapper>
 
 

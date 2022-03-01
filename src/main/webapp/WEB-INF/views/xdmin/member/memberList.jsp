@@ -195,10 +195,10 @@
                 <td><a href="javascript:goForm(<c:out value="${item.ifmmSeq}"/>)"><c:out value="${item.ifmmName }"/></a></td>
                 <td><c:out value="${item.ifmmId }"/></td>
                 <td><c:out value="${item.ifmmGenderCd }"/></td>
-                <td><fmt:formatDate value="${item.ifmmDob }" pattern="yyyy.MM.dd"/></td>
+                <td><%-- <fmt:formatDate value="${item.ifmmDob }" pattern="yyyy.MM.dd"/> --%></td>
                 <td>--</td>
                 <td>--</td>
-                <td><fmt:formatDate value="${item.regDateTime }" pattern="yyyy.MM.dd"/></td>
+                <td><%-- <fmt:formatDate value="${item.regDateTime }" pattern="yyyy.MM.dd"/> --%></td>
             </tr>
             
 		</c:forEach>

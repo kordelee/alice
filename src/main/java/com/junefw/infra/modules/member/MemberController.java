@@ -50,14 +50,16 @@ public class MemberController extends BaseController{
 	
 	@SuppressWarnings(value = {"all"})
 	@RequestMapping(value = "memberInst")
-	public String memberInst(MemberVo vo, Member member, RedirectAttributes redirectAttributes) throws Exception {
+	public String memberInst(MemberVo vo, Member dto, RedirectAttributes redirectAttributes) throws Exception {
+		
+		System.out.println("dto.getIfmmDob(): " + dto.getIfmmDob());
+		
+		service.insert(dto);
 	
-		service.insert(member);
-	
-		vo.setIfmmSeq(member.getIfmmSeq());
+		vo.setIfmmSeq(dto.getIfmmSeq());
 		
 		redirectAttributes.addFlashAttribute("vo", vo);
-	
+
 		if (Constants.INSERT_AFTER_TYPE == 1) {
 			return "redirect:/member/memberForm";
 		} else {
@@ -67,9 +69,9 @@ public class MemberController extends BaseController{
 	
 	@SuppressWarnings(value = {"all"})
 	@RequestMapping(value = "memberUpdt")
-	public String memberUpdt(MemberVo vo, Member member, RedirectAttributes redirectAttributes) throws Exception {
+	public String memberUpdt(MemberVo vo, Member dto, RedirectAttributes redirectAttributes) throws Exception {
 		
-		service.update(member);
+		service.update(dto);
 		
 		redirectAttributes.addFlashAttribute("vo", vo);
 		
