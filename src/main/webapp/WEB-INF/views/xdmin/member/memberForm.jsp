@@ -284,9 +284,8 @@
             <button type="button" class="btn btn-secondary btn-sm" name="" id="btnList"><i class="fa-solid fa-bars"></i></button>
         </div>
         <div class="col-6 text-end">
-            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop" name="" id="btnModalDelete"><i class="far fa-trash-alt"></i></button>
-            <!-- <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop" name="" id="btnUelete"><i class="far fa-trash-alt"></i></button> -->
-            <button type="button" class="btn btn-danger btn-sm" name="" id="btnModalUelete"><i class="far fa-trash-alt"></i></button>
+            <button type="button" class="btn btn-danger btn-sm" name="" id="btnDelete"><i class="fa-solid fa-x"></i></button>
+            <button type="button" class="btn btn-danger btn-sm" name="" id="btnUelete"><i class="far fa-trash-alt"></i></button>
             <button type="button" class="btn btn-success btn-sm" name="" id="btnSave"><i class="fa-regular fa-bookmark"></i></button>
         </div>
     </div>
@@ -365,23 +364,27 @@
 	}); 
 	
 	
-	$("#btnModalUelete").on("click", function(){
+	$("#btnUelete").on("click", function(){
 		$("input:hidden[name=exDeleteType]").val(1);
 		$(".modal-title").text("확 인");
 		$(".modal-body").text("해당 데이터를 삭제하시겠습니까 ?");
+		$("#btnModalUelete").show();
+		$("#btnModalDelete").hide();
 		$("#modalConfirm").modal("show");
 	});
 	
-	
-	$("#btnModalDelete").on("click", function(){
+
+	$("#btnDelete").on("click", function(){
 		$("input:hidden[name=exDeleteType]").val(2);
 		$(".modal-title").text("확 인");
 		$(".modal-body").text("해당 데이터를 삭제하시겠습니까 ?");
+		$("#btnModalUelete").hide();
+		$("#btnModalDelete").show();
 		$("#modalConfirm").modal("show");
 	});
 	
 	
-	$("#btnUelete").on("click", function(){
+	$("#btnModalUelete, #btnModalDelete").on("click", function(){
 		$("#modalConfirm").modal("hide");
 		if ($("input:hidden[name=exDeleteType]").val() == 1) {
 			formVo.attr("action", goUrlUele).submit();

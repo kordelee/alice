@@ -20,6 +20,7 @@ public class BaseVo {
 
 	private int startRnumForMysql = 0;							// 쿼리 시작 row
 	
+	
 //	search
 	private Integer shDelNy = 0;
 	private Integer shDateOption;
@@ -27,8 +28,12 @@ public class BaseVo {
 	private String shDateEnd;
 	private Integer shOption;
 	private String ShValue;
-//	----------
 
+	
+//	list
+	private String[] listSeq;
+	
+//	----------
 	public void setParamsPaging(int totalRows) {
 		
 //		setThisPage(3);
@@ -213,6 +218,14 @@ public class BaseVo {
 
 	public void setShValue(String shValue) {
 		ShValue = shValue;
+	}
+
+	public String[] getListSeq() {
+		return listSeq;
+	}
+
+	public void setListSeq(String[] listSeq) {
+		this.listSeq = listSeq;
 	}
 
 }

@@ -11,12 +11,14 @@
       	body
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-angle-left"></i></button>
-        <button type="button" class="btn btn-danger" name="" id="btnUelete"><i class="far fa-trash-alt"></i></button>
+        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i class="fa-solid fa-angle-left"></i></button>
+       	<button type="button" class="btn btn-danger btn-sm" name="" id="btnModalDelete"><i class="fa-solid fa-x"></i></button>
+       	<button type="button" class="btn btn-danger btn-sm" name="" id="btnModalUelete"><i class="far fa-trash-alt"></i></button>
       </div>
     </div>
   </div>
 </div>
+
 
 <div class="modal fade" id="modalAlert" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -29,7 +31,7 @@
       	body
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"><i class="fa-solid fa-check"></i></button>
+        <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal"><i class="fa-solid fa-check"></i></button>
       </div>
     </div>
   </div>

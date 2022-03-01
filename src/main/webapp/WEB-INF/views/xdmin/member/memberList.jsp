@@ -189,7 +189,7 @@
             <tr>
                 <td class="text-center">
                     <div>
-                        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                        <input type="checkbox" id="checkboxNoLabel" name="listSeq" value="<c:out value="${item.ifmmSeq }"/>" class="form-check-input">
                     </div>
                 </td>
                 <td><c:out value="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + status.index) }"/></td>
@@ -219,7 +219,8 @@
 <div class="container-fluid px-0 mt-2">
     <div class="row">
         <div class="col-6 text-start">
-            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="far fa-trash-alt"></i></button>
+            <button type="button" class="btn btn-danger btn-sm" name="" id="btnDelete"><i class="fa-solid fa-x"></i></button>
+            <button type="button" class="btn btn-danger btn-sm" name="" id="btnUelete"><i class="far fa-trash-alt"></i></button>
         </div>
         <div class="col-6 text-end">
             <button type="button" class="btn btn-success btn-sm" name="" id="btnExcel"><i class="far fa-file-excel fa-lg"></i></button>
@@ -299,6 +300,40 @@
 		form.attr("action", goUrlList).submit();
 	}
 
+	
+	$("#btnUelete").on("click", function(){
+		$("input:hidden[name=exDeleteType]").val(1);
+		$(".modal-title").text("확 인");
+		$(".modal-body").text("해당 데이터를 삭제하시겠습니까 ?");
+		$("#btnModalUelete").show();
+		$("#btnModalDelete").hide();
+		$("#modalConfirm").modal("show");
+	});
+	
+
+	$("#btnDelete").on("click", function(){
+		$("input:hidden[name=exDeleteType]").val(2);
+		$(".modal-title").text("확 인");
+		$(".modal-body").text("해당 데이터를 삭제하시겠습니까 ?");
+		$("#btnModalUelete").hide();
+		$("#btnModalDelete").show();
+		$("#modalConfirm").modal("show");
+	});
+	
+	
+	$("#btnModalUelete, #btnModalDelete").on("click", function(){
+		$("#modalConfirm").modal("hide");
+		
+		
+		
+		
+		if ($("input:hidden[name=exDeleteType]").val() == 1) {
+			//formVo.attr("action", goUrlUele).submit();
+		} else {
+			//formVo.attr("action", goUrlDele).submit();
+		}
+	});
+	
 	
 	$('#btnForm').on("click", function() {
 		goForm(0);                
