@@ -31,7 +31,7 @@ public class BaseVo {
 
 	
 //	list
-	private String[] listSeq;
+	private String[] checkboxSeqArray;
 	
 //	----------
 	public void setParamsPaging(int totalRows) {
@@ -220,12 +220,12 @@ public class BaseVo {
 		ShValue = shValue;
 	}
 
-	public String[] getListSeq() {
-		return listSeq;
+	public String[] getCheckboxSeqArray() {
+		return checkboxSeqArray;
 	}
 
-	public void setListSeq(String[] listSeq) {
-		this.listSeq = listSeq;
+	public void setCheckboxSeqArray(String[] checkboxSeqArray) {
+		this.checkboxSeqArray = checkboxSeqArray;
 	}
 
 }

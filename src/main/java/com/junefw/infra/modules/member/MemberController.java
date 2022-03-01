@@ -104,6 +104,27 @@ public class MemberController extends BaseController{
 		return "redirect:/member/memberList";
 	}
 	
+	
+	@RequestMapping(value = "memberMultiUele")
+	public String memberMultiUele(MemberVo vo, RedirectAttributes redirectAttributes) throws Exception {
+		
+		System.out.println("asdfasdf");
+		
+		String[] arrayParam = vo.getCheckboxSeqArray();
+		for (int i = 0; i < arrayParam.length; i++) {
+		System.out.println(arrayParam[i]);
+		}
+
+		
+		System.out.println("vo.getCheckboxSeqArray().length: " + vo.getCheckboxSeqArray().length);
+		
+//		service.uelete(vo);
+		
+		redirectAttributes.addFlashAttribute("vo", vo);
+		
+		return "redirect:/member/memberList";
+	}
+	
 //	@RequestMapping(value = "memberForm", method = RequestMethod.POST)
 //	public ModelAndView memberForm(@ModelAttribute MemberVo vo) throws Exception {
 //		ModelAndView mav = new ModelAndView();

@@ -384,13 +384,15 @@
 	});
 	
 	
-	$("#btnModalUelete, #btnModalDelete").on("click", function(){
+	$("#btnModalUelete").on("click", function(){
 		$("#modalConfirm").modal("hide");
-		if ($("input:hidden[name=exDeleteType]").val() == 1) {
-			formVo.attr("action", goUrlUele).submit();
-		} else {
-			formVo.attr("action", goUrlDele).submit();
-		}
+		formVo.attr("action", goUrlUele).submit();
+	});
+	
+	
+	$("#btnModalDelete").on("click", function(){
+		$("#modalConfirm").modal("hide");
+		formVo.attr("action", goUrlDele).submit();
 	});
 
 </script>

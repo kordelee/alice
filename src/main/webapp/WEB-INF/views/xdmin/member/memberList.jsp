@@ -94,6 +94,8 @@
 <form name="formList" id="formList" method="post">
 	<input type="hidden" name="thisPage" value="<c:out value="${vo.thisPage}" default="1"/>">
 	<input type="hidden" name="rowNumToShow" value="<c:out value="${vo.rowNumToShow}"/>">
+	<input type="hidden" name="checkboxSeqArray" >
+	
 	<input type="hidden" name="ifmmSeq">	<!-- #-> -->
 <h3 class="mt-3 mb-0">Code</h3> 
 
@@ -189,7 +191,7 @@
             <tr>
                 <td class="text-center">
                     <div>
-                        <input type="checkbox" id="checkboxNoLabel" name="listSeq" value="<c:out value="${item.ifmmSeq }"/>" class="form-check-input">
+                        <input type="checkbox" id="checkboxNoLabel" name="checkboxSeq" value="<c:out value="${item.ifmmSeq }"/>" class="form-check-input">
                     </div>
                 </td>
                 <td><c:out value="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + status.index) }"/></td>
@@ -258,16 +260,20 @@
 	}); 
 
 	
-	var goUrlList = "/member/memberList";			/* #-> */
-	var goUrlForm = "/member/memberForm";			/* #-> */
-	var seq = $("input:hidden[name=ifmmSeq]");		/* #-> */
+	var goUrlList = "/member/memberList";					/* #-> */
+	var goUrlForm = "/member/memberForm";					/* #-> */
+	var goUrlMultiUele = "/member/memberMultiUele";			/* #-> */
+	var goUrlMultiDele = "/member/memberMultiDele";			/* #-> */
+	
+	var seq = $("input:hidden[name=ifmmSeq]");				/* #-> */
 	
 	var form = $("form[name=formList]");
+	
+	var checkboxSeqArray = [];
 	
 	
 	$("#btnSearch").on("click", function(){
 		if (validationList() == false) return false;
-		/* $("input:hidden[name=thisPage]").val(1); */
 		form.attr("action", goUrlList).submit();
 	});
     
@@ -321,18 +327,30 @@
 	});
 	
 	
-	$("#btnModalUelete, #btnModalDelete").on("click", function(){
+	$("#btnModalUelete").on("click", function(){
+		$("input[name=checkboxSeq]:checked").each(function() { 
+			checkboxSeqArray.push($(this).val());
+		});
+		
+		$("input:hidden[name=checkboxSeqArray]").val(checkboxSeqArray);
+		
 		$("#modalConfirm").modal("hide");
 		
-		
-		
-		
-		if ($("input:hidden[name=exDeleteType]").val() == 1) {
-			//formVo.attr("action", goUrlUele).submit();
-		} else {
-			//formVo.attr("action", goUrlDele).submit();
-		}
+		form.attr("action", goUrlMultiUele).submit();
 	});
+	
+	
+	$("#btnModalDelete").on("click", function(){
+		$("input[name=checkboxSeq]:checked").each(function() { 
+			checkboxSeqArray.push($(this).val());
+		});
+		
+		$("#modalConfirm").modal("hide");
+		
+		form.attr("action", goUrlMultDele).submit();
+	});
+
+	
 	
 	
 	$('#btnForm').on("click", function() {
