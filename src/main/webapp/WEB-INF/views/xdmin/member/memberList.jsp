@@ -95,8 +95,8 @@
 	<input type="hidden" name="thisPage" value="<c:out value="${vo.thisPage}" default="1"/>">
 	<input type="hidden" name="rowNumToShow" value="<c:out value="${vo.rowNumToShow}"/>">
 	<input type="hidden" name="checkboxSeqArray" >
-	
 	<input type="hidden" name="ifmmSeq">	<!-- #-> -->
+	
 <h3 class="mt-3 mb-0">Code</h3> 
 
 <!--  -->
@@ -345,9 +345,11 @@
 			checkboxSeqArray.push($(this).val());
 		});
 		
-		$("#modalConfirm").modal("hide");
+		$("input:hidden[name=checkboxSeqArray]").val(checkboxSeqArray);
 		
-		form.attr("action", goUrlMultDele).submit();
+		$("#modalConfirm").modal("hide");
+							
+		form.attr("action", goUrlMultiDele).submit();
 	});
 
 	

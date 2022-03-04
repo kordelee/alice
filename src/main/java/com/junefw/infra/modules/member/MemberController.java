@@ -108,17 +108,28 @@ public class MemberController extends BaseController{
 	@RequestMapping(value = "memberMultiUele")
 	public String memberMultiUele(MemberVo vo, RedirectAttributes redirectAttributes) throws Exception {
 		
-		System.out.println("asdfasdf");
+		String[] checkboxSeqArray = vo.getCheckboxSeqArray();
 		
-		String[] arrayParam = vo.getCheckboxSeqArray();
-		for (int i = 0; i < arrayParam.length; i++) {
-		System.out.println(arrayParam[i]);
+		for(String checkboxSeq : checkboxSeqArray) {
+			vo.setIfmmSeq(checkboxSeq);
+			service.uelete(vo);
 		}
-
 		
-		System.out.println("vo.getCheckboxSeqArray().length: " + vo.getCheckboxSeqArray().length);
+		redirectAttributes.addFlashAttribute("vo", vo);
 		
-//		service.uelete(vo);
+		return "redirect:/member/memberList";
+	}
+	
+	
+	@RequestMapping(value = "memberMultiDele")
+	public String memberMultiDele(MemberVo vo, RedirectAttributes redirectAttributes) throws Exception {
+		
+		String[] checkboxSeqArray = vo.getCheckboxSeqArray();
+		
+		for(String checkboxSeq : checkboxSeqArray) {
+			vo.setIfmmSeq(checkboxSeq);
+//			service.delete(vo);
+		}
 		
 		redirectAttributes.addFlashAttribute("vo", vo);
 		
