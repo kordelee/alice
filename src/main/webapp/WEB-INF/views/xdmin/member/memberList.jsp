@@ -165,7 +165,7 @@
             <tr>
                 <th class="text-center" width="40px" >
                     <div>
-                        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                        <input type="checkbox" id="checkboxAll" name="" value="" class="form-check-input">
                     </div>
                 </th>
                 <th class="text-center" width="80px">#</th>
@@ -191,7 +191,7 @@
             <tr>
                 <td class="text-center">
                     <div>
-                        <input type="checkbox" id="checkboxNoLabel" name="checkboxSeq" value="<c:out value="${item.ifmmSeq }"/>" class="form-check-input">
+                        <input type="checkbox" id="checkboxSeq" name="checkboxSeq" value="<c:out value="${item.ifmmSeq }"/>" class="form-check-input">
                     </div>
                 </td>
                 <td><c:out value="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + status.index) }"/></td>
@@ -353,10 +353,23 @@
 	});
 
 	
-	
-	
 	$('#btnForm').on("click", function() {
 		goForm(0);                
+	});
+	
+	
+	$("#checkboxAll").click(function() {
+		if($("#checkboxAll").is(":checked")) $("input[name=checkboxSeq]").prop("checked", true);
+		else $("input[name=checkboxSeq]").prop("checked", false);
+	});
+	
+	
+	$("input[name=checkboxSeq]").click(function() {
+		var total = $("input[name=checkboxSeq]").length;
+		var checked = $("input[name=checkboxSeq]:checked").length;
+		
+		if(total != checked) $("#checkboxAll").prop("checked", false);
+		else $("#checkboxAll").prop("checked", true); 
 	});
      
 </script>
