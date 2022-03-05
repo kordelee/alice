@@ -8,5 +8,7 @@ public interface CodeService {
 	public List<Code> selectList(Code code) throws Exception; 
 	public Code selectOne(Code code) throws Exception;
 	public int insert(Code code) throws Exception;
-	public int update(Code code) throws Exception; 
+	public int update(Code code) throws Exception;
+	
+	public void selectListForCache() throws Exception; 
 }

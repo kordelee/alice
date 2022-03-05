@@ -11,6 +11,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.junefw.infra.common.base.BaseController;
 import com.junefw.infra.common.constants.Constants;
+import com.junefw.infra.modules.code.Code;
+import com.junefw.infra.modules.code.CodeServiceImpl;
 
 @Controller
 @RequestMapping(value="/member/")
@@ -19,9 +21,19 @@ public class MemberController extends BaseController{
 	@Autowired
 	MemberServiceImpl service;
 	
+	@Autowired
+	CodeServiceImpl codeService;
+	
 	@RequestMapping(value = "memberList")
 	public String memberList(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
 
+		
+		
+		for(Code ss : CodeServiceImpl.code) {
+			ss.getIfcdSeq();
+			
+		}
+		
 		vo.setParamsPaging(service.selectOneCount(vo));
 		
 		if (vo.getTotalRows() > 0) {
