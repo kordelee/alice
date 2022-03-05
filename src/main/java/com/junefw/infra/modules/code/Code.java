@@ -1,10 +1,13 @@
 package com.junefw.infra.modules.code;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.junefw.infra.common.base.Base;
 
 public class Code extends Base {
 	
-	// infr_code_group
+//	infr_code_group
 	private String ifcgSeq = "";
 	private String ifcgSeqAnother = "";
 	private String ifcgName = "";
@@ -21,7 +24,7 @@ public class Code extends Base {
 	private String ifcgDelNy  = "";
 
 	
-	// infr_code
+//	infr_code
 	private String ifcdSeq = "";
 	private String ifcdSeqAnother = "";
 	private String ifcdName = "";
@@ -43,11 +46,12 @@ public class Code extends Base {
 	private String ifcdDelNy = "";
 //	private String ifcgSeq = "";
 
-	// search_codeGroup
 	
-	// search_code
+//	for cache
+	public static List<Code> cachedCodeArrayList = new ArrayList<Code>();
 	
-	// ----------
+	
+//	----------
 	public String getIfcgSeq() {
 		return ifcgSeq;
 	}

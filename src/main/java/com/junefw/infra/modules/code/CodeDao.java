@@ -23,6 +23,6 @@ public class CodeDao {
 	public int insert(Code code) { return sqlSession.insert(namespace + ".insert", code); }
 	public int update(Code code) { return sqlSession.update(namespace + ".update", code); }
 	
-	
-	public List<Code> selectListForCache(){ return sqlSession.selectList(namespace + ".selectListForCache", null); }
+//	for cache
+	public List<Code> selectListCachedCodeArrayList(){ return sqlSession.selectList(namespace + ".selectListCachedCodeArrayList", null); }
 }

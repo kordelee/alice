@@ -10,5 +10,4 @@ public interface CodeService {
 	public int insert(Code code) throws Exception;
 	public int update(Code code) throws Exception;
 	
-	public void selectListForCache() throws Exception; 
 }

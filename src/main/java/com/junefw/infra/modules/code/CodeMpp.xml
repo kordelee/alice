@@ -68,7 +68,7 @@
 	</delete>
 	
 	
-	<select id="selectListForCache" resultMap="resultMapObj">
+	<select id="selectListCachedCodeArrayList" resultMap="resultMapObj">
 		SELECT 
 			ifcdSeq
 			, ifcdName
@@ -79,6 +79,7 @@
 			AND ifcdDelNy = 0
 		    AND ifcdUseNy = 1
     </select>
+    
     
 </mapper>
 

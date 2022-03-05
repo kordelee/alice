@@ -13,37 +13,72 @@ public class CodeServiceImpl implements CodeService{
 
 	@Autowired
 	CodeDao dao;
-	
-//	private static List<Code> codeGroup = new ArrayList<Code>();
-	public static List<Code> code = new ArrayList<Code>();
 
 	
 	@Override
-	public int selectOneCount(Code code) throws Exception { return dao.selectOneCount(code); }
+	public int selectOneCount(Code code) throws Exception {
+		return dao.selectOneCount(code);
+	}
+	
 	
 	@Override
-	public List<Code> selectList(Code code) throws Exception { return dao.selectList(code); }
+	public List<Code> selectList(Code code) throws Exception {
+		return dao.selectList(code);
+	}
+	
 	
 	@Override
-	public Code selectOne(Code code) throws Exception { return dao.selectOne(code); }
-
-	@Override
-	public int insert(Code code) throws Exception { return dao.insert(code); }
-
-	@Override
-	public int update(Code code) throws Exception { return dao.update(code); }
-
-	@Override
-	@PostConstruct
-	public void selectListForCache() throws Exception {
-		
-		System.out.println("loaded !!!");
-		
-		List<Code> codeListFromDb; // 코드 그룹
-		codeListFromDb = (ArrayList<Code>) dao.selectListForCache(); // codeId, codeIdNm
-		code.clear(); 
-		code.addAll(codeListFromDb);
-
+	public Code selectOne(Code code) throws Exception {
+		return dao.selectOne(code);
 	}
 
+	
+	@Override
+	public int insert(Code code) throws Exception {
+		return dao.insert(code);
+	}
+
+	
+	@Override
+	public int update(Code code) throws Exception {
+		return dao.update(code);
+	}
+
+	@PostConstruct
+	public void selectListCachedCodeArrayList() throws Exception {
+		List<Code> codeListFromDb;
+		codeListFromDb = (ArrayList<Code>) dao.selectListCachedCodeArrayList();
+		Code.cachedCodeArrayList.clear(); 
+		Code.cachedCodeArrayList.addAll(codeListFromDb);
+		System.out.println("cachedCodeArrayList: " + Code.cachedCodeArrayList.size() + " chached !");
+	}
+
+	public static List<Code> selectListCachedCode(String ifcgSeq) throws Exception {
+		List<Code> rt = new ArrayList<Code>();
+		for(Code codeRow : Code.cachedCodeArrayList) {
+			if (codeRow.getIfcgSeq().equals(ifcgSeq)) {
+				rt.add(codeRow);
+			} else {
+				// by pass
+			}
+		}
+		return rt;
+	}
+
+	public static Code selectOneCachedCode(String ifcdSeq) throws Exception {
+		Code rt = new Code();
+		for(Code codeRow : Code.cachedCodeArrayList) {
+			if (codeRow.getIfcdSeq().equals(ifcdSeq)) {
+				rt = codeRow;
+			} else {
+				// by pass
+			}
+		}
+		return rt;
+	}
+	
+	public static void clear() throws Exception {
+		Code.cachedCodeArrayList.clear();
+	}
+	
 }

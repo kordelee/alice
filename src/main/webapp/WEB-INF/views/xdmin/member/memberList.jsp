@@ -171,8 +171,8 @@
                 <th class="text-center" width="80px">#</th>
                 <th>이름</th>
                 <th>아이디</th>
-                <th>생년월일</th>
-                <th>나이</th>
+                <th>성별</th>
+                <th>생일</th>
                 <th>이메일</th>
                 <th>모바일</th>
                 <th>가입일</th>
@@ -197,7 +197,11 @@
                 <td><c:out value="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + status.index) }"/></td>
                 <td><a href="javascript:goForm(<c:out value="${item.ifmmSeq}"/>)"><c:out value="${item.ifmmName }"/></a></td>
                 <td><c:out value="${item.ifmmId }"/></td>
-                <td><c:out value="${item.ifmmGenderCd }"/></td>
+                <td>
+					<c:forEach items="${codeGender}" var="itemGender" varStatus="statusGender">
+						<c:if test="${item.ifmmGenderCd eq itemGender.ifcdSeq}"><c:out value="${itemGender.ifcdName }"/></c:if>
+					</c:forEach>
+                </td>
                 <td><%-- <fmt:formatDate value="${item.ifmmDob }" pattern="yyyy.MM.dd"/> --%></td>
                 <td>--</td>
                 <td>--</td>
@@ -239,6 +243,10 @@
 	</div>
 </div>
 <!-- contents e -->
+
+		<c:forEach items="${codeGender}" var="item2" varStatus="status">
+			<c:out value="${item2.ifcdName }"/>	|<c:out value="${item2.ifcdSeq }"/> 
+		</c:forEach>
 
 <!-- footer s -->
 <%@include file="../include/footer.jsp"%>
