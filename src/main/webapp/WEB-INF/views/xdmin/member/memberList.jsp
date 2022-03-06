@@ -244,9 +244,6 @@
 </div>
 <!-- contents e -->
 
-		<c:forEach items="${codeGender}" var="item2" varStatus="status">
-			<c:out value="${item2.ifcdName }"/>	|<c:out value="${item2.ifcdSeq }"/> 
-		</c:forEach>
 
 <!-- footer s -->
 <%@include file="../include/footer.jsp"%>

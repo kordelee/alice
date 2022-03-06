@@ -16,7 +16,8 @@ public class MemberDao {
 	private SqlSession sqlSession;
 	
 	private static String namespace = "com.junefw.infra.modules.member.MemberMpp";
-
+	
+//	infrMember
 	public int selectOneCount(MemberVo vo) { return sqlSession.selectOne(namespace + ".selectOneCount", vo); }
 	public List<Member> selectList(MemberVo vo){ return sqlSession.selectList(namespace + ".selectList", vo); }
 	public Member selectOne(MemberVo vo) { return sqlSession.selectOne(namespace + ".selectOne", vo); }
@@ -24,4 +25,8 @@ public class MemberDao {
 	public int update(Member dto) { return sqlSession.update(namespace + ".update", dto); }
 	public int uelete(MemberVo vo) { return sqlSession.update(namespace + ".uelete", vo); }
 	public int delete(MemberVo vo) { return sqlSession.delete(namespace + ".delete", vo); }
+	
+//	infrMemberEmail
+	public int insertEmail(Member dto) { return sqlSession.insert(namespace + ".insertEmail", dto); }
+	
 }

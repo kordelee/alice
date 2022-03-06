@@ -6,6 +6,7 @@ import com.junefw.infra.common.base.Base;
 
 public class Member extends Base {
 	
+//	infrMember
 	private String ifmmSeq;
 	private Integer ifmmAdminNy;
 	private Integer ifmmDormancyNy;
@@ -27,6 +28,18 @@ public class Member extends Base {
 	private Integer ifmmPushConsentNy;
 	private String ifmmDesc;
 	private Integer ifmmDelNy;
+
+	
+//	infrMemberEmail
+	private String ifmeSeq;
+	private String ifmeDefaultNy;
+	private String ifmeTypeCd;
+	private String ifmeEmailFull;
+	private String ifmeEmailAccount;
+	private String ifmeEmailDomain;
+	private String ifmeEmailDomainCd;
+	private String ifmeDelNy;
+//	private String ifmmSeq;
 //	----------
 	public String getIfmmSeq() {
 		return ifmmSeq;
@@ -153,6 +166,54 @@ public class Member extends Base {
 	}
 	public void setIfmmDelNy(Integer ifmmDelNy) {
 		this.ifmmDelNy = ifmmDelNy;
+	}
+	public String getIfmeSeq() {
+		return ifmeSeq;
+	}
+	public void setIfmeSeq(String ifmeSeq) {
+		this.ifmeSeq = ifmeSeq;
+	}
+	public String getIfmeDefaultNy() {
+		return ifmeDefaultNy;
+	}
+	public void setIfmeDefaultNy(String ifmeDefaultNy) {
+		this.ifmeDefaultNy = ifmeDefaultNy;
+	}
+	public String getIfmeTypeCd() {
+		return ifmeTypeCd;
+	}
+	public void setIfmeTypeCd(String ifmeTypeCd) {
+		this.ifmeTypeCd = ifmeTypeCd;
+	}
+	public String getIfmeEmailFull() {
+		return ifmeEmailFull;
+	}
+	public void setIfmeEmailFull(String ifmeEmailFull) {
+		this.ifmeEmailFull = ifmeEmailFull;
+	}
+	public String getIfmeEmailAccount() {
+		return ifmeEmailAccount;
+	}
+	public void setIfmeEmailAccount(String ifmeEmailAccount) {
+		this.ifmeEmailAccount = ifmeEmailAccount;
+	}
+	public String getIfmeEmailDomain() {
+		return ifmeEmailDomain;
+	}
+	public void setIfmeEmailDomain(String ifmeEmailDomain) {
+		this.ifmeEmailDomain = ifmeEmailDomain;
+	}
+	public String getIfmeEmailDomainCd() {
+		return ifmeEmailDomainCd;
+	}
+	public void setIfmeEmailDomainCd(String ifmeEmailDomainCd) {
+		this.ifmeEmailDomainCd = ifmeEmailDomainCd;
+	}
+	public String getIfmeDelNy() {
+		return ifmeDelNy;
+	}
+	public void setIfmeDelNy(String ifmeDelNy) {
+		this.ifmeDelNy = ifmeDelNy;
 	}
 	
 }

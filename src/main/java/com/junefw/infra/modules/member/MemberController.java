@@ -46,9 +46,11 @@ public class MemberController extends BaseController{
 //			insert
 		} else {
 //			update
-			Member rt = service.selectOne(vo);
-			model.addAttribute("rt", rt);
+			Member item = service.selectOne(vo);
+			model.addAttribute("item", item);
 		}
+		
+		model.addAttribute("codeGender", CodeServiceImpl.selectListCachedCode("2"));
 	
 		return "xdmin/member/memberForm";
 	}

@@ -105,7 +105,7 @@
     <div class="row mt-sm-4">
         <div class="col-sm-6">
             <label for="memId" class="form-label">아이디</label>
-            <input type="text" id="ifmmId" name="ifmmId" value="<c:out value="${rt.ifmmId}"/>" maxlength="20" placeholder="영문(대소문자),숫자,특수문자(), 4~20자리 조합" class="form-control form-control-sm">
+            <input type="text" id="ifmmId" name="ifmmId" value="<c:out value="${item.ifmmId}"/>" maxlength="20" placeholder="영문(대소문자),숫자,특수문자(), 4~20자리 조합" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6">
         </div>
@@ -123,7 +123,7 @@
     <div class="row mt-sm-4">
         <div class="col-sm-6 mt-3 mt-sm-0">
             <label for="memNameFull" class="form-label">이름</label>
-            <input type="text" id="ifmmName" name="ifmmName" value="<c:out value="${rt.ifmmName}"/>" maxlength="50" placeholder="" class="form-control form-control-sm">
+            <input type="text" id="ifmmName" name="ifmmName" value="<c:out value="${item.ifmmName}"/>" maxlength="50" placeholder="" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
             <label for="memNameFullEng" class="form-label">이름 (영문)</label>
@@ -152,23 +152,23 @@
     </div>
     <div class="row mt-sm-4">
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="memGender" class="form-label">성별</label>
-            <select id="memGender" name="memGender" class="form-select form-select-sm">
-                <option value="">::선택::</option>
-                <option value="1">남성</option>
-                <option value="2">여성</option>
-                <option value="3">기타</option>
+            <label for="ifmmGenderCd" class="form-label">성별</label>
+            <select id="ifmmGenderCd" name="ifmmGenderCd" class="form-select form-select-sm">
+				<option value="">::선택::</option>
+	            	<c:forEach items="${codeGender}" var="itemGender" varStatus="statusGender">
+				<option value="<c:out value="${itemGender.ifcdSeq }"/>" <c:if test="${item.ifmmGenderCd eq itemGender.ifcdSeq }">selected</c:if>><c:out value="${itemGender.ifcdName }"/></option>
+					</c:forEach>
               </select>
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
             <label for="ifmmDob" class="form-label">생일</label>
-            <input type="text" id="ifmmDob" name="ifmmDob" value="<c:out value="${rt.ifmmDob }"/>" placeholder="" class="form-control form-control-sm" >          
+            <input type="text" id="ifmmDob" name="ifmmDob" value="<c:out value="${item.ifmmDob }"/>" placeholder="" class="form-control form-control-sm" >          
         </div>
     </div>    
     <div class="row mt-sm-4">    
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="memEmail" class="form-label">Email</label>
-            <input type="text" id="memEmail" name="memEmail" value="" maxlength="50" placeholder="name@example.com" class="form-control form-control-sm">
+            <label for="ifmeEmailFull" class="form-label">Email</label>
+            <input type="text" id="ifmeEmailFull" name="ifmeEmailFull" value="<c:out value="${item.ifmeEmailFull }"/>" maxlength="50" placeholder="name@example.com" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
             <label for="memEmailAgree" class="form-label">이메일 정보 마케팅 사용 동의</label>

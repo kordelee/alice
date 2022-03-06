@@ -50,6 +50,7 @@
 			a.ifmmSeq
 			,a.ifmmName
 			,a.ifmmId
+			,a.ifmmGenderCd
 			,a.ifmmDob
 		from
 			infrMember a
@@ -62,12 +63,14 @@
 		insert into infrMember (
 			ifmmName
 			,ifmmId
+			,ifmmGenderCd
 			,ifmmDob
 			,ifmmDelNy			
 		)
 		values (
 			#{ifmmName}
 			,#{ifmmId}
+			,#{ifmmGenderCd}
 			,#{ifmmDob}
 			,0
 		)
@@ -97,6 +100,28 @@
 	<delete id="delete">
 		delete from infrMember where ifmmSeq = #{ifmmSeq}
 	</delete>
+	
+	
+	<insert id="insertEmail">
+		insert into infrMemberEmail (
+			ifmeDefaultNy
+			,ifmeTypeCd
+			,ifmeEmailFull
+			,ifmeEmailAccount
+			,ifmeEmailDomain
+			,ifmeEmailDomainCd
+			,ifmeDelNy
+		)
+		values (
+			#{ifmeDefaultNy}
+			,#{ifmeTypeCd}
+			,#{ifmeEmailFull}
+			,#{ifmeEmailAccount}
+			,#{ifmeEmailDomain}
+			,#{ifmeEmailDomainCd}
+			,0
+		)
+	</insert>
 	
 </mapper>
 
