@@ -10,18 +10,18 @@
 	
 	
 	<sql id ="selectCommon">
-		from 
+		FROM 
 			infrMember a
-		where 1=1
+		WHERE 1=1
 			<if test="shDelNy != null and !shDelNy.equals('')">AND ifmmDelNy = #{shDelNy}</if>
 			<choose>
-				<when test="shDateOption == 1">and regDate like CONCAT('%',#{shValue},'%')</when>
-				<when test="shDateOption == 2">and ifmmId like CONCAT('%',#{shValue},'%')</when>
-				<when test="shDateOption == 3">and ifmmDob BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				<when test="shDateOption == 1">AND regDate LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shDateOption == 2">AND ifmmId LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shDateOption == 3">AND ifmmDob BETWEEN #{shDateStart} AND #{shDateEnd}</when>
 			</choose>
 			<choose>
-				<when test="shOption == 1">and ifmmName like CONCAT('%',#{shValue},'%')</when>
-				<when test="shOption == 2">and ifmmId like CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 1">AND ifmmName LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 2">AND ifmmId LIKE CONCAT('%',#{shValue},'%')</when>
 			</choose>
 			
 	</sql>
@@ -29,10 +29,10 @@
 	
 	<select id="selectList" resultMap="resultMapObj">
 		<include refid="Base.selectListUpperForMysql" />
-			select
+			SELECT
 				*
 		<include refid="selectCommon" />
-			order by a.ifmmSeq desc
+			ORDER BY a.ifmmSeq DESC
 			<include refid="Base.orderByLimitForMysql" />
 		<include refid="Base.selectListLowerForMysql" />
 			
@@ -40,34 +40,36 @@
 	
 	
 	<select id="selectOneCount" resultType="Integer">
-		select count(*)
+		SELECT count(*)
 		<include refid="selectCommon" />
 	</select>
 	
 	
 	<select id="selectOne" resultMap="resultMapObj">
-		select
+		SELECT
 			a.ifmmSeq
 			,a.ifmmName
 			,a.ifmmId
 			,a.ifmmGenderCd
 			,a.ifmmDob
-		from
+			,b.ifmeEmailFull
+		FROM
 			infrMember a
-		where 1=1
-			and ifmmSeq = #{ifmmSeq}
+			LEFT JOIN infrMemberEmail b ON b.ifmeDelNy = 0 AND b.ifmeDefaultNy = 1 AND b.ifmmSeq = a.ifmmSeq
+		WHERE 1=1
+			AND a.ifmmSeq = #{ifmmSeq}
 	</select>
 	
 	
 	<insert id="insert">
-		insert into infrMember (
+		INSERT INTO infrMember (
 			ifmmName
 			,ifmmId
 			,ifmmGenderCd
 			,ifmmDob
 			,ifmmDelNy			
 		)
-		values (
+		VALUES (
 			#{ifmmName}
 			,#{ifmmId}
 			,#{ifmmGenderCd}
@@ -75,35 +77,35 @@
 			,0
 		)
 		 <selectKey resultType="String" keyProperty="ifmmSeq" order="AFTER">
-			select last_insert_id()
+			SELECT last_insert_id()
 		 </selectKey>
 	</insert>
 
 
 	<update id="update">
-		update
+		UPDATE
 			infrMember
-		set
+		SET
 			ifmmID = #{ifmmId}
 			,ifmmName = #{ifmmName}
 			,ifmmDob = #{ifmmDob}
-		where 1=1
-			and ifmmSeq = #{ifmmSeq}
+		WHERE 1=1
+			AND ifmmSeq = #{ifmmSeq}
 	</update>
 	
 	
 	<update id="uelete">
-		update infrMember set ifmmDelNy = 1 where ifmmSeq = #{ifmmSeq}
+		UPDATE infrMember SET ifmmDelNy = 1 WHERE ifmmSeq = #{ifmmSeq}
 	</update>
 	
 	
 	<delete id="delete">
-		delete from infrMember where ifmmSeq = #{ifmmSeq}
+		DELETE FROM infrMember WHERE ifmmSeq = #{ifmmSeq}
 	</delete>
 	
 	
 	<insert id="insertEmail">
-		insert into infrMemberEmail (
+		INSERT INTO infrMemberEmail (
 			ifmeDefaultNy
 			,ifmeTypeCd
 			,ifmeEmailFull
@@ -111,8 +113,9 @@
 			,ifmeEmailDomain
 			,ifmeEmailDomainCd
 			,ifmeDelNy
+			,ifmmSeq
 		)
-		values (
+		VALUES (
 			#{ifmeDefaultNy}
 			,#{ifmeTypeCd}
 			,#{ifmeEmailFull}
@@ -120,6 +123,7 @@
 			,#{ifmeEmailDomain}
 			,#{ifmeEmailDomainCd}
 			,0
+			,#{ifmmSeq}
 		)
 	</insert>
 	
