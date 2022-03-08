@@ -1,9 +1,12 @@
 package com.junefw.infra.modules.member;
 
+import java.sql.SQLSyntaxErrorException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -26,13 +29,18 @@ public class MemberServiceImpl implements MemberService{
 		return dao.selectOne(vo);
 	}
 	
-	
 	@Override
 	public int insert(Member dto) throws Exception {
-		dao.insert(dto);
-		
-		dto.setIfmeDefaultNy("1");
-		return dao.insertEmail(dto);
+	    try {
+			dao.insert(dto);
+			
+			dto.setIfmeDefaultNy("1");
+			
+			return dao.insertEmail(dto);
+
+	    } catch (Exception e) {
+	        throw new Exception();
+	    }
 	}
 
 	@Override

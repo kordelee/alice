@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
-	
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
 	<!-- mariadb s 2022.02.15 -->
@@ -27,6 +32,25 @@
 	</bean>
 	<!-- mariadb e 2022.02.15 -->
 
-	
+	<!-- transaction s 2022.03.06 -->
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	  
+	<aop:config>
+		<aop:pointcut id="transactionGeneralPointCut" expression="execution(* com.junefw.infra.modules..*Service.*(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="transactionGeneralPointCut"/>
+	</aop:config>
+	  
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="insert*" propagation="REQUIRED" rollback-for="Throwable" no-rollback-for="InstrumentNotFoundException"/>
+			<tx:method name="update*" propagation="REQUIRED" rollback-for="Throwable" no-rollback-for="InstrumentNotFoundException"/>
+			<tx:method name="delete*" propagation="REQUIRED" rollback-for="Throwable" no-rollback-for="InstrumentNotFoundException"/>
+			<tx:method name="uelete*" propagation="REQUIRED" rollback-for="Throwable" no-rollback-for="InstrumentNotFoundException"/>
+			<tx:method name="*" read-only="true" propagation="SUPPORTS" />
+		</tx:attributes>
+	</tx:advice>
+	<!-- transaction e 2022.03.06 -->
 		
 </beans>
