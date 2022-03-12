@@ -98,18 +98,17 @@
 <script type="text/javascript">
 
 	$("#btnLogin").on("click", function(){
-		/* $("#formLogin").attr("action", "/member/loginProc").submit(); */
 		if(validation() == false) return false;
 		$.ajax({
 			async: true 
 			,cache: false
 			,type: "post"
-			,dataType:"text"
+			/* ,dataType:"json" */
 			,url: "/member/loginProc"
 			/* ,data : $("#formLogin").serialize() */
 			,data : { "ifmmId" : $("#ifmmId").val(), "ifmmPassword" : $("#ifmmPassword").val()}
 			,success: function(response) {
-				if(response.rt == "true") {
+				if(response.rt == "success") {
 					/* values = rt.list ; */
 /* 			                   
 					console.log(rt.list.length);
@@ -119,13 +118,11 @@
 					console.log(keys0);
  */			       
 					location.href = "/";
-					/* location.href = '/hmeps_new/main/mainView'; */
 				} else {
-					alert("회원없음")
+					alert("회원없음");
 				}
 			}
 			,error : function(jqXHR, textStatus, errorThrown){
-				/* debugger; */
 				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
 			}
 		});

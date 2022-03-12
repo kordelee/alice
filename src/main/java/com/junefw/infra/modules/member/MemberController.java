@@ -156,7 +156,7 @@ public class MemberController extends BaseController{
 	
 	@ResponseBody
 	@RequestMapping(value = "loginProc")
-	public Object loginForm(Member dto, HttpSession httpSession) throws Exception {
+	public Map<String, Object> loginForm(Member dto, HttpSession httpSession) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		
 		Member rtMember = service.selectOneLogin(dto);
@@ -181,27 +181,19 @@ public class MemberController extends BaseController{
 				
 ////				로그인로그 작동
 				
-				
 				System.out.println("1");
-//				returnMap.put("rt", "true");
-//				return returnMap;
+				returnMap.put("rt", "success");
 			} else {
 
 //				로그인로그 작동
 				
-				System.out.println("2");
-//				returnMap.put("rt", "false");
-//				return returnMap;
+				returnMap.put("rt", "fail");
 			}
 		} else {
 //			로그인로그 작동
-			System.out.println("3");
-//			returnMap.put("rt", "false");
-//			return returnMap;
+			returnMap.put("rt", "fail");
 		}
-		returnMap.put("rt", "true");
 		return returnMap;
-//		return null;
 	}
 	
 	
