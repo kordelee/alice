@@ -145,8 +145,9 @@
 	<select id="selectOneLogin" resultMap="resultMapObj">
 		SELECT
 			a.ifmmSeq
-			,a.ifmmName
 			,a.ifmmId
+			,a.ifmmName
+			,a.ifmmDesc
 		FROM
 			infrMember a
 		WHERE 1=1

@@ -4,7 +4,8 @@ import java.util.Date;
 
 import com.junefw.infra.common.base.Base;
 
-public class Member extends Base {
+@SuppressWarnings("all")
+public class Member extends Base{
 	
 //	infrMember
 	private String ifmmSeq;

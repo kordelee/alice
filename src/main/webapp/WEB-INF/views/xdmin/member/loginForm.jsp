@@ -104,12 +104,12 @@
 			async: true 
 			,cache: false
 			,type: "post"
-			/* ,dataType:"text" */
+			,dataType:"text"
 			,url: "/member/loginProc"
 			/* ,data : $("#formLogin").serialize() */
 			,data : { "ifmmId" : $("#ifmmId").val(), "ifmmPassword" : $("#ifmmPassword").val()}
-			,success: function(rt) {
-				if(rt.task == "true") {
+			,success: function(response) {
+				if(response.rt == "true") {
 					/* values = rt.list ; */
 /* 			                   
 					console.log(rt.list.length);
