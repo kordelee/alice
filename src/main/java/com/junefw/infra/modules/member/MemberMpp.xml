@@ -127,6 +127,33 @@
 		)
 	</insert>
 	
+	
+	<!-- login -->
+	
+	
+	<select id="selectOneId" resultMap="resultMapObj">
+		SELECT
+			a.ifmmSeq
+			,a.ifmmId
+		FROM
+			infrMember a
+		WHERE 1=1
+			AND a.ifmmId = #{ifmmId}
+	</select>
+	
+	
+	<select id="selectOneLogin" resultMap="resultMapObj">
+		SELECT
+			a.ifmmSeq
+			,a.ifmmName
+			,a.ifmmId
+		FROM
+			infrMember a
+		WHERE 1=1
+			AND a.ifmmId = #{ifmmId}
+			AND a.ifmmPassword = #{ifmmPassword}
+	</select>
+	
 </mapper>
 
 

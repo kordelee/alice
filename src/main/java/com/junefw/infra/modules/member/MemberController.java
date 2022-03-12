@@ -1,12 +1,17 @@
 package com.junefw.infra.modules.member;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.junefw.infra.common.base.BaseController;
@@ -141,101 +146,60 @@ public class MemberController extends BaseController{
 		return "redirect:/member/memberList";
 	}
 	
-//	@RequestMapping(value = "memberForm", method = RequestMethod.POST)
-//	public ModelAndView memberForm(@ModelAttribute MemberVo vo) throws Exception {
-//		ModelAndView mav = new ModelAndView();
-//		
-//		System.out.println("vo.getIfmmSeq(): " + vo.getIfmmSeq());
-////		System.out.println("member.getIfmmSeq(): " + member.getIfmmSeq());
-//		if (vo.getIfmmSeq().equals("0")) {
-////			insert
-//			System.out.println("insert");
-//		} else {
-//			System.out.println("update");
-////			Member rt = service.selectOne(vo);
-////			System.out.println("rt.getIfmmId(): " + rt.getIfmmId());
-////			mav.addObject("rt", rt);
-//		}
+	
+	@RequestMapping(value = "loginForm")
+	public String loginForm() throws Exception {
 		
-////		mav.addObject("vo", vo);
-//		mav.setViewName("/xdmin/member/memberForm");
-//		return mav;
-//	}
+		return "xdmin/member/loginForm";
+	}
 	
-//	@RequestMapping(value = "memberList")
-//	public ModelAndView memberList(MemberVo vo) throws Exception {
-//		ModelAndView mav = new ModelAndView();
-//	
-//		vo.setParamsPaging(service.selectOneCount(vo));
-//		
-//		if (vo.getTotalRows() > 0) {
-//			List<?> list = service.selectList(vo);
-//			mav.addObject("list", list);
-//		}
-//		mav.addObject("vo", vo);
-//		mav.setViewName("/xdmin/member/memberList");
-//		return mav;
-//	} 
+	@ResponseBody
+	@RequestMapping(value = "loginProc")
+	public Object loginForm(Member dto, HttpSession httpSession) throws Exception {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		
+		Member rtMember = service.selectOneId(dto);
+		
+		// 아이디만 존재하는지 찾는다
+		if(rtMember.getIfmmSeq() != null && rtMember.getIfmmSeq().equals("")) {
+			
+			rtMember = service.selectOneLogin(dto);
+			System.out.println("asdfasdf");
+			if(rtMember.getIfmmSeq() != null && rtMember.getIfmmSeq().equals("")) {
+//				세션 작동
+				
+				httpSession.setMaxInactiveInterval( 60 * Constants.SESSION_MINUTE);	//60second * 30 = 30minute  
+//ref			session.setMaxInactiveInterval(-1);		// session time unlimited
+	
+				httpSession.setAttribute("sessSeq", rtMember.getIfmmSeq());
+				httpSession.setAttribute("sessId", rtMember.getIfmmId());
+				httpSession.setAttribute("sessName", rtMember.getIfmmName());
+							
+//				로그인로그 작동
+				
+//				returnMap.put("rt", "true");
+			} else {
+
+//				로그인로그 작동
+				
+//				returnMap.put("rt", "false");
+			}
+		} else {
+//			로그인로그 작동
+//			returnMap.put("rt", "false");
+		}
+		returnMap.put("rt", "true");
+//		return returnMap;
+		return null;
+	}
 	
 	
-//	@RequestMapping(value = "memberUpdt")
-//	public String memberUpdt(MemberVo vo, Member dto, Model model, RedirectAttributes redirectAttributes) throws Exception {
-//		
-//		service.update(dto);
-//
-////		model.addAttribute("vo", vo);
-////		model.addAttribute("vo", model);
-//
-//		redirectAttributes.addAttribute("vo", vo);
-//		
-//		return "redirect:/member/memberForm";
-//	}		
 	
-	
-	
-//	@RequestMapping(value = "codeGroupForm")
-//	public ModelAndView authForm(Code vo) throws Exception {
-//		ModelAndView mav = new ModelAndView();
-//		if (vo.getCdgrSeq() != null) {
-//				vo.setCdgrSeq(base64Decoder(vo.getCdgrSeq()));
-//				mav.addObject("rt", service.selectOne(vo));
-//		}else {
-//
-//		}
-//		mav.setViewName("/modules/code/codeGroupForm");
-//		return mav;
-//	}
-//	
-//	@RequestMapping(value = "codeGroupInst")
-//	public String authInst(Code vo) throws Exception {
-//		service.insert(vo);
-//		vo.setCdgrSeq(base64Encoder(vo.getCdgrSeq()));
-//		return "redirect:/code/codeGroupForm" + "?CdgrSeq=" + vo.getCdgrSeq() + makeParams(params);
-//	}
-	
-//	@RequestMapping(value = "authUpdt")
-//	public String authUpdt(Code auth, CodeParams params) throws Exception {
-//		authService.update(auth);
-//		auth.setAUTH_SEQ(base64Encoder(auth.getAUTH_SEQ()));
-//		return "redirect:/auth/authForm" + "?AUTH_SEQ=" + auth.getAUTH_SEQ() + makeParams(params);
-//	}		
-	
-//	/*
-//	 * public String makeParams (CodeParams params) { String paramString =
-//	 * "&thisPage=" + params.getThisPage(); paramString += "&rowNumToShow=" +
-//	 * params.getRowNumToShow(); paramString += "&searchValue=" +
-//	 * params.getSearchValue(); paramString += "&gubun=" + params.getGubun();
-//	 * 
-//	 * return paramString; }
-//	 */
+	@RequestMapping(value = "findIdPwdForm")
+	public String findIdPwdForm() throws Exception {
+		
+		return "xdmin/member/findIdPwdForm";
+	}
 	
 
-	
-//	@RequestMapping(value = "codeGroupView")
-//	public ModelAndView authView(Code vo) throws Exception {
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("one", service.selectOne(vo));
-//		mav.setViewName("/modules/code/codeGroupView");
-//		return mav;
-//	}
 }
