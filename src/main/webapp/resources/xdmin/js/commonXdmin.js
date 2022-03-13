@@ -5,7 +5,7 @@ document.write("<script src='/resources/xdmin/js/validationXdmin.js'></script>")
 
 divSearchControl = function() {
     var screenWidth = $(window).width();
-    if (screenWidth < bootstrap5_sm_dimensions) {
+    if (screenWidth < BOOTSTRAP5_SM_DIMENSIONS) {
         $('#divSearch').hide();
         $('#iSearchControlUp').hide();
         $('#iSearchControlDown').show();

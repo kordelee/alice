@@ -117,7 +117,7 @@
 					var keys0 = Object.keys(rt.list[0]);
 					console.log(keys0);
  */			       
-					location.href = "/";
+					location.href = URL_INDEX_ADMIN;
 				} else {
 					alert("회원없음");
 				}

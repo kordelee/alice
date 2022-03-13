@@ -196,6 +196,14 @@ public class MemberController extends BaseController{
 		return returnMap;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "logoutProc")
+	public Map<String, Object> logoutProc(HttpSession httpSession) throws Exception {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		httpSession.invalidate();
+		returnMap.put("rt", "success");
+		return returnMap;
+	}
 	
 	
 	@RequestMapping(value = "findIdPwdForm")

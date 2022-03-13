@@ -1,2 +1,6 @@
 
-const bootstrap5_sm_dimensions = "576";
+const BOOTSTRAP5_SM_DIMENSIONS = "576";
+
+const URL_INDEX_ADMIN = "/index/indexView";
+const URL_LOGINFORM = "/member/loginForm";
+
