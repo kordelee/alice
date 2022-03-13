@@ -62,10 +62,10 @@
 			<img alt="" src="/resources/xdmin/image/logo_login_300_200.png">
 		</div>		
     	<div class="col">
-			<input type="text" id="ifmmId" name="ifmmId" maxlength="20" placeholder="ID" class="form-control">
+			<input type="text" id="ifmmId" name="ifmmId" maxlength="20" placeholder="ID" class="form-control" value="xdmin">
 		</div>
 		<div class="col">
-			<input type="password" id="ifmmPassword" name="ifmmPassword" maxlength="20" placeholder="Password" class="form-control">
+			<input type="password" id="ifmmPassword" name="ifmmPassword" maxlength="20" placeholder="Password" class="form-control" value="aaa">
 		</div>
 		<div class="col">
 			<div class="form-check form-switch">

@@ -156,7 +156,7 @@ public class MemberController extends BaseController{
 	
 	@ResponseBody
 	@RequestMapping(value = "loginProc")
-	public Map<String, Object> loginForm(Member dto, HttpSession httpSession) throws Exception {
+	public Map<String, Object> loginProc(Member dto, HttpSession httpSession) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		
 		Member rtMember = service.selectOneLogin(dto);
