@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -154,6 +153,7 @@ public class MemberController extends BaseController{
 		return "xdmin/member/loginForm";
 	}
 	
+	
 	@ResponseBody
 	@RequestMapping(value = "loginProc")
 	public Map<String, Object> loginProc(Member dto, HttpSession httpSession) throws Exception {
@@ -162,39 +162,26 @@ public class MemberController extends BaseController{
 		Member rtMember = service.selectOneLogin(dto);
 
 		if(rtMember != null) {
-
 			rtMember = service.selectOneLogin(dto);
 
 			if(rtMember.getIfmmSeq() != null) {
-//				세션 작동
-
 				httpSession.setMaxInactiveInterval( 60 * Constants.SESSION_MINUTE);	//60second * 30 = 30minute  
 //ref			session.setMaxInactiveInterval(-1);		// session time unlimited
 	
 				httpSession.setAttribute("sessSeq", rtMember.getIfmmSeq());
 				httpSession.setAttribute("sessId", rtMember.getIfmmId());
 				httpSession.setAttribute("sessName", rtMember.getIfmmName());
-//					
-//				휴면 계정여부 체크
 				
-//				비민번호 업데이트 주기 체크
-				
-////				로그인로그 작동
-				
-				System.out.println("1");
 				returnMap.put("rt", "success");
 			} else {
-
-//				로그인로그 작동
-				
 				returnMap.put("rt", "fail");
 			}
 		} else {
-//			로그인로그 작동
 			returnMap.put("rt", "fail");
 		}
 		return returnMap;
 	}
+	
 	
 	@ResponseBody
 	@RequestMapping(value = "logoutProc")

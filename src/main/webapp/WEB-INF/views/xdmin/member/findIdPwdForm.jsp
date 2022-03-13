@@ -19,7 +19,7 @@
 <div class="container my-wrap">
 	<div class="row row-cols-1 gy-3">
 		<div class="col text-center">
-			<img alt="" src="../../../images/xdmin/logo_login_300_200.png">
+			<img alt="" src="/resources/xdmin/image/logo_login_300_200.png">
 		</div>
 		<div class="col">
 			<h4>Find ID/Password</h4>
