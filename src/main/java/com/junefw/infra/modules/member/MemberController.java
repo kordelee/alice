@@ -1,9 +1,13 @@
 package com.junefw.infra.modules.member;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -148,7 +152,18 @@ public class MemberController extends BaseController{
 	
 	
 	@RequestMapping(value = "loginForm")
-	public String loginForm() throws Exception {
+	public String loginForm(HttpServletRequest httpServletRequest) throws Exception {
+		
+		/* . */
+		
+		System.out.println(httpServletRequest.getDateHeader("If-Modified-Since"));
+		
+	    Enumeration<String> headerNames = httpServletRequest.getHeaderNames();
+	    headerNames.asIterator().forEachRemaining(headerName -> {
+	      System.out.println(headerName + ": " + httpServletRequest.getHeader(headerName));
+	    });
+
+	    /* . */
 		
 		return "xdmin/member/loginForm";
 	}
