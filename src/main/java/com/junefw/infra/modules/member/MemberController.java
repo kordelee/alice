@@ -1,8 +1,5 @@
 package com.junefw.infra.modules.member;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -156,13 +153,25 @@ public class MemberController extends BaseController{
 		
 		/* . */
 		
-		System.out.println(httpServletRequest.getDateHeader("If-Modified-Since"));
-		
-	    Enumeration<String> headerNames = httpServletRequest.getHeaderNames();
-	    headerNames.asIterator().forEachRemaining(headerName -> {
-	      System.out.println(headerName + ": " + httpServletRequest.getHeader(headerName));
-	    });
+//		httpServletRequest.getDateHeader("If-Unmodified-Since");
+//		httpServletRequest.getDateHeader("If-Modified-Since");
 
+		System.out.println("httpServletRequest.getDateHeader(\"If-Unmodified-Since\"): " + httpServletRequest.getDateHeader("If-Unmodified-Since"));
+		System.out.println("httpServletRequest.getDateHeader(\"If-Modified-Since\"): " + httpServletRequest.getDateHeader("If-Modified-Since"));
+		
+//		System.out.println(httpServletRequest.getDateHeader("If-Modified-Since"));
+//		System.out.println(httpServletRequest.getHeader("Date"));
+//		
+//	    Enumeration<String> headerNames = httpServletRequest.getHeaderNames();
+//	    headerNames.asIterator().forEachRemaining(headerName -> {
+//	      System.out.println(headerName + ": " + httpServletRequest.getHeader(headerName));
+//	    });
+		
+//		httpHeaders.getDate();
+		//System.out.println("httpHeaders.getDate(): " + httpHeaders.getDate());
+		
+		
+		
 	    /* . */
 		
 		return "xdmin/member/loginForm";
