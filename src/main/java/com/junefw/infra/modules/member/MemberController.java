@@ -153,11 +153,14 @@ public class MemberController extends BaseController{
 		
 		/* . */
 		
+		httpServletRequest.getHeaders("Date");
+		System.out.println(httpServletRequest.getHeaders("Date"));
+		
 //		httpServletRequest.getDateHeader("If-Unmodified-Since");
 //		httpServletRequest.getDateHeader("If-Modified-Since");
 
-		System.out.println("httpServletRequest.getDateHeader(\"If-Unmodified-Since\"): " + httpServletRequest.getDateHeader("If-Unmodified-Since"));
-		System.out.println("httpServletRequest.getDateHeader(\"If-Modified-Since\"): " + httpServletRequest.getDateHeader("If-Modified-Since"));
+//		System.out.println("httpServletRequest.getDateHeader(\"If-Unmodified-Since\"): " + httpServletRequest.getDateHeader("If-Unmodified-Since"));
+//		System.out.println("httpServletRequest.getDateHeader(\"If-Modified-Since\"): " + httpServletRequest.getDateHeader("If-Modified-Since"));
 		
 //		System.out.println(httpServletRequest.getDateHeader("If-Modified-Since"));
 //		System.out.println(httpServletRequest.getHeader("Date"));
