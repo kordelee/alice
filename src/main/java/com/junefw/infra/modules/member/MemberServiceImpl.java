@@ -1,16 +1,26 @@
 package com.junefw.infra.modules.member;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.junefw.infra.common.base.BaseServiceImpl;
+import com.junefw.infra.common.constants.Constants;
+import com.junefw.infra.common.util.UtilMis;
+
 
 @Service
-public class MemberServiceImpl implements MemberService{
+public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 
 	@Autowired
 	MemberDao dao;
+	
 	
 	@Override
 	public int selectOneCount(MemberVo vo){
@@ -30,7 +40,10 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int insert(Member dto) throws Exception {
 	    try {
-			dao.insert(dto);
+	    	
+	    	setReg(dto);
+	    	
+	    	dao.insert(dto);
 			
 			dto.setIfmeDefaultNy("1");
 			
@@ -67,6 +80,16 @@ public class MemberServiceImpl implements MemberService{
 	public Member selectOneLogin(Member dto) throws Exception {
 		return dao.selectOneLogin(dto);
 	}
+	
+	public void setReg(Member dto) throws Exception {
+		dto.setRegDateTime(UtilMis.nowDate());
+	}
+	
+	public void setRegMod(Member dto) throws Exception {
+		dto.setModDateTime(UtilMis.nowDate());
+	}
+	
+
 	
 	
 }

@@ -1,6 +1,6 @@
 package com.junefw.infra.common.base;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Base {
 

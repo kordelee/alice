@@ -23,7 +23,6 @@
 				<when test="shOption == 1">AND ifmmName LIKE CONCAT('%',#{shValue},'%')</when>
 				<when test="shOption == 2">AND ifmmId LIKE CONCAT('%',#{shValue},'%')</when>
 			</choose>
-			
 	</sql>
 	
 	
@@ -35,7 +34,6 @@
 			ORDER BY a.ifmmSeq DESC
 			<include refid="Base.orderByLimitForMysql" />
 		<include refid="Base.selectListLowerForMysql" />
-			
 	</select>
 	
 	
@@ -67,7 +65,8 @@
 			,ifmmId
 			,ifmmGenderCd
 			,ifmmDob
-			,ifmmDelNy			
+			,ifmmDelNy
+			,regDateTime			
 		)
 		VALUES (
 			#{ifmmName}
@@ -75,6 +74,7 @@
 			,#{ifmmGenderCd}
 			,#{ifmmDob}
 			,0
+			,#{regDateTime}
 		)
 		 <selectKey resultType="String" keyProperty="ifmmSeq" order="AFTER">
 			SELECT last_insert_id()

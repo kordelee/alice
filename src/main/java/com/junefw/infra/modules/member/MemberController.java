@@ -1,5 +1,7 @@
 package com.junefw.infra.modules.member;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -151,32 +153,9 @@ public class MemberController extends BaseController{
 	@RequestMapping(value = "loginForm")
 	public String loginForm(HttpServletRequest httpServletRequest) throws Exception {
 		
-		/* . */
-		
-		httpServletRequest.getHeaders("Date");
-		System.out.println(httpServletRequest.getHeaders("Date"));
-		
-//		httpServletRequest.getDateHeader("If-Unmodified-Since");
-//		httpServletRequest.getDateHeader("If-Modified-Since");
-
-//		System.out.println("httpServletRequest.getDateHeader(\"If-Unmodified-Since\"): " + httpServletRequest.getDateHeader("If-Unmodified-Since"));
-//		System.out.println("httpServletRequest.getDateHeader(\"If-Modified-Since\"): " + httpServletRequest.getDateHeader("If-Modified-Since"));
-		
-//		System.out.println(httpServletRequest.getDateHeader("If-Modified-Since"));
-//		System.out.println(httpServletRequest.getHeader("Date"));
-//		
-//	    Enumeration<String> headerNames = httpServletRequest.getHeaderNames();
-//	    headerNames.asIterator().forEachRemaining(headerName -> {
-//	      System.out.println(headerName + ": " + httpServletRequest.getHeader(headerName));
-//	    });
-		
-//		httpHeaders.getDate();
-		//System.out.println("httpHeaders.getDate(): " + httpHeaders.getDate());
-		
-		
-		
-	    /* . */
-		
+		LocalDateTime localDateTime = LocalDateTime.now();
+		String dateTimeBasic = localDateTime.format(DateTimeFormatter.ofPattern(Constants.DATETIME_FORMAT_BASIC));
+		System.out.println("dateTimeBasic: " + dateTimeBasic);
 		return "xdmin/member/loginForm";
 	}
 	
