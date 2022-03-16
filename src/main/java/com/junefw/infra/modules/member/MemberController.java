@@ -65,9 +65,9 @@ public class MemberController extends BaseController{
 	
 	@SuppressWarnings(value = {"all"})
 	@RequestMapping(value = "memberInst")
-	public String memberInst(MemberVo vo, Member dto, RedirectAttributes redirectAttributes) throws Exception {
+	public String memberInst(MemberVo vo, Member dto, RedirectAttributes redirectAttributes, HttpServletRequest httpServletRequest) throws Exception {
 		
-		service.insert(dto);
+		service.insert(dto, httpServletRequest);
 	
 		vo.setIfmmSeq(dto.getIfmmSeq());
 		

@@ -278,8 +278,8 @@
 		var dateString = year + '-' + month  + '-' + day;
 		var timeString = hours + ':' + minutes  + ':' + seconds;
 
-		alert(dateString);
-		alert(timeString);
+//		alert(dateString);
+//		alert(timeString);
 	}
 
 	

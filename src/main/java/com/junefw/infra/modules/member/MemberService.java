@@ -2,13 +2,15 @@ package com.junefw.infra.modules.member;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface MemberService {
 
 //	member
 	int selectOneCount(MemberVo vo) throws Exception;
 	List<Member> selectList(MemberVo vo) throws Exception; 
 	Member selectOne(MemberVo vo) throws Exception;
-	int insert(Member dto) throws Exception;
+	int insert(Member dto, HttpServletRequest httpServletRequest) throws Exception;
 	int update(Member dto) throws Exception; 
 	int uelete(MemberVo vo) throws Exception; 
 	int delete(MemberVo vo) throws Exception;

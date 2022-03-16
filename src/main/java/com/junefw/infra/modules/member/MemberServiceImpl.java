@@ -1,17 +1,14 @@
 package com.junefw.infra.modules.member;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.junefw.infra.common.base.BaseServiceImpl;
-import com.junefw.infra.common.constants.Constants;
 import com.junefw.infra.common.util.UtilMis;
 
 
@@ -38,7 +35,7 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	}
 	
 	@Override
-	public int insert(Member dto) throws Exception {
+	public int insert(Member dto, HttpServletRequest httpServletRequest) throws Exception {
 	    try {
 	    	
 	    	setReg(dto);
@@ -82,7 +79,10 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	}
 	
 	public void setReg(Member dto) throws Exception {
+		dto.setRegIp(UtilMis.getClientIP());
+		dto.setRegSeq(UtilMis.getSessionSeq());
 		dto.setRegDateTime(UtilMis.nowDate());
+		UtilMis.getBroswer();
 	}
 	
 	public void setRegMod(Member dto) throws Exception {
