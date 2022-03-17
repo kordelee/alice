@@ -78,6 +78,9 @@ public class UtilMis {
 		
 		String browser = "";
 		String userAgent = httpServletRequest.getHeader("User-Agent");
+		
+		System.out.println("userAgent: " + userAgent);
+		
 		if(userAgent.indexOf("Trident") > -1) {
 			// IE : 5
 			browser = "ie";
@@ -106,7 +109,7 @@ public class UtilMis {
 
 		System.out.println("browser: " + browser);
 		return browser;
-	}
+	} 
 
 	
 }

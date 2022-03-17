@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.junefw.infra.common.base.BaseServiceImpl;
+import com.junefw.infra.common.util.SetRegMod;
 import com.junefw.infra.common.util.UtilMis;
 
 
@@ -17,6 +18,9 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 
 	@Autowired
 	MemberDao dao;
+
+//	@Autowired
+//	SetRegMod setRegMod;
 	
 	
 	@Override
@@ -39,6 +43,7 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	    try {
 	    	
 	    	setReg(dto);
+//	    	setRegMod.setReg(dto);
 	    	
 	    	dao.insert(dto);
 			
@@ -83,6 +88,7 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 		dto.setRegSeq(UtilMis.getSessionSeq());
 		dto.setRegDateTime(UtilMis.nowDate());
 		UtilMis.getBroswer();
+		System.out.println("asdfasdf");
 	}
 	
 	public void setRegMod(Member dto) throws Exception {

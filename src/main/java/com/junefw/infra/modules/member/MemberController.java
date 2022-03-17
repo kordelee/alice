@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.junefw.infra.common.base.BaseController;
 import com.junefw.infra.common.constants.Constants;
+import com.junefw.infra.common.util.UtilMis;
 import com.junefw.infra.modules.code.Code;
 import com.junefw.infra.modules.code.CodeServiceImpl;
 
@@ -153,9 +154,8 @@ public class MemberController extends BaseController{
 	@RequestMapping(value = "loginForm")
 	public String loginForm(HttpServletRequest httpServletRequest) throws Exception {
 		
-		LocalDateTime localDateTime = LocalDateTime.now();
-		String dateTimeBasic = localDateTime.format(DateTimeFormatter.ofPattern(Constants.DATETIME_FORMAT_BASIC));
-		System.out.println("dateTimeBasic: " + dateTimeBasic);
+		UtilMis.getBroswer();
+		
 		return "xdmin/member/loginForm";
 	}
 	
