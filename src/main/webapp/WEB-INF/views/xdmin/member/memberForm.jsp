@@ -183,8 +183,8 @@
     </div>
     <div class="row mt-sm-4">
         <div class="col-sm-3 mt-3 mt-sm-0">
-			<input type="hidden" id="ifmpTypeCd" name="ifmpTypeCd" value="54">
-			<input type="hidden" id="ifmpDeviceCd" name="ifmpDeviceCd" value="58">
+			<input type="hidden" id="xxxxMobileTypeCd" name="xxxxMobileTypeCd" value="54">
+			<input type="hidden" id="xxxxMobileDeviceCd" name="xxxxMobileDeviceCd" value="58">
             <label for="ifmpTelecomCd" class="form-label">통신사</label>
             <select id="ifmpTelecomCd" name="ifmpTelecomCd" class="form-select form-select-sm">
 				<option value="">::선택::</option>            
@@ -194,8 +194,8 @@
 			</select>
         </div>
         <div class="col-sm-3 mt-3 mt-sm-0">
-            <label for="ifmpNumber" class="form-label">핸드폰</label>
-            <input type="text" id="ifmpNumber" name="ifmpNumber" value="" maxlength="11" placeholder="숫자만 (01044447777)" class="form-control form-control-sm">
+            <label for="xxxxMobile" class="form-label">핸드폰</label>
+            <input type="text" id="xxxxMobile" name="xxxxMobile" value="" maxlength="11" placeholder="숫자만 (01044447777)" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
             <label for="ifmmSmsConsentNy" class="form-label">핸드폰 정보 마케팅 사용 동의</label>
@@ -209,12 +209,16 @@
     </div>
     <div class="row mt-sm-4">
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="memTel" class="form-label">전화번호</label>
-            <input type="text" id="memTel" name="memTel" value="" maxlength="11" placeholder="숫자만 (024447777)" class="form-control form-control-sm">
+        	<input type="hidden" id="xxxxPhoneTypeCd" name="xxxxPhoneTypeCd" value="54">
+        	<input type="hidden" id="xxxxPhoneDeviceCd" name="xxxxPhoneDeviceCd" value="57">
+            <label for="xxxxPhone" class="form-label">전화번호</label>
+            <input type="text" id="xxxxPhone" name="xxxxPhone" value="" maxlength="11" placeholder="숫자만 (024447777)" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="memFax" class="form-label">팩스번호</label>
-            <input type="text" id="memFax" name="memFax" value="" maxlength="11" placeholder="숫자만 (024447777)" class="form-control form-control-sm">
+        	<input type="hidden" id="xxxxFaxTypeCd" name="xxxxFaxTypeCd" value="54">
+        	<input type="hidden" id="xxxxFaxDeviceCd" name="xxxxFaxDeviceCd" value="59">
+            <label for="xxxxFax" class="form-label">팩스번호</label>
+            <input type="text" id="xxxxFax" name="xxxxFax" value="" maxlength="11" placeholder="숫자만 (024447777)" class="form-control form-control-sm">
         </div>
     </div>
     <div class="row mt-sm-4">
@@ -349,6 +353,15 @@
 	$("#btnSave").on("click", function(){
 		if (seq.val() == "0"){
 	   		// insert
+	   		// ------------------
+	   		
+	   		alert($("#xxxxMobileTypeCd").val());
+	   		alert($("#xxxxMobileDeviceCd").val());
+	   		alert($("#ifmpTelecomCd").val());
+	   		alert($("#xxxxMobile").val());
+	   		
+	   		return false;
+	   		// -----------------
 	   		if (validationInst() == false) return false;
 	   		form.attr("action", goUrlInst).submit();
 	   	} else {

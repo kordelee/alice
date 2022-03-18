@@ -59,7 +59,8 @@ public class MemberController extends BaseController{
 			model.addAttribute("item", item);
 		}
 		
-		model.addAttribute("codeGender", CodeServiceImpl.selectListCachedCode("2"));
+		model.addAttribute("codeGender", CodeServiceImpl.selectListCachedCode("3"));
+		model.addAttribute("codeTelecom", CodeServiceImpl.selectListCachedCode("10"));
 	
 		return "xdmin/member/memberForm";
 	}

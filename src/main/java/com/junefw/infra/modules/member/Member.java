@@ -46,6 +46,18 @@ public class Member extends Base{
 	private String ifmeEmailDomainCd;
 	private String ifmeDelNy;
 //	private String ifmmSeq;
+	
+	
+//	infrMemberPhone
+	private String ifmpSeq;
+	private String[] ifmpSeqArr;
+	private Integer[] ifmpDefaultNy;
+	private Integer[] ifmpTypeCd;
+	private Integer[] ifmpDeviceCd;
+	private Integer[] ifmpTelecomCd;
+	private String[] ifmpNumber;
+	private Integer[] ifmpDelNy;
+//	private String ifmmSeq;
 //	----------
 	public String getIfmmSeq() {
 		return ifmmSeq;
@@ -250,6 +262,54 @@ public class Member extends Base{
 	}
 	public void setIfmeDelNy(String ifmeDelNy) {
 		this.ifmeDelNy = ifmeDelNy;
+	}
+	public String getIfmpSeq() {
+		return ifmpSeq;
+	}
+	public void setIfmpSeq(String ifmpSeq) {
+		this.ifmpSeq = ifmpSeq;
+	}
+	public String[] getIfmpSeqArr() {
+		return ifmpSeqArr;
+	}
+	public void setIfmpSeqArr(String[] ifmpSeqArr) {
+		this.ifmpSeqArr = ifmpSeqArr;
+	}
+	public Integer[] getIfmpDefaultNy() {
+		return ifmpDefaultNy;
+	}
+	public void setIfmpDefaultNy(Integer[] ifmpDefaultNy) {
+		this.ifmpDefaultNy = ifmpDefaultNy;
+	}
+	public Integer[] getIfmpTypeCd() {
+		return ifmpTypeCd;
+	}
+	public void setIfmpTypeCd(Integer[] ifmpTypeCd) {
+		this.ifmpTypeCd = ifmpTypeCd;
+	}
+	public Integer[] getIfmpDeviceCd() {
+		return ifmpDeviceCd;
+	}
+	public void setIfmpDeviceCd(Integer[] ifmpDeviceCd) {
+		this.ifmpDeviceCd = ifmpDeviceCd;
+	}
+	public Integer[] getIfmpTelecomCd() {
+		return ifmpTelecomCd;
+	}
+	public void setIfmpTelecomCd(Integer[] ifmpTelecomCd) {
+		this.ifmpTelecomCd = ifmpTelecomCd;
+	}
+	public String[] getIfmpNumber() {
+		return ifmpNumber;
+	}
+	public void setIfmpNumber(String[] ifmpNumber) {
+		this.ifmpNumber = ifmpNumber;
+	}
+	public Integer[] getIfmpDelNy() {
+		return ifmpDelNy;
+	}
+	public void setIfmpDelNy(Integer[] ifmpDelNy) {
+		this.ifmpDelNy = ifmpDelNy;
 	}
 	
 }
