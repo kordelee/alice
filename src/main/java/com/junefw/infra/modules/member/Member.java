@@ -12,6 +12,11 @@ public class Member extends Base{
 	private Integer ifmmAdminNy;
 	private Integer ifmmDormancyNy;
 	private String ifmmName;
+	private String ifmmNameEng;
+	private String ifmmLastName;
+	private String ifmmFirstName;
+	private String ifmmLastNameEng;
+	private String ifmmFirstNameEng;
 	private String ifmmId;
 	private String ifmmPassword;
 	private Date ifmmPwdModDate;
@@ -65,6 +70,36 @@ public class Member extends Base{
 	}
 	public void setIfmmName(String ifmmName) {
 		this.ifmmName = ifmmName;
+	}
+	public String getIfmmNameEng() {
+		return ifmmNameEng;
+	}
+	public void setIfmmNameEng(String ifmmNameEng) {
+		this.ifmmNameEng = ifmmNameEng;
+	}
+	public String getIfmmLastName() {
+		return ifmmLastName;
+	}
+	public void setIfmmLastName(String ifmmLastName) {
+		this.ifmmLastName = ifmmLastName;
+	}
+	public String getIfmmFirstName() {
+		return ifmmFirstName;
+	}
+	public void setIfmmFirstName(String ifmmFirstName) {
+		this.ifmmFirstName = ifmmFirstName;
+	}
+	public String getIfmmLastNameEng() {
+		return ifmmLastNameEng;
+	}
+	public void setIfmmLastNameEng(String ifmmLastNameEng) {
+		this.ifmmLastNameEng = ifmmLastNameEng;
+	}
+	public String getIfmmFirstNameEng() {
+		return ifmmFirstNameEng;
+	}
+	public void setIfmmFirstNameEng(String ifmmFirstNameEng) {
+		this.ifmmFirstNameEng = ifmmFirstNameEng;
 	}
 	public String getIfmmId() {
 		return ifmmId;

@@ -7,6 +7,7 @@
 <style type="text/css">
 
 
+
 </style>
 </head>
 <body>
@@ -99,12 +100,12 @@
 <%@include file="memberVo.jsp"%>
 <!-- *Vo.jsp e -->
 
-<h3 class="mt-3 mb-0">Code</h3>
+<h3 class="mt-3 mb-0">회원관리</h3>
  
 <div class="container-fluid px-0 px-sm-5 mt-2">
     <div class="row mt-sm-4">
         <div class="col-sm-6">
-            <label for="memId" class="form-label">아이디</label>
+            <label for="ifmmId" class="form-label">아이디</label>
             <input type="text" id="ifmmId" name="ifmmId" value="<c:out value="${item.ifmmId}"/>" maxlength="20" placeholder="영문(대소문자),숫자,특수문자(), 4~20자리 조합" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6">
@@ -112,42 +113,42 @@
     </div>
     <div class="row mt-sm-4">
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="memPwd" class="form-label">비밀번호</label>
-            <input type="password" id="memPwd" name="memPwd" value="" maxlength="20" placeholder="영문(대소문자),숫자,특수문자(), 8~20자리 조합" class="form-control form-control-sm">
+            <label for="ifmmPassword" class="form-label">비밀번호</label>
+            <input type="password" id="ifmmPassword" name="ifmmPassword" value="" maxlength="20" placeholder="영문(대소문자),숫자,특수문자(), 8~20자리 조합" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="memPwdRe" class="form-label">비밀번호확인</label>
-            <input type="password" id="memPwdRe" name="memPwdRe" value="" maxlength="20" placeholder="" class="form-control form-control-sm">          
+            <label for="ifmmPasswordRe" class="form-label">비밀번호확인</label>
+            <input type="password" id="ifmmPasswordRe" name="ifmmPasswordRe" value="" maxlength="20" placeholder="" class="form-control form-control-sm">          
         </div>
     </div>
     <div class="row mt-sm-4">
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="memNameFull" class="form-label">이름</label>
+            <label for="ifmmName" class="form-label">이름</label>
             <input type="text" id="ifmmName" name="ifmmName" value="<c:out value="${item.ifmmName}"/>" maxlength="50" placeholder="" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="memNameFullEng" class="form-label">이름 (영문)</label>
-            <input type="text" id="memNameFullEng" name="memNameFullEng" value="" maxlength="50" placeholder="" class="form-control form-control-sm">            
+            <label for="ifmmNameEng" class="form-label">이름 (영문)</label>
+            <input type="text" id="ifmmNameEng" name="ifmmNameEng" value="" maxlength="50" placeholder="" class="form-control form-control-sm">            
         </div>
     </div>
     <div class="row mt-sm-4 mt-3 mt-sm-0">
         <div class="col-sm-6">
-            <label for="memNameLast" class="form-label">이름</label>
-            <input type="text" id="memNameLast" name="memNameLast" value="" maxlength="50" placeholder="" class="form-control form-control-sm">
+            <label for="ifmmLastName" class="form-label">성</label>
+            <input type="text" id="ifmmLastName" name="ifmmLastName" value="" maxlength="50" placeholder="" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="memNameFirst" class="form-label">성</label>
-            <input type="text" id="memNameFirst" name="memNameFirst" value="" maxlength="50" placeholder="" class="form-control form-control-sm">          
+            <label for="ifmmFirstName" class="form-label">이름</label>
+            <input type="text" id="ifmmFirstName" name="ifmmFirstName" value="" maxlength="50" placeholder="" class="form-control form-control-sm">          
         </div>
     </div>
     <div class="row mt-sm-4 mt-3 mt-sm-0">
         <div class="col-sm-6">
-            <label for="memNameLastEng" class="form-label">이름 (영문)</label>
-            <input type="text" id="memNameLastEng" name="memNameLastEng" value="" maxlength="50" placeholder="" class="form-control form-control-sm">
+            <label for="ifmmLastNameEng" class="form-label">성 (영문)</label>
+            <input type="text" id="ifmmLastNameEng" name="ifmmLastNameEng" value="" maxlength="50" placeholder="" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="memNameFirstEng" class="form-label">성 (영문)</label>
-            <input type="text" id="memNameFirstEng" name="memNameFirstEng" value="" maxlength="50" placeholder="" class="form-control form-control-sm">          
+            <label for="ifmmFirstNameEng" class="form-label">이름 (영문)</label>
+            <input type="text" id="ifmmFirstNameEng" name="ifmmFirstNameEng" value="" maxlength="50" placeholder="" class="form-control form-control-sm">          
         </div>
     </div>
     <div class="row mt-sm-4">
@@ -171,25 +172,36 @@
             <input type="text" id="ifmeEmailFull" name="ifmeEmailFull" value="<c:out value="${item.ifmeEmailFull }"/>" maxlength="50" placeholder="name@example.com" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="memEmailAgree" class="form-label">이메일 정보 마케팅 사용 동의</label>
+            <label for="ifmmEmailConsentNy" class="form-label">이메일 정보 마케팅 사용 동의</label>
             <div class="form-check">
-                <input type="checkbox" id="memEmailAgree" name="memEmailAgree" value="" class="form-check-input">
-                <label for="memEmailAgree" class="form-check-label">
+                <input type="checkbox" id="ifmmEmailConsentNy" name="ifmmEmailConsentNy" value="" class="form-check-input">
+                <label for="ifmmEmailConsentNy" class="form-check-label">
                     동의합니다
                 </label>
             </div>
         </div>
     </div>
     <div class="row mt-sm-4">
-        <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="memMobile" class="form-label">핸드폰</label>
-            <input type="text" id="memMobile" name="memMobile" value="" maxlength="11" placeholder="숫자만 (01044447777)" class="form-control form-control-sm">
+        <div class="col-sm-3 mt-3 mt-sm-0">
+			<input type="hidden" id="ifmpTypeCd" name="ifmpTypeCd" value="54">
+			<input type="hidden" id="ifmpDeviceCd" name="ifmpDeviceCd" value="58">
+            <label for="ifmpTelecomCd" class="form-label">통신사</label>
+            <select id="ifmpTelecomCd" name="ifmpTelecomCd" class="form-select form-select-sm">
+				<option value="">::선택::</option>            
+	            	<c:forEach items="${codeTelecom}" var="itemTelecom" varStatus="statusTelecom">
+				<option value="<c:out value="${itemTelecom.ifcdSeq }"/>" <c:if test="${item.ifmpTelecomCd eq itemTelecom.ifcdSeq }">selected</c:if>><c:out value="${itemTelecom.ifcdName }"/></option>
+					</c:forEach>
+			</select>
+        </div>
+        <div class="col-sm-3 mt-3 mt-sm-0">
+            <label for="ifmpNumber" class="form-label">핸드폰</label>
+            <input type="text" id="ifmpNumber" name="ifmpNumber" value="" maxlength="11" placeholder="숫자만 (01044447777)" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="memMobileAgree" class="form-label">핸드폰 정보 마케팅 사용 동의</label>
+            <label for="ifmmSmsConsentNy" class="form-label">핸드폰 정보 마케팅 사용 동의</label>
             <div class="form-check">
-                <input type="checkbox" id="memMobileAgree" name="memMobileAgree" value="" class="form-check-input">
-                <label for="memMobileAgree" class="form-check-label">
+                <input type="checkbox" id="ifmmSmsConsentNy" name="ifmmSmsConsentNy" value="" class="form-check-input">
+                <label for="ifmmSmsConsentNy" class="form-check-label">
                     동의합니다
                 </label>
             </div>          
