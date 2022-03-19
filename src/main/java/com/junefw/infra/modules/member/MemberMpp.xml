@@ -8,7 +8,7 @@
 
     <resultMap id="resultMapObj" type="com.junefw.infra.modules.member.Member"></resultMap>
 	
-	
+	<!-- infrMember s -->
 	<sql id ="selectCommon">
 		FROM 
 			infrMember a
@@ -106,8 +106,10 @@
 	<delete id="delete">
 		DELETE FROM infrMember WHERE ifmmSeq = #{ifmmSeq}
 	</delete>
+	<!-- infrMember e -->
 	
 	
+	<!-- infrMemberEmail s -->
 	<insert id="insertEmail">
 		INSERT INTO infrMemberEmail (
 			ifmeDefaultNy
@@ -130,11 +132,33 @@
 			,#{ifmmSeq}
 		)
 	</insert>
+	<!-- infrMemberEmail e -->
+	
+	<!-- infrMemberPhone s -->
+	<insert id="insertPhone">
+		INSERT INTO infrMemberPhone (
+			ifmpDefaultNy
+			,ifmpTypeCd
+			,ifmpDeviceCd
+			,ifmpTelecomCd
+			,ifmpNumber
+			,ifmpDelNy
+			,ifmmSeq
+		)
+		VALUES (
+			#{ifmpDefaultNy}
+			,#{ifmpTypeCd}
+			,#{ifmpDeviceCd}
+			,#{ifmpTelecomCd}
+			,#{ifmpNumber}
+			,#{ifmpDelNy}
+			,#{ifmmSeq}
+		)
+	</insert>
+	<!-- infrMemberPhone e -->
 	
 	
-	<!-- login -->
-	
-	
+	<!-- login s -->
 	<select id="selectOneId" resultMap="resultMapObj">
 		SELECT
 			a.ifmmSeq
@@ -158,6 +182,7 @@
 			AND a.ifmmId = #{ifmmId}
 			AND a.ifmmPassword = #{ifmmPassword}
 	</select>
+	<!-- login e -->
 	
 </mapper>
 

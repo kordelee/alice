@@ -106,21 +106,25 @@
     <div class="row mt-sm-4">
         <div class="col-sm-6">
             <label for="ifmmId" class="form-label">아이디</label>
-            <input type="text" id="ifmmId" name="ifmmId" value="<c:out value="${item.ifmmId}"/>" maxlength="20" placeholder="영문(대소문자),숫자,특수문자(), 4~20자리 조합" class="form-control form-control-sm">
+            <input type="text" id="ifmmId" name="ifmmId" value="<c:out value="${item.ifmmId}"/>" maxlength="20" placeholder="영문(대소문자),숫자,특수문자(-_.), 4~20자리 조합" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6">
+			<label for="ifmmNickname" class="form-label">별명</label>
+            <input type="text" id="ifmmNickname" name="ifmmNickname" value="<c:out value="${item.ifmmNickname}"/>" maxlength="20" placeholder="별명" class="form-control form-control-sm">        
         </div>
     </div>
+<c:if test="${empty item.ifmmId }">    
     <div class="row mt-sm-4">
         <div class="col-sm-6 mt-3 mt-sm-0">
             <label for="ifmmPassword" class="form-label">비밀번호</label>
-            <input type="password" id="ifmmPassword" name="ifmmPassword" value="" maxlength="20" placeholder="영문(대소문자),숫자,특수문자(), 8~20자리 조합" class="form-control form-control-sm">
+            <input type="password" id="ifmmPassword" name="ifmmPassword" value="" maxlength="20" placeholder="영문(대소문자),숫자,특수문자(!@#$%^&*), 8~20자리 조합" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
             <label for="ifmmPasswordRe" class="form-label">비밀번호확인</label>
-            <input type="password" id="ifmmPasswordRe" name="ifmmPasswordRe" value="" maxlength="20" placeholder="" class="form-control form-control-sm">          
+            <input type="password" id="ifmmPasswordRe" name="ifmmPasswordRe" value="" maxlength="20" placeholder="비밀번호 확인" class="form-control form-control-sm">          
         </div>
     </div>
+</c:if>    
     <div class="row mt-sm-4">
         <div class="col-sm-6 mt-3 mt-sm-0">
             <label for="ifmmName" class="form-label">이름</label>
@@ -128,27 +132,27 @@
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
             <label for="ifmmNameEng" class="form-label">이름 (영문)</label>
-            <input type="text" id="ifmmNameEng" name="ifmmNameEng" value="" maxlength="50" placeholder="" class="form-control form-control-sm">            
+            <input type="text" id="ifmmNameEng" name="ifmmNameEng" value="<c:out value="${item.ifmmNameEng}"/>" maxlength="50" placeholder="" class="form-control form-control-sm">            
         </div>
     </div>
     <div class="row mt-sm-4 mt-3 mt-sm-0">
         <div class="col-sm-6">
             <label for="ifmmLastName" class="form-label">성</label>
-            <input type="text" id="ifmmLastName" name="ifmmLastName" value="" maxlength="50" placeholder="" class="form-control form-control-sm">
+            <input type="text" id="ifmmLastName" name="ifmmLastName" value="<c:out value="${item.ifmmLastName}"/>" maxlength="50" placeholder="" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
             <label for="ifmmFirstName" class="form-label">이름</label>
-            <input type="text" id="ifmmFirstName" name="ifmmFirstName" value="" maxlength="50" placeholder="" class="form-control form-control-sm">          
+            <input type="text" id="ifmmFirstName" name="ifmmFirstName" value="<c:out value="${item.ifmmFirstName}"/>" maxlength="50" placeholder="" class="form-control form-control-sm">          
         </div>
     </div>
     <div class="row mt-sm-4 mt-3 mt-sm-0">
         <div class="col-sm-6">
             <label for="ifmmLastNameEng" class="form-label">성 (영문)</label>
-            <input type="text" id="ifmmLastNameEng" name="ifmmLastNameEng" value="" maxlength="50" placeholder="" class="form-control form-control-sm">
+            <input type="text" id="ifmmLastNameEng" name="ifmmLastNameEng" value="<c:out value="${item.ifmmLastNameEng}"/>" maxlength="50" placeholder="" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
             <label for="ifmmFirstNameEng" class="form-label">이름 (영문)</label>
-            <input type="text" id="ifmmFirstNameEng" name="ifmmFirstNameEng" value="" maxlength="50" placeholder="" class="form-control form-control-sm">          
+            <input type="text" id="ifmmFirstNameEng" name="ifmmFirstNameEng" value="<c:out value="${item.ifmmFirstNameEng}"/>" maxlength="50" placeholder="" class="form-control form-control-sm">          
         </div>
     </div>
     <div class="row mt-sm-4">
@@ -168,8 +172,10 @@
     </div>    
     <div class="row mt-sm-4">    
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="ifmeEmailFull" class="form-label">Email</label>
-            <input type="text" id="ifmeEmailFull" name="ifmeEmailFull" value="<c:out value="${item.ifmeEmailFull }"/>" maxlength="50" placeholder="name@example.com" class="form-control form-control-sm">
+        	<input type="hidden" id="ifmeDefaultNyArray0" name="ifmeDefaultNyArray" value="1">
+        	<input type="hidden" id="ifmeTypeCdArray0" name="ifmeTypeCdArray" value="1">
+            <label for="ifmeEmailFullArray0" class="form-label">Email</label>
+            <input type="text" id="ifmeEmailFullArray0" name="ifmeEmailFullArray" value="<c:out value="${item.ifmeEmailFull }"/>" maxlength="50" placeholder="account@example.com" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
             <label for="ifmmEmailConsentNy" class="form-label">이메일 정보 마케팅 사용 동의</label>
@@ -183,10 +189,11 @@
     </div>
     <div class="row mt-sm-4">
         <div class="col-sm-3 mt-3 mt-sm-0">
-			<input type="hidden" id="xxxxMobileTypeCd" name="xxxxMobileTypeCd" value="54">
-			<input type="hidden" id="xxxxMobileDeviceCd" name="xxxxMobileDeviceCd" value="58">
-            <label for="ifmpTelecomCd" class="form-label">통신사</label>
-            <select id="ifmpTelecomCd" name="ifmpTelecomCd" class="form-select form-select-sm">
+        	<input type="hidden" id="ifmpDefaultNyArray0" name="ifmpDefaultNyArray" value="1">
+        	<input type="hidden" id="ifmpTypeCdArray0" name="ifmpTypeCdArray" value="54">
+        	<input type="hidden" id="ifmpDeviceCdArray0" name="ifmpDeviceCdArray" value="58">
+            <label for="ifmpTelecomCdArray0" class="form-label">통신사</label>
+            <select id="ifmpTelecomCdArray0" name="ifmpTelecomCdArray" class="form-select form-select-sm">
 				<option value="">::선택::</option>            
 	            	<c:forEach items="${codeTelecom}" var="itemTelecom" varStatus="statusTelecom">
 				<option value="<c:out value="${itemTelecom.ifcdSeq }"/>" <c:if test="${item.ifmpTelecomCd eq itemTelecom.ifcdSeq }">selected</c:if>><c:out value="${itemTelecom.ifcdName }"/></option>
@@ -194,8 +201,8 @@
 			</select>
         </div>
         <div class="col-sm-3 mt-3 mt-sm-0">
-            <label for="xxxxMobile" class="form-label">핸드폰</label>
-            <input type="text" id="xxxxMobile" name="xxxxMobile" value="" maxlength="11" placeholder="숫자만 (01044447777)" class="form-control form-control-sm">
+            <label for="ifmpNumberArray0" class="form-label">핸드폰</label>
+            <input type="text" id="ifmpNumberArray0" name="ifmpNumberArray" value="" maxlength="11" placeholder="숫자만 (01044447777)" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
             <label for="ifmmSmsConsentNy" class="form-label">핸드폰 정보 마케팅 사용 동의</label>
@@ -207,18 +214,23 @@
             </div>          
         </div>
     </div>
+  
     <div class="row mt-sm-4">
         <div class="col-sm-6 mt-3 mt-sm-0">
-        	<input type="hidden" id="xxxxPhoneTypeCd" name="xxxxPhoneTypeCd" value="54">
-        	<input type="hidden" id="xxxxPhoneDeviceCd" name="xxxxPhoneDeviceCd" value="57">
-            <label for="xxxxPhone" class="form-label">전화번호</label>
-            <input type="text" id="xxxxPhone" name="xxxxPhone" value="" maxlength="11" placeholder="숫자만 (024447777)" class="form-control form-control-sm">
+        	<input type="hidden" id="ifmpDefaultNyArray1" name="ifmpDefaultNyArray" value="0">
+        	<input type="hidden" id="ifmpTypeCdArray1" name="ifmpTypeCdArray" value="54">
+        	<input type="hidden" id="ifmpDeviceCdArray1" name="ifmpDeviceCdArray" value="57">
+        	<input type="hidden" id="ifmpTelecomCdArray1" name="ifmpTelecomCdArray" value="">
+            <label for="ifmpNumberArray1" class="form-label">전화번호</label>
+            <input type="text" id="ifmpNumberArray1" name="ifmpNumberArray" value="" maxlength="11" placeholder="숫자만 (024447777)" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
-        	<input type="hidden" id="xxxxFaxTypeCd" name="xxxxFaxTypeCd" value="54">
-        	<input type="hidden" id="xxxxFaxDeviceCd" name="xxxxFaxDeviceCd" value="59">
-            <label for="xxxxFax" class="form-label">팩스번호</label>
-            <input type="text" id="xxxxFax" name="xxxxFax" value="" maxlength="11" placeholder="숫자만 (024447777)" class="form-control form-control-sm">
+        	<input type="hidden" id="ifmpDefaultNyArray2" name="ifmpDefaultNyArray" value="0">
+        	<input type="hidden" id="ifmpTypeCdArray2" name="ifmpTypeCdArray" value="54">
+        	<input type="hidden" id="ifmpDeviceCdArray2" name="ifmpDeviceCdArray" value="59">
+        	<input type="hidden" id="ifmpTelecomCdArray2" name="ifmpTelecomCdArray" value="">
+            <label for="ifmpNumberArray2" class="form-label">팩스번호</label>
+            <input type="text" id="ifmpNumberArray2" name="ifmpNumberArray" value="" maxlength="11" placeholder="숫자만 (024447777)" class="form-control form-control-sm">
         </div>
     </div>
     <div class="row mt-sm-4">
@@ -353,15 +365,6 @@
 	$("#btnSave").on("click", function(){
 		if (seq.val() == "0"){
 	   		// insert
-	   		// ------------------
-	   		
-	   		alert($("#xxxxMobileTypeCd").val());
-	   		alert($("#xxxxMobileDeviceCd").val());
-	   		alert($("#ifmpTelecomCd").val());
-	   		alert($("#xxxxMobile").val());
-	   		
-	   		return false;
-	   		// -----------------
 	   		if (validationInst() == false) return false;
 	   		form.attr("action", goUrlInst).submit();
 	   	} else {

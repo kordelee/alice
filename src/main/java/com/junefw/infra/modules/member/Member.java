@@ -48,15 +48,37 @@ public class Member extends Base{
 //	private String ifmmSeq;
 	
 	
+//	infrMemberEmailArray
+//	private String ifmeSeq;
+	private String[] ifmeDefaultNyArray;
+	private String[] ifmeTypeCdArray;
+	private String[] ifmeEmailFullArray;
+	private String[] ifmeEmailAccountArray;
+	private String[] ifmeEmailDomainArray;
+	private String[] ifmeEmailDomainCdArray;
+	private String[] ifmeDelNyArray;
+//	private String ifmmSeq;
+	
+	
 //	infrMemberPhone
 	private String ifmpSeq;
-	private String[] ifmpSeqArr;
-	private Integer[] ifmpDefaultNy;
-	private Integer[] ifmpTypeCd;
-	private Integer[] ifmpDeviceCd;
-	private Integer[] ifmpTelecomCd;
-	private String[] ifmpNumber;
-	private Integer[] ifmpDelNy;
+	private Integer ifmpDefaultNy;
+	private Integer ifmpTypeCd;
+	private Integer ifmpDeviceCd;
+	private Integer ifmpTelecomCd;
+	private String ifmpNumber;
+	private Integer ifmpDelNy;
+//	private String ifmmSeq;
+	
+
+//	infrMemberPhoneArray
+//	private String ifmpSeq;
+	private Integer[] ifmpDefaultNyArray;
+	private Integer[] ifmpTypeCdArray;
+	private Integer[] ifmpDeviceCdArray;
+	private Integer[] ifmpTelecomCdArray;
+	private String[] ifmpNumberArray;
+	private Integer[] ifmpDelNyArray;
 //	private String ifmmSeq;
 //	----------
 	public String getIfmmSeq() {
@@ -263,53 +285,125 @@ public class Member extends Base{
 	public void setIfmeDelNy(String ifmeDelNy) {
 		this.ifmeDelNy = ifmeDelNy;
 	}
+	public String[] getIfmeDefaultNyArray() {
+		return ifmeDefaultNyArray;
+	}
+	public void setIfmeDefaultNyArray(String[] ifmeDefaultNyArray) {
+		this.ifmeDefaultNyArray = ifmeDefaultNyArray;
+	}
+	public String[] getIfmeTypeCdArray() {
+		return ifmeTypeCdArray;
+	}
+	public void setIfmeTypeCdArray(String[] ifmeTypeCdArray) {
+		this.ifmeTypeCdArray = ifmeTypeCdArray;
+	}
+	public String[] getIfmeEmailFullArray() {
+		return ifmeEmailFullArray;
+	}
+	public void setIfmeEmailFullArray(String[] ifmeEmailFullArray) {
+		this.ifmeEmailFullArray = ifmeEmailFullArray;
+	}
+	public String[] getIfmeEmailAccountArray() {
+		return ifmeEmailAccountArray;
+	}
+	public void setIfmeEmailAccountArray(String[] ifmeEmailAccountArray) {
+		this.ifmeEmailAccountArray = ifmeEmailAccountArray;
+	}
+	public String[] getIfmeEmailDomainArray() {
+		return ifmeEmailDomainArray;
+	}
+	public void setIfmeEmailDomainArray(String[] ifmeEmailDomainArray) {
+		this.ifmeEmailDomainArray = ifmeEmailDomainArray;
+	}
+	public String[] getIfmeEmailDomainCdArray() {
+		return ifmeEmailDomainCdArray;
+	}
+	public void setIfmeEmailDomainCdArray(String[] ifmeEmailDomainCdArray) {
+		this.ifmeEmailDomainCdArray = ifmeEmailDomainCdArray;
+	}
+	public String[] getIfmeDelNyArray() {
+		return ifmeDelNyArray;
+	}
+	public void setIfmeDelNyArray(String[] ifmeDelNyArray) {
+		this.ifmeDelNyArray = ifmeDelNyArray;
+	}
 	public String getIfmpSeq() {
 		return ifmpSeq;
 	}
 	public void setIfmpSeq(String ifmpSeq) {
 		this.ifmpSeq = ifmpSeq;
 	}
-	public String[] getIfmpSeqArr() {
-		return ifmpSeqArr;
-	}
-	public void setIfmpSeqArr(String[] ifmpSeqArr) {
-		this.ifmpSeqArr = ifmpSeqArr;
-	}
-	public Integer[] getIfmpDefaultNy() {
+	public Integer getIfmpDefaultNy() {
 		return ifmpDefaultNy;
 	}
-	public void setIfmpDefaultNy(Integer[] ifmpDefaultNy) {
+	public void setIfmpDefaultNy(Integer ifmpDefaultNy) {
 		this.ifmpDefaultNy = ifmpDefaultNy;
 	}
-	public Integer[] getIfmpTypeCd() {
+	public Integer getIfmpTypeCd() {
 		return ifmpTypeCd;
 	}
-	public void setIfmpTypeCd(Integer[] ifmpTypeCd) {
+	public void setIfmpTypeCd(Integer ifmpTypeCd) {
 		this.ifmpTypeCd = ifmpTypeCd;
 	}
-	public Integer[] getIfmpDeviceCd() {
+	public Integer getIfmpDeviceCd() {
 		return ifmpDeviceCd;
 	}
-	public void setIfmpDeviceCd(Integer[] ifmpDeviceCd) {
+	public void setIfmpDeviceCd(Integer ifmpDeviceCd) {
 		this.ifmpDeviceCd = ifmpDeviceCd;
 	}
-	public Integer[] getIfmpTelecomCd() {
+	public Integer getIfmpTelecomCd() {
 		return ifmpTelecomCd;
 	}
-	public void setIfmpTelecomCd(Integer[] ifmpTelecomCd) {
+	public void setIfmpTelecomCd(Integer ifmpTelecomCd) {
 		this.ifmpTelecomCd = ifmpTelecomCd;
 	}
-	public String[] getIfmpNumber() {
+	public String getIfmpNumber() {
 		return ifmpNumber;
 	}
-	public void setIfmpNumber(String[] ifmpNumber) {
+	public void setIfmpNumber(String ifmpNumber) {
 		this.ifmpNumber = ifmpNumber;
 	}
-	public Integer[] getIfmpDelNy() {
+	public Integer getIfmpDelNy() {
 		return ifmpDelNy;
 	}
-	public void setIfmpDelNy(Integer[] ifmpDelNy) {
+	public void setIfmpDelNy(Integer ifmpDelNy) {
 		this.ifmpDelNy = ifmpDelNy;
 	}
-	
+	public Integer[] getIfmpDefaultNyArray() {
+		return ifmpDefaultNyArray;
+	}
+	public void setIfmpDefaultNyArray(Integer[] ifmpDefaultNyArray) {
+		this.ifmpDefaultNyArray = ifmpDefaultNyArray;
+	}
+	public Integer[] getIfmpTypeCdArray() {
+		return ifmpTypeCdArray;
+	}
+	public void setIfmpTypeCdArray(Integer[] ifmpTypeCdArray) {
+		this.ifmpTypeCdArray = ifmpTypeCdArray;
+	}
+	public Integer[] getIfmpDeviceCdArray() {
+		return ifmpDeviceCdArray;
+	}
+	public void setIfmpDeviceCdArray(Integer[] ifmpDeviceCdArray) {
+		this.ifmpDeviceCdArray = ifmpDeviceCdArray;
+	}
+	public Integer[] getIfmpTelecomCdArray() {
+		return ifmpTelecomCdArray;
+	}
+	public void setIfmpTelecomCdArray(Integer[] ifmpTelecomCdArray) {
+		this.ifmpTelecomCdArray = ifmpTelecomCdArray;
+	}
+	public String[] getIfmpNumberArray() {
+		return ifmpNumberArray;
+	}
+	public void setIfmpNumberArray(String[] ifmpNumberArray) {
+		this.ifmpNumberArray = ifmpNumberArray;
+	}
+	public Integer[] getIfmpDelNyArray() {
+		return ifmpDelNyArray;
+	}
+	public void setIfmpDelNyArray(Integer[] ifmpDelNyArray) {
+		this.ifmpDelNyArray = ifmpDelNyArray;
+	}
+		
 }

@@ -3,13 +3,11 @@ package com.junefw.infra.modules.member;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.junefw.infra.common.base.BaseServiceImpl;
-import com.junefw.infra.common.util.SetRegMod;
 import com.junefw.infra.common.util.UtilMis;
 
 
@@ -48,8 +46,29 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	    	dao.insert(dto);
 			
 			dto.setIfmeDefaultNy("1");
+			dao.insertEmail(dto);
 			
-			return dao.insertEmail(dto);
+			for(int i = 0 ; i < dto.getIfmpDefaultNyArray().length ; i++) {
+				
+				dto.setIfmpDefaultNy(dto.getIfmpDefaultNyArray()[i]);
+				dto.setIfmpTypeCd(dto.getIfmpTypeCdArray()[i]);
+				dto.setIfmpDeviceCd(dto.getIfmpDeviceCdArray()[i]);
+				dto.setIfmpTelecomCd(dto.getIfmpTelecomCdArray()[i]);
+				dto.setIfmpNumber(dto.getIfmpNumberArray()[i]);
+				dto.setIfmpDelNy(dto.getIfmpDelNyArray()[i]);
+				
+//				System.out.println("dto.getIfmpDefaultNy(): " + dto.getIfmpDefaultNy());
+//				System.out.println("dto.getIfmpTypeCd(): " + dto.getIfmpTypeCd());
+//				System.out.println("dto.getIfmpDeviceCd(): " + dto.getIfmpDeviceCd());
+//				System.out.println("dto.getIfmpTelecomCd(): " + dto.getIfmpTelecomCd());
+//				System.out.println("dto.getIfmpNumber(): " + dto.getIfmpNumber());
+//				System.out.println("dto.getIfmpDelNy(): " + dto.getIfmpDelNy());
+//				System.out.println("dto.getIfmmSeq(): " + dto.getIfmmSeq());
+				
+				 dao.insertPhone(dto);
+			}
+			
+			return 1;
 
 	    } catch (Exception e) {
 	        throw new Exception();

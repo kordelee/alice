@@ -1,7 +1,5 @@
 package com.junefw.infra.modules.member;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,7 +66,7 @@ public class MemberController extends BaseController{
 	@SuppressWarnings(value = {"all"})
 	@RequestMapping(value = "memberInst")
 	public String memberInst(MemberVo vo, Member dto, RedirectAttributes redirectAttributes, HttpServletRequest httpServletRequest) throws Exception {
-		
+
 		service.insert(dto, httpServletRequest);
 	
 		vo.setIfmmSeq(dto.getIfmmSeq());
