@@ -10,14 +10,17 @@
 		select aa.* from (
 	</sql>
 	
+	
 	<sql id="selectListLowerForMysql">	
 		) aa
 		limit #{rowNumToShow} offset #{startRnumForMysql}
 	</sql>
 	
+	
 	<sql id="orderByLimitForMysql">	
 		limit 99999999999
 	</sql>
+	
 	
 	<sql id="selectListUpperForOracle">
 		SELECT BB.*
@@ -26,12 +29,50 @@
 				FROM (
 	</sql>
 	
+	
 	<sql id="selectListLowerForOracle">	
 			) AA
 			WHERE ROWNUM <![CDATA[ < ]]>= #{endRnum} ) BB
 		WHERE BB.RNUM >= #{startRnum}
 	</sql>
+	
+	
+	<sql id="insertRegModColumn">	
+		,regIp
+		,regSeq
+		,regDeviceCd
+		,regDateTime
+		,regDateTimeSvr
+		,modIp
+		,modSeq
+		,modDeviceCd
+		,modDateTime
+		,modDateTimeSvr
+	</sql>
     
+    
+    <sql id="insertRegModValue">	
+		,#{regIp}
+		,#{regSeq}
+		,#{regDeviceCd}
+		,#{regDateTime}
+		,#{regDateTimeSvr}
+		,#{modIp}
+		,#{modSeq}
+		,#{modDeviceCd}
+		,#{modDateTime}
+		,#{modDateTimeSvr}
+	</sql>
+	
+	
+	<sql id="updateModColumnValue">	
+		,modIp = #{modIp}
+		,modSeq = #{modSeq}
+		,modDeviceCd = #{modDeviceCd}
+		,modDateTime = #{modDateTime}
+		,modDateTimeSvr = #{modDateTimeSvr}
+	</sql>
+	
 </mapper>
 
 

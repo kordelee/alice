@@ -50,7 +50,8 @@
 		 	SELECT TB_EP_AUTH_SEQ.CURRVAL FROM DUAL
 		 </selectKey>
 	</insert>
-
+	
+	
 	<update id="update">
 		UPDATE
 			TB_EP_AUTH
@@ -67,8 +68,7 @@
 	
 	</delete>
 	
-	
-	<select id="selectListCachedCodeArrayList" resultMap="resultMapObj">
+    <select id="selectListCachedCodeArrayList" resultMap="resultMapObj">
 		SELECT 
 			ifcdSeq
 			, ifcdName
@@ -79,7 +79,6 @@
 			AND ifcdDelNy = 0
 		    AND ifcdUseNy = 1
     </select>
-    
     
 </mapper>
 

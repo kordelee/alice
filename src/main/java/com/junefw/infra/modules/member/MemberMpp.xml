@@ -61,24 +61,60 @@
 	
 	<insert id="insert">
 		INSERT INTO infrMember (
-			ifmmName
+			ifmmAdminNy
+			,ifmmDormancyNy
+			,ifmmName
+			,ifmmNameEng
+			,ifmmLastName
+			,ifmmFirstName
+			,ifmmLastNameEng
+			,ifmmFirstNameEng
 			,ifmmId
+			,ifmmPassword
+			,ifmmPwdModDate
+			,ifmmNickname
 			,ifmmGenderCd
 			,ifmmDob
+			,ifmmSavedCd
+			,ifmmMarriageCd
+			,ifmmMarriageDate
+			,ifmmChildrenNum
+			,ifmmFavoriteColor
+			,ifmmRecommenderSeq
+			,ifmmEmailConsentNy
+			,ifmmSmsConsentNy
+			,ifmmPushConsentNy
+			,ifmmDesc
 			,ifmmDelNy
-			,regDateTime
-			,regIp		
-			,regSeq	
+			<include refid="Base.insertRegModColumn" />
 		)
 		VALUES (
-			#{ifmmName}
+			1
+			,0
+			,#{ifmmName}
+			,#{ifmmNameEng}
+			,#{ifmmLastName}
+			,#{ifmmFirstName}
+			,#{ifmmLastNameEng}
+			,#{ifmmFirstNameEng}
 			,#{ifmmId}
+			,#{ifmmPassword}
+			,#{ifmmPwdModDate}
+			,#{ifmmNickname}
 			,#{ifmmGenderCd}
 			,#{ifmmDob}
+			,#{ifmmSavedCd}
+			,#{ifmmMarriageCd}
+			,#{ifmmMarriageDate}
+			,#{ifmmChildrenNum}
+			,#{ifmmFavoriteColor}
+			,#{ifmmRecommenderSeq}
+			,#{ifmmEmailConsentNy}
+			,#{ifmmSmsConsentNy}
+			,#{ifmmPushConsentNy}
+			,#{ifmmDesc}
 			,0
-			,#{regDateTime}
-			,#{regIp}
-			,#{regSeq}
+			<include refid="Base.insertRegModValue" />
 		)
 		 <selectKey resultType="String" keyProperty="ifmmSeq" order="AFTER">
 			SELECT last_insert_id()
@@ -90,9 +126,28 @@
 		UPDATE
 			infrMember
 		SET
-			ifmmID = #{ifmmId}
+			,ifmmAdminNy = #{ifmmAdminNy}
+			,ifmmDormancyNy = #{ifmmDormancyNy}
 			,ifmmName = #{ifmmName}
+			,ifmmNameEng = #{ifmmNameEng}
+			,ifmmLastName = #{ifmmLastName}
+			,ifmmFirstName = #{ifmmFirstName}
+			,ifmmLastNameEng = #{ifmmLastNameEng}
+			,ifmmFirstNameEng = #{ifmmFirstNameEng}
+			,ifmmNickname = #{ifmmNickname}
+			,ifmmGenderCd = #{ifmmGenderCd}
 			,ifmmDob = #{ifmmDob}
+			,ifmmSavedCd = #{ifmmSavedCd}
+			,ifmmMarriageCd = #{ifmmMarriageCd}
+			,ifmmMarriageDate = #{ifmmMarriageDate}
+			,ifmmChildrenNum = #{ifmmChildrenNum}
+			,ifmmFavoriteColor = #{ifmmFavoriteColor}
+			,ifmmRecommenderSeq = #{ifmmRecommenderSeq}
+			,ifmmEmailConsentNy = #{ifmmEmailConsentNy}
+			,ifmmSmsConsentNy = #{ifmmSmsConsentNy}
+			,ifmmPushConsentNy = #{ifmmPushConsentNy}
+			,ifmmDesc = #{ifmmDesc}
+			<include refid="Base.updateModColumnValue" />
 		WHERE 1=1
 			AND ifmmSeq = #{ifmmSeq}
 	</update>
