@@ -45,9 +45,16 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	    	
 	    	dao.insert(dto);
 			
-			dto.setIfmeDefaultNy("1");
-			dao.insertEmail(dto);
-			
+	    	// infrMemberEmail
+			for(int i = 0 ; i < dto.getIfmeDefaultNyArray().length ; i++) {
+				dto.setIfmeDefaultNy(dto.getIfmeDefaultNyArray()[i]);
+				dto.setIfmeTypeCd(dto.getIfmeTypeCdArray()[i]);
+				dto.setIfmeEmailFull(dto.getIfmeEmailFullArray()[i]);
+				
+				dao.insertEmail(dto);
+			}
+	    	
+			// infrMemberPhone
 			for(int i = 0 ; i < dto.getIfmpDefaultNyArray().length ; i++) {
 				
 				dto.setIfmpDefaultNy(dto.getIfmpDefaultNyArray()[i]);
@@ -55,17 +62,21 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 				dto.setIfmpDeviceCd(dto.getIfmpDeviceCdArray()[i]);
 				dto.setIfmpTelecomCd(dto.getIfmpTelecomCdArray()[i]);
 				dto.setIfmpNumber(dto.getIfmpNumberArray()[i]);
-				dto.setIfmpDelNy(dto.getIfmpDelNyArray()[i]);
 				
-//				System.out.println("dto.getIfmpDefaultNy(): " + dto.getIfmpDefaultNy());
-//				System.out.println("dto.getIfmpTypeCd(): " + dto.getIfmpTypeCd());
-//				System.out.println("dto.getIfmpDeviceCd(): " + dto.getIfmpDeviceCd());
-//				System.out.println("dto.getIfmpTelecomCd(): " + dto.getIfmpTelecomCd());
-//				System.out.println("dto.getIfmpNumber(): " + dto.getIfmpNumber());
-//				System.out.println("dto.getIfmpDelNy(): " + dto.getIfmpDelNy());
-//				System.out.println("dto.getIfmmSeq(): " + dto.getIfmmSeq());
+				dao.insertPhone(dto);
+			}
+			
+//			infrMemberAddress
+			for(int i = 0 ; i < dto.getIfmaDefaultNyArray().length ; i++) {
 				
-				 dao.insertPhone(dto);
+				dto.setIfmaDefaultNy(dto.getIfmaDefaultNyArray()[i]);
+				dto.setIfmaTypeCd(dto.getIfmaTypeCdArray()[i]);
+				dto.setIfmaTitle(dto.getIfmaTitleArray()[i]);
+				dto.setIfmaAddress1(dto.getIfmaAddress1Array()[i]);
+				dto.setIfmaAddress2(dto.getIfmaAddress2Array()[i]);
+				dto.setIfmaZipcode(dto.getIfmaZipcodeArray()[i]);
+				
+				dao.insertAddress(dto);
 			}
 			
 			return 1;

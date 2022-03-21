@@ -86,7 +86,7 @@
 			,ifmmPushConsentNy
 			,ifmmDesc
 			,ifmmDelNy
-			<include refid="Base.insertRegModColumn" />
+			<!-- <include refid="Base.insertRegModColumn" /> -->
 		)
 		VALUES (
 			1
@@ -114,7 +114,7 @@
 			,#{ifmmPushConsentNy}
 			,#{ifmmDesc}
 			,0
-			<include refid="Base.insertRegModValue" />
+			<!-- <include refid="Base.insertRegModValue" /> -->
 		)
 		 <selectKey resultType="String" keyProperty="ifmmSeq" order="AFTER">
 			SELECT last_insert_id()
@@ -206,11 +206,34 @@
 			,#{ifmpDeviceCd}
 			,#{ifmpTelecomCd}
 			,#{ifmpNumber}
-			,#{ifmpDelNy}
+			,0
 			,#{ifmmSeq}
 		)
 	</insert>
 	<!-- infrMemberPhone e -->
+	
+	<!-- infrMemberAddress s -->
+	<insert id="insertAddress">
+		INSERT INTO infrMemberAddress (
+			ifmaDefaultNy
+			,ifmaTypeCd
+			,ifmaTitle
+			,ifmaAddress1
+			,ifmaAddress2
+			,ifmaZipcode
+			,ifmaDelNy
+		)
+		VALUES (
+			#{ifmaDefaultNy}
+			,#{ifmaTypeCd}
+			,#{ifmaTitle}
+			,#{ifmaAddress1}
+			,#{ifmaAddress2}
+			,#{ifmaZipcode}
+			,0
+		)
+	</insert>
+	<!-- infrMemberAddress e -->
 	
 	
 	<!-- login s -->

@@ -31,6 +31,9 @@ public class MemberDao {
 	
 //	infrMemberPhone
 	public int insertPhone(Member dto) { return sqlSession.insert(namespace + ".insertPhone", dto); }
+
+//	infrMemberAddress
+	public int insertAddress(Member dto) { return sqlSession.insert(namespace + ".insertAddress", dto); }
 	
 //	login
 	public Member selectOneId(Member dto) { return sqlSession.selectOne(namespace + ".selectOneId", dto); }

@@ -38,25 +38,25 @@ public class Member extends Base{
 	
 //	infrMemberEmail
 	private String ifmeSeq;
-	private String ifmeDefaultNy;
-	private String ifmeTypeCd;
+	private Integer ifmeDefaultNy;
+	private Integer ifmeTypeCd;
 	private String ifmeEmailFull;
 	private String ifmeEmailAccount;
 	private String ifmeEmailDomain;
 	private String ifmeEmailDomainCd;
-	private String ifmeDelNy;
+	private Integer ifmeDelNy;
 //	private String ifmmSeq;
 	
 	
 //	infrMemberEmailArray
 //	private String ifmeSeq;
-	private String[] ifmeDefaultNyArray;
-	private String[] ifmeTypeCdArray;
+	private Integer[] ifmeDefaultNyArray;
+	private Integer[] ifmeTypeCdArray;
 	private String[] ifmeEmailFullArray;
 	private String[] ifmeEmailAccountArray;
 	private String[] ifmeEmailDomainArray;
 	private String[] ifmeEmailDomainCdArray;
-	private String[] ifmeDelNyArray;
+	private Integer[] ifmeDelNyArray;
 //	private String ifmmSeq;
 	
 	
@@ -80,6 +80,28 @@ public class Member extends Base{
 	private String[] ifmpNumberArray;
 	private Integer[] ifmpDelNyArray;
 //	private String ifmmSeq;
+	
+	
+//	infrMemberAddress
+	private String ifmaSeq;
+	private Integer ifmaDefaultNy;
+	private Integer ifmaTypeCd;
+	private String ifmaTitle;
+	private String ifmaAddress1;
+	private String ifmaAddress2;
+	private String ifmaZipcode;
+	private Integer ifmaDelNy;
+	
+	
+//	infrMemberAddressArray
+//	private String ifmaSeq;
+	private Integer[] ifmaDefaultNyArray;
+	private Integer[] ifmaTypeCdArray;
+	private String[] ifmaTitleArray;
+	private String[] ifmaAddress1Array;
+	private String[] ifmaAddress2Array;
+	private String[] ifmaZipcodeArray;
+	private Integer[] ifmaDelNyArray;
 //	----------
 	public String getIfmmSeq() {
 		return ifmmSeq;
@@ -243,16 +265,16 @@ public class Member extends Base{
 	public void setIfmeSeq(String ifmeSeq) {
 		this.ifmeSeq = ifmeSeq;
 	}
-	public String getIfmeDefaultNy() {
+	public Integer getIfmeDefaultNy() {
 		return ifmeDefaultNy;
 	}
-	public void setIfmeDefaultNy(String ifmeDefaultNy) {
+	public void setIfmeDefaultNy(Integer ifmeDefaultNy) {
 		this.ifmeDefaultNy = ifmeDefaultNy;
 	}
-	public String getIfmeTypeCd() {
+	public Integer getIfmeTypeCd() {
 		return ifmeTypeCd;
 	}
-	public void setIfmeTypeCd(String ifmeTypeCd) {
+	public void setIfmeTypeCd(Integer ifmeTypeCd) {
 		this.ifmeTypeCd = ifmeTypeCd;
 	}
 	public String getIfmeEmailFull() {
@@ -279,22 +301,22 @@ public class Member extends Base{
 	public void setIfmeEmailDomainCd(String ifmeEmailDomainCd) {
 		this.ifmeEmailDomainCd = ifmeEmailDomainCd;
 	}
-	public String getIfmeDelNy() {
+	public Integer getIfmeDelNy() {
 		return ifmeDelNy;
 	}
-	public void setIfmeDelNy(String ifmeDelNy) {
+	public void setIfmeDelNy(Integer ifmeDelNy) {
 		this.ifmeDelNy = ifmeDelNy;
 	}
-	public String[] getIfmeDefaultNyArray() {
+	public Integer[] getIfmeDefaultNyArray() {
 		return ifmeDefaultNyArray;
 	}
-	public void setIfmeDefaultNyArray(String[] ifmeDefaultNyArray) {
+	public void setIfmeDefaultNyArray(Integer[] ifmeDefaultNyArray) {
 		this.ifmeDefaultNyArray = ifmeDefaultNyArray;
 	}
-	public String[] getIfmeTypeCdArray() {
+	public Integer[] getIfmeTypeCdArray() {
 		return ifmeTypeCdArray;
 	}
-	public void setIfmeTypeCdArray(String[] ifmeTypeCdArray) {
+	public void setIfmeTypeCdArray(Integer[] ifmeTypeCdArray) {
 		this.ifmeTypeCdArray = ifmeTypeCdArray;
 	}
 	public String[] getIfmeEmailFullArray() {
@@ -321,10 +343,10 @@ public class Member extends Base{
 	public void setIfmeEmailDomainCdArray(String[] ifmeEmailDomainCdArray) {
 		this.ifmeEmailDomainCdArray = ifmeEmailDomainCdArray;
 	}
-	public String[] getIfmeDelNyArray() {
+	public Integer[] getIfmeDelNyArray() {
 		return ifmeDelNyArray;
 	}
-	public void setIfmeDelNyArray(String[] ifmeDelNyArray) {
+	public void setIfmeDelNyArray(Integer[] ifmeDelNyArray) {
 		this.ifmeDelNyArray = ifmeDelNyArray;
 	}
 	public String getIfmpSeq() {
@@ -404,6 +426,96 @@ public class Member extends Base{
 	}
 	public void setIfmpDelNyArray(Integer[] ifmpDelNyArray) {
 		this.ifmpDelNyArray = ifmpDelNyArray;
+	}
+	public String getIfmaSeq() {
+		return ifmaSeq;
+	}
+	public void setIfmaSeq(String ifmaSeq) {
+		this.ifmaSeq = ifmaSeq;
+	}
+	public Integer getIfmaDefaultNy() {
+		return ifmaDefaultNy;
+	}
+	public void setIfmaDefaultNy(Integer ifmaDefaultNy) {
+		this.ifmaDefaultNy = ifmaDefaultNy;
+	}
+	public Integer getIfmaTypeCd() {
+		return ifmaTypeCd;
+	}
+	public void setIfmaTypeCd(Integer ifmaTypeCd) {
+		this.ifmaTypeCd = ifmaTypeCd;
+	}
+	public String getIfmaTitle() {
+		return ifmaTitle;
+	}
+	public void setIfmaTitle(String ifmaTitle) {
+		this.ifmaTitle = ifmaTitle;
+	}
+	public String getIfmaAddress1() {
+		return ifmaAddress1;
+	}
+	public void setIfmaAddress1(String ifmaAddress1) {
+		this.ifmaAddress1 = ifmaAddress1;
+	}
+	public String getIfmaAddress2() {
+		return ifmaAddress2;
+	}
+	public void setIfmaAddress2(String ifmaAddress2) {
+		this.ifmaAddress2 = ifmaAddress2;
+	}
+	public String getIfmaZipcode() {
+		return ifmaZipcode;
+	}
+	public void setIfmaZipcode(String ifmaZipcode) {
+		this.ifmaZipcode = ifmaZipcode;
+	}
+	public Integer getIfmaDelNy() {
+		return ifmaDelNy;
+	}
+	public void setIfmaDelNy(Integer ifmaDelNy) {
+		this.ifmaDelNy = ifmaDelNy;
+	}
+	public Integer[] getIfmaDefaultNyArray() {
+		return ifmaDefaultNyArray;
+	}
+	public void setIfmaDefaultNyArray(Integer[] ifmaDefaultNyArray) {
+		this.ifmaDefaultNyArray = ifmaDefaultNyArray;
+	}
+	public Integer[] getIfmaTypeCdArray() {
+		return ifmaTypeCdArray;
+	}
+	public void setIfmaTypeCdArray(Integer[] ifmaTypeCdArray) {
+		this.ifmaTypeCdArray = ifmaTypeCdArray;
+	}
+	public String[] getIfmaTitleArray() {
+		return ifmaTitleArray;
+	}
+	public void setIfmaTitleArray(String[] ifmaTitleArray) {
+		this.ifmaTitleArray = ifmaTitleArray;
+	}
+	public String[] getIfmaAddress1Array() {
+		return ifmaAddress1Array;
+	}
+	public void setIfmaAddress1Array(String[] ifmaAddress1Array) {
+		this.ifmaAddress1Array = ifmaAddress1Array;
+	}
+	public String[] getIfmaAddress2Array() {
+		return ifmaAddress2Array;
+	}
+	public void setIfmaAddress2Array(String[] ifmaAddress2Array) {
+		this.ifmaAddress2Array = ifmaAddress2Array;
+	}
+	public String[] getIfmaZipcodeArray() {
+		return ifmaZipcodeArray;
+	}
+	public void setIfmaZipcodeArray(String[] ifmaZipcodeArray) {
+		this.ifmaZipcodeArray = ifmaZipcodeArray;
+	}
+	public Integer[] getIfmaDelNyArray() {
+		return ifmaDelNyArray;
+	}
+	public void setIfmaDelNyArray(Integer[] ifmaDelNyArray) {
+		this.ifmaDelNyArray = ifmaDelNyArray;
 	}
 		
 }
