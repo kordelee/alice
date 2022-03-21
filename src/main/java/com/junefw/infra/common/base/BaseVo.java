@@ -23,7 +23,7 @@ public class BaseVo {
 	
 //	search
 	private Integer shDelNy = 0;
-	private Integer shDateOption;
+	private Integer shOptionDate;
 	private String shDateStart;
 	private String shDateEnd;
 	private Integer shOption;
@@ -180,12 +180,12 @@ public class BaseVo {
 		this.shDelNy = shDelNy;
 	}
 
-	public Integer getShDateOption() {
-		return shDateOption;
+	public Integer getShOptionDate() {
+		return shOptionDate;
 	}
 
-	public void setShDateOption(Integer shDateOption) {
-		this.shDateOption = shDateOption;
+	public void setShOptionDate(Integer shOptionDate) {
+		this.shOptionDate = shOptionDate;
 	}
 
 	public String getShDateStart() {

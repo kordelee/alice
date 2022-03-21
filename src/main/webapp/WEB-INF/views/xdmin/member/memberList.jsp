@@ -121,18 +121,18 @@
             </select>
         </div>
         <div class="col">
-            <select id="shDateOption" name="shDateOption" class="form-select form-select-sm">
-                <option value="" <c:if test="${empty vo.shDateOption}">selected</c:if>>날짜</option>
-                <option value="1" <c:if test="${vo.shDateOption eq 1}">selected</c:if>>등록일</option>
-                <option value="2" <c:if test="${vo.shDateOption eq 2}">selected</c:if>>수정일</option>
-                <option value="3" <c:if test="${vo.shDateOption eq 3}">selected</c:if>>생일</option>
+            <select id="shOptionDate" name="shOptionDate" class="form-select form-select-sm">
+                <option value="" <c:if test="${empty vo.shOptionDate}">selected</c:if>>날짜</option>
+                <option value="1" <c:if test="${vo.shOptionDate eq 1}">selected</c:if>>등록일</option>
+                <option value="2" <c:if test="${vo.shOptionDate eq 2}">selected</c:if>>수정일</option>
+                <option value="3" <c:if test="${vo.shOptionDate eq 3}">selected</c:if>>생일</option>
             </select>
         </div>  
         <div class="col">
-            <input type="text" id="shDateStart" name="shDateStart" value="<c:out value="${vo.shDateStart }"/>" placeholder="시작일" class="form-control form-control-sm">
+            <input type="text" id="shDateStart" name="shDateStart" value="<c:out value="${vo.shDateStart }"/>" placeholder="시작일" class="form-control form-control-sm" autocomplete="off">
         </div>              
         <div class="col">
-	        <input type="text" id="shDateEnd" name="shDateEnd" value="<c:out value="${vo.shDateEnd }"/>" placeholder="종료일" class="form-control form-control-sm">
+	        <input type="text" id="shDateEnd" name="shDateEnd" value="<c:out value="${vo.shDateEnd }"/>" placeholder="종료일" class="form-control form-control-sm" autocomplete="off">
         </div> 
     </div>
     <div class="row row-cols-2 row-cols-sm-6 g-2 mt-1 px-2">
