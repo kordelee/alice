@@ -204,5 +204,21 @@ public class MemberController extends BaseController{
 		return "xdmin/member/findIdPwdForm";
 	}
 	
-
+	
+	@ResponseBody
+	@RequestMapping(value = "addressFindGeoProc")
+	public Map<String, Object> addressFindGeoProc(Member dto) throws Exception {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		
+		System.out.println("dto.getIfmaAddress1Array()[0]: " + dto.getIfmaAddress1Array()[0]);
+		
+		Float[] rtFloat = UtilMis.getLatLng(dto.getIfmaAddress1Array()[0]);
+		
+		System.out.println("rtFloat[0]: " + rtFloat[0]);
+		System.out.println("rtFloat[1]: " + rtFloat[1]);
+		
+		returnMap.put("rtFloat", rtFloat);
+		returnMap.put("rt", "success");
+		return returnMap;
+	}
 }
