@@ -332,10 +332,6 @@
 </form>
 <!-- main e -->
 
-
-<div id="map" style="width:500px;height:400px;"></div>
-
-
 		</div>
 	</div>
 </div>
@@ -355,24 +351,9 @@
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc0680fedff73402526955076f9c7d53"></script>
-
-
 <script>
-
-var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-var options = { //지도를 생성할 때 필요한 기본 옵션
-	center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-	level: 3 //지도의 레벨(확대, 축소 정도)
-};
-
-var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-
-
 	$(document).ready(function(){
 		 $("#ifmmDob").datepicker();
-		 
-		
 	}); 
 	
 	var goUrlList = "/member/memberList"; 			/* #-> */
@@ -454,12 +435,6 @@ var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리
 	});	  
 	
 	
-	$("#btnAddressClear").on("click", function(){	
-		$("#ifmaZipcodeArray0").val('');
-		$("#ifmaAddress1Array0").val('');
-	});	  
-	
-	
 	//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
 	function sample4_execDaumPostcode() {
         new daum.Postcode({
@@ -514,7 +489,7 @@ var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리
                     guideTextBox.style.display = 'none';
                 }
  */                
-        aaa();        
+        /* aaa(); */        
             }
         }).open();
     }
@@ -542,6 +517,13 @@ var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리
 			}
 		});
 	}
+	
+	
+	$("#btnAddressClear").on("click", function(){	
+		$("#ifmaZipcodeArray0").val('');
+		$("#ifmaAddress1Array0").val('');
+		$("#ifmaAddress2Array0").val('');
+	});	  
 	
 	
 
