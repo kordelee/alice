@@ -46,36 +46,31 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	    	dao.insert(dto);
 			
 	    	// infrMemberEmail
-			for(int i = 0 ; i < dto.getIfmeDefaultNyArray().length ; i++) {
+			for(int i = 0 ; i < dto.getIfmeEmailFullArray().length ; i++) {
 				dto.setIfmeDefaultNy(dto.getIfmeDefaultNyArray()[i]);
 				dto.setIfmeTypeCd(dto.getIfmeTypeCdArray()[i]);
 				dto.setIfmeEmailFull(dto.getIfmeEmailFullArray()[i]);
-				
 				dao.insertEmail(dto);
 			}
 	    	
 			// infrMemberPhone
-			for(int i = 0 ; i < dto.getIfmpDefaultNyArray().length ; i++) {
-				
+			for(int i = 0 ; i < dto.getIfmpNumberArray().length ; i++) {
 				dto.setIfmpDefaultNy(dto.getIfmpDefaultNyArray()[i]);
 				dto.setIfmpTypeCd(dto.getIfmpTypeCdArray()[i]);
 				dto.setIfmpDeviceCd(dto.getIfmpDeviceCdArray()[i]);
 				dto.setIfmpTelecomCd(dto.getIfmpTelecomCdArray()[i]);
 				dto.setIfmpNumber(dto.getIfmpNumberArray()[i]);
-				
 				dao.insertPhone(dto);
 			}
 			
 //			infrMemberAddress
-			for(int i = 0 ; i < dto.getIfmaDefaultNyArray().length ; i++) {
-				
+			for(int i = 0 ; i < dto.getIfmaZipcodeArray().length ; i++) {
 				dto.setIfmaDefaultNy(dto.getIfmaDefaultNyArray()[i]);
 				dto.setIfmaTypeCd(dto.getIfmaTypeCdArray()[i]);
 				dto.setIfmaTitle(dto.getIfmaTitleArray()[i]);
 				dto.setIfmaAddress1(dto.getIfmaAddress1Array()[i]);
 				dto.setIfmaAddress2(dto.getIfmaAddress2Array()[i]);
 				dto.setIfmaZipcode(dto.getIfmaZipcodeArray()[i]);
-				
 				dao.insertAddress(dto);
 			}
 			

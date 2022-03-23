@@ -102,7 +102,10 @@
 			,#{ifmmPwdModDate}
 			,#{ifmmNickname}
 			,#{ifmmGenderCd}
-			,#{ifmmDob}
+			<choose>
+				<when test="ifmmDob.equals('')">,NULL</when>
+				<otherwise>,#{ifmmDob}</otherwise>
+			</choose>
 			,#{ifmmSavedCd}
 			,#{ifmmMarriageCd}
 			,#{ifmmMarriageDate}
@@ -222,6 +225,7 @@
 			,ifmaAddress2
 			,ifmaZipcode
 			,ifmaDelNy
+			,ifmmSeq
 		)
 		VALUES (
 			#{ifmaDefaultNy}
@@ -231,6 +235,7 @@
 			,#{ifmaAddress2}
 			,#{ifmaZipcode}
 			,0
+			,#{ifmmSeq}
 		)
 	</insert>
 	<!-- infrMemberAddress e -->
