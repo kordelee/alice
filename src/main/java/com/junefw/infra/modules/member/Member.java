@@ -89,6 +89,7 @@ public class Member extends Base{
 	private String ifmaTitle;
 	private String ifmaAddress1;
 	private String ifmaAddress2;
+	private String ifmaAddress3;
 	private String ifmaZipcode;
 	private Integer ifmaDelNy;
 	
@@ -100,6 +101,7 @@ public class Member extends Base{
 	private String[] ifmaTitleArray;
 	private String[] ifmaAddress1Array;
 	private String[] ifmaAddress2Array;
+	private String[] ifmaAddress3Array;
 	private String[] ifmaZipcodeArray;
 	private Integer[] ifmaDelNyArray;
 //	----------
@@ -463,6 +465,12 @@ public class Member extends Base{
 	public void setIfmaAddress2(String ifmaAddress2) {
 		this.ifmaAddress2 = ifmaAddress2;
 	}
+	public String getIfmaAddress3() {
+		return ifmaAddress3;
+	}
+	public void setIfmaAddress3(String ifmaAddress3) {
+		this.ifmaAddress3 = ifmaAddress3;
+	}
 	public String getIfmaZipcode() {
 		return ifmaZipcode;
 	}
@@ -504,6 +512,12 @@ public class Member extends Base{
 	}
 	public void setIfmaAddress2Array(String[] ifmaAddress2Array) {
 		this.ifmaAddress2Array = ifmaAddress2Array;
+	}
+	public String[] getIfmaAddress3Array() {
+		return ifmaAddress3Array;
+	}
+	public void setIfmaAddress3Array(String[] ifmaAddress3Array) {
+		this.ifmaAddress3Array = ifmaAddress3Array;
 	}
 	public String[] getIfmaZipcodeArray() {
 		return ifmaZipcodeArray;

@@ -70,6 +70,7 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 				dto.setIfmaTitle(dto.getIfmaTitleArray()[i]);
 				dto.setIfmaAddress1(dto.getIfmaAddress1Array()[i]);
 				dto.setIfmaAddress2(dto.getIfmaAddress2Array()[i]);
+				dto.setIfmaAddress3(dto.getIfmaAddress3Array()[i]);
 				dto.setIfmaZipcode(dto.getIfmaZipcodeArray()[i]);
 				dao.insertAddress(dto);
 			}

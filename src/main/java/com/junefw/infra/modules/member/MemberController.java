@@ -1,3 +1,4 @@
+
 package com.junefw.infra.modules.member;
 
 import java.util.HashMap;
@@ -204,21 +205,22 @@ public class MemberController extends BaseController{
 		return "xdmin/member/findIdPwdForm";
 	}
 	
-	
-	@ResponseBody
-	@RequestMapping(value = "addressFindGeoProc")
-	public Map<String, Object> addressFindGeoProc(Member dto) throws Exception {
-		Map<String, Object> returnMap = new HashMap<String, Object>();
-		
-		System.out.println("dto.getIfmaAddress1Array()[0]: " + dto.getIfmaAddress1Array()[0]);
-		
-		Float[] rtFloat = UtilMis.getLatLng(dto.getIfmaAddress1Array()[0]);
-		
-		System.out.println("rtFloat[0]: " + rtFloat[0]);
-		System.out.println("rtFloat[1]: " + rtFloat[1]);
-		
-		returnMap.put("rtFloat", rtFloat);
-		returnMap.put("rt", "success");
-		return returnMap;
-	}
+//	구글api를 이용하여 주소값을 던지면 위도 경도를 받아오는 정적 함수
+//	구글 계정 등록이 필요하여 현재는 주석 처리
+//	@ResponseBody
+//	@RequestMapping(value = "addressFindGeoProc")
+//	public Map<String, Object> addressFindGeoProc(Member dto) throws Exception {
+//		Map<String, Object> returnMap = new HashMap<String, Object>();
+//		
+//		System.out.println("dto.getIfmaAddress1Array()[0]: " + dto.getIfmaAddress1Array()[0]);
+//		
+//		Float[] rtFloat = UtilMis.getLatLng(dto.getIfmaAddress1Array()[0]);
+//		
+//		System.out.println("rtFloat[0]: " + rtFloat[0]);
+//		System.out.println("rtFloat[1]: " + rtFloat[1]);
+//		
+//		returnMap.put("rtFloat", rtFloat);
+//		returnMap.put("rt", "success");
+//		return returnMap;
+//	}
 }

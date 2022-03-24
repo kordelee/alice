@@ -260,7 +260,6 @@
         	<input type="hidden" id="ifmaDefaultNyArray0" name="ifmaDefaultNyArray" value="1">
         	<input type="hidden" id="ifmaTypeCdArray0" name="ifmaTypeCdArray" value="78">
         	<input type="hidden" id="ifmaTitleArray0" name="ifmaTitleArray" value="기본">
-        	<input type="hidden" id="ifmaAddressExtraArray0" name="ifmaAddressExtraArray" value="기본">
             <label for="memZip" class="form-label">주소 (한국전용)</label>
             <div class="input-group input-group-sm ">
                 <input type="text" id="ifmaZipcodeArray0" name="ifmaZipcodeArray" value="" placeholder="우편번호" class="form-control" readonly>
@@ -268,7 +267,8 @@
                 <button type="button" id="btnAddressClear" class="btn btn-outline-secondary"><i class="fa-solid fa-x"></i></button>
             </div>
             <input type="text" id="ifmaAddress1Array0" name="ifmaAddress1Array" value="" placeholder="주소" class="form-control form-control-sm mt-2" readonly>
-            <input type="text" id="ifmaAddress2Array0" name="ifmaAddress2Array" value="" maxlength="50" placeholder="상세 주소" class="form-control form-control-sm mt-2">
+            <input type="text" id="ifmaAddress2Array0" name="ifmaAddress2Array" value="" maxlength="50" placeholder="상세주소" class="form-control form-control-sm mt-2">
+            <input type="text" id="ifmaAddress3Array0" name="ifmaAddress3Array" value="" maxlength="50" placeholder="참고항목" class="form-control form-control-sm mt-2" readonly>
         </div>
         <div class="col-sm-6">          
         </div>
@@ -435,7 +435,6 @@
 	});	  
 	
 	
-	//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
 	function sample4_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -463,15 +462,16 @@
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('ifmaZipcodeArray0').value = data.zonecode;
                 document.getElementById("ifmaAddress1Array0").value = roadAddr;
-                /* document.getElementById("ifmaAddress2Array0").value = data.jibunAddress; */
+                /* document.getElementById("").value = data.jibunAddress; */
                 
                 // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
-                 
+                  
                 if(roadAddr !== ''){
-                    document.getElementById("ifmaAddressExtraArray0").value = extraRoadAddr;
+                    document.getElementById("ifmaAddress3Array0").value = extraRoadAddr;
                 } else {
-                    document.getElementById("ifmaAddressExtraArray0").value = '';
+                    document.getElementById("ifmaAddress3Array0").value = '';
                 }
+                
 /*  
                 var guideTextBox = document.getElementById("guide");
                 // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
@@ -488,41 +488,17 @@
                     guideTextBox.innerHTML = '';
                     guideTextBox.style.display = 'none';
                 }
- */                
-        /* aaa(); */        
+ */                    
             }
         }).open();
     }
 	
-	
-	aaa = function() {
-		$.ajax({
-			async: true 
-			,cache: false
-			,type: "post"
-			,url: "/member/addressFindGeoProc"
-			,data : { "ifmaAddress1Array" : $("#ifmaAddress1Array0").val()}
-			,success: function(response) {
-				if(response.rt == "success") {
-	       			
-					alert(response.rtFloat[0]);
-					alert(response.rtFloat[1]);
-					
-				} else {
-					
-				}
-			}
-			,error : function(jqXHR, textStatus, errorThrown){
-				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
-			}
-		});
-	}
-	
-	
+
 	$("#btnAddressClear").on("click", function(){	
 		$("#ifmaZipcodeArray0").val('');
 		$("#ifmaAddress1Array0").val('');
 		$("#ifmaAddress2Array0").val('');
+		$("#ifmaAddress3Array0").val('');
 	});	  
 	
 	

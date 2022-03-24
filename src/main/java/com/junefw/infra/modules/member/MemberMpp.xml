@@ -223,6 +223,7 @@
 			,ifmaTitle
 			,ifmaAddress1
 			,ifmaAddress2
+			,ifmaAddress3
 			,ifmaZipcode
 			,ifmaDelNy
 			,ifmmSeq
@@ -233,6 +234,7 @@
 			,#{ifmaTitle}
 			,#{ifmaAddress1}
 			,#{ifmaAddress2}
+			,#{ifmaAddress3}
 			,#{ifmaZipcode}
 			,0
 			,#{ifmmSeq}
