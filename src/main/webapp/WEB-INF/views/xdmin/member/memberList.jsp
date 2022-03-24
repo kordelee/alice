@@ -331,22 +331,30 @@
 
 	
 	$("#btnUelete").on("click", function(){
-		$("input:hidden[name=exDeleteType]").val(1);
-		$(".modal-title").text("확 인");
-		$(".modal-body").text("해당 데이터를 삭제하시겠습니까 ?");
-		$("#btnModalUelete").show();
-		$("#btnModalDelete").hide();
-		$("#modalConfirm").modal("show");
+		if($("input[name=checkboxSeq]:checked").length > 0 ) {
+			$("input:hidden[name=exDeleteType]").val(1);
+			$(".modal-title").text("확 인");
+			$(".modal-body").text("해당 데이터를 삭제하시겠습니까 ?");
+			$("#btnModalUelete").show();
+			$("#btnModalDelete").hide();
+			$("#modalConfirm").modal("show");
+		} else {
+			// alert modal open
+		}
 	});
 	
 
 	$("#btnDelete").on("click", function(){
-		$("input:hidden[name=exDeleteType]").val(2);
-		$(".modal-title").text("확 인");
-		$(".modal-body").text("해당 데이터를 삭제하시겠습니까 ?");
-		$("#btnModalUelete").hide();
-		$("#btnModalDelete").show();
-		$("#modalConfirm").modal("show");
+		if($("input[name=checkboxSeq]:checked").length > 0 ) {
+			$("input:hidden[name=exDeleteType]").val(2);
+			$(".modal-title").text("확 인");
+			$(".modal-body").text("해당 데이터를 삭제하시겠습니까 ?");
+			$("#btnModalUelete").hide();
+			$("#btnModalDelete").show();
+			$("#modalConfirm").modal("show");
+		} else {
+			// alert modal open
+		}
 	});
 	
 	
