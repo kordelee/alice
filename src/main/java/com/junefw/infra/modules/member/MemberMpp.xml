@@ -46,14 +46,50 @@
 	<select id="selectOne" resultMap="resultMapObj">
 		SELECT
 			a.ifmmSeq
+			,a.ifmmAdminNy
+			,a.ifmmDormancyNy
 			,a.ifmmName
+			,a.ifmmNameEng
+			,a.ifmmLastName
+			,a.ifmmFirstName
+			,a.ifmmLastNameEng
+			,a.ifmmFirstNameEng
 			,a.ifmmId
+			,a.ifmmPassword
+			,a.ifmmPwdModDate
+			,a.ifmmNickname
 			,a.ifmmGenderCd
 			,a.ifmmDob
+			,a.ifmmSavedCd
+			,a.ifmmMarriageCd
+			,a.ifmmMarriageDate
+			,a.ifmmChildrenNum
+			,a.ifmmFavoriteColor
+			,a.ifmmRecommenderSeq
+			,a.ifmmEmailConsentNy
+			,a.ifmmSmsConsentNy
+			,a.ifmmPushConsentNy
+			,a.ifmmDesc
+			,a.ifmmDelNy
+			,a.regIp
+			,a.regSeq
+			,a.regDeviceCd
+			,a.regDateTime
+			,a.regDateTimeSvr
+			,a.modIp
+			,a.modSeq
+			,a.modDeviceCd
+			,a.modDateTime
+			,a.modDateTimeSvr
 			,b.ifmeEmailFull
+			,c.ifmaAddress1
+			,c.ifmaAddress2
+			,c.ifmaAddress3
+			,c.ifmaZipcode
 		FROM
 			infrMember a
 			LEFT JOIN infrMemberEmail b ON b.ifmeDelNy = 0 AND b.ifmeDefaultNy = 1 AND b.ifmmSeq = a.ifmmSeq
+			LEFT JOIN infrMemberAddress c ON c.ifmaDelNy = 0 AND c.ifmaDefaultNy = 1 AND c.ifmmSeq = a.ifmmSeq
 		WHERE 1=1
 			AND a.ifmmSeq = #{ifmmSeq}
 	</select>

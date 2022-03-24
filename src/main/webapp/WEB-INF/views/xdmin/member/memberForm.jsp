@@ -262,13 +262,13 @@
         	<input type="hidden" id="ifmaTitleArray0" name="ifmaTitleArray" value="기본">
             <label for="memZip" class="form-label">주소 (한국전용)</label>
             <div class="input-group input-group-sm ">
-                <input type="text" id="ifmaZipcodeArray0" name="ifmaZipcodeArray" value="" placeholder="우편번호" class="form-control" readonly>
+                <input type="text" id="ifmaZipcodeArray0" name="ifmaZipcodeArray" value="<c:out value="${item.ifmaZipcode }"/>" placeholder="우편번호" class="form-control" readonly>
                 <button type="button" id="btnAddress" class="btn btn-outline-secondary"><i class="fas fa-search"></i></button>
                 <button type="button" id="btnAddressClear" class="btn btn-outline-secondary"><i class="fa-solid fa-x"></i></button>
             </div>
-            <input type="text" id="ifmaAddress1Array0" name="ifmaAddress1Array" value="" placeholder="주소" class="form-control form-control-sm mt-2" readonly>
-            <input type="text" id="ifmaAddress2Array0" name="ifmaAddress2Array" value="" maxlength="50" placeholder="상세주소" class="form-control form-control-sm mt-2">
-            <input type="text" id="ifmaAddress3Array0" name="ifmaAddress3Array" value="" maxlength="50" placeholder="참고항목" class="form-control form-control-sm mt-2" readonly>
+            <input type="text" id="ifmaAddress1Array0" name="ifmaAddress1Array" value="<c:out value="${item.ifmaAddress1 }"/>" maxlength="50" placeholder="주소" class="form-control form-control-sm mt-2" readonly>
+            <input type="text" id="ifmaAddress2Array0" name="ifmaAddress2Array" value="<c:out value="${item.ifmaAddress2 }"/>" maxlength="50" placeholder="상세주소" class="form-control form-control-sm mt-2">
+            <input type="text" id="ifmaAddress3Array0" name="ifmaAddress3Array" value="<c:out value="${item.ifmaAddress3 }"/>" maxlength="50" placeholder="참고항목" class="form-control form-control-sm mt-2" readonly>
         </div>
         <div class="col-sm-6">          
         </div>
@@ -285,8 +285,8 @@
     </div>
     <div class="row mt-sm-4">
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="memDesc" class="form-label">설명</label>
-            <textarea id="memDesc" name="memDesc" placeholder="" class="form-control"></textarea>
+            <label for="ifmmDesc" class="form-label">설명</label>
+            <textarea id="ifmmDesc" name="ifmmDesc" class="form-control"><c:out value="${item.ifmmDesc }"/></textarea>
         </div>
         <div class="col-sm-6">
         </div>
@@ -323,6 +323,8 @@
         </div>
     </div>
 </div>
+
+<%-- <c:out value="${Code.selectListCachedCode("15") }"/> --%>
 
 </form>
 <form name="formVo" id="formVo" method="post">
