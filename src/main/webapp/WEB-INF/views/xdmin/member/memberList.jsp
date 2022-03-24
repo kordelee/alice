@@ -339,7 +339,9 @@
 			$("#btnModalDelete").hide();
 			$("#modalConfirm").modal("show");
 		} else {
-			// alert modal open
+			$(".modal-title").text("확 인");
+			$(".modal-body").text("데이터를 선택해 주세요!");
+			$("#modalAlert").modal("show");
 		}
 	});
 	
@@ -353,7 +355,9 @@
 			$("#btnModalDelete").show();
 			$("#modalConfirm").modal("show");
 		} else {
-			// alert modal open
+			$(".modal-title").text("확 인");
+			$(".modal-body").text("데이터를 선택해 주세요!");
+			$("#modalAlert").modal("show");
 		}
 	});
 	
