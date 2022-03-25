@@ -30,6 +30,7 @@ public class MemberDao {
 	public int insertEmail(Member dto) { return sqlSession.insert(namespace + ".insertEmail", dto); }
 	
 //	infrMemberPhone
+	public List<Member> selectListPhone(MemberVo vo){ return sqlSession.selectList(namespace + ".selectListPhone", vo); }
 	public int insertPhone(Member dto) { return sqlSession.insert(namespace + ".insertPhone", dto); }
 
 //	infrMemberAddress

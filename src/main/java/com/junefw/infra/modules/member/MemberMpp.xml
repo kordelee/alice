@@ -229,6 +229,22 @@
 	<!-- infrMemberEmail e -->
 	
 	<!-- infrMemberPhone s -->
+	<select id="selectListPhone" resultMap="resultMapObj">
+		SELECT
+			ifmpSeq
+			,ifmpDefaultNy
+			,ifmpTypeCd
+			,ifmpDeviceCd
+			,ifmpTelecomCd
+			,ifmpNumber
+		FROM
+			infrMemberAddress
+		WHERE 1=1
+			AND ifmaDelNy = 0
+			AND ifmmSeq = #{ifmmSeq}
+	</select>
+	
+	
 	<insert id="insertPhone">
 		INSERT INTO infrMemberPhone (
 			ifmpDefaultNy

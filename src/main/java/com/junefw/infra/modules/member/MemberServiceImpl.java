@@ -120,6 +120,11 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	public void setRegMod(Member dto) throws Exception {
 		dto.setModDateTime(UtilMis.nowDate());
 	}
+
+	@Override
+	public List<Member> selectListPhone(MemberVo vo) throws Exception {
+		return dao.selectListPhone(vo);
+	}
 	
 
 	

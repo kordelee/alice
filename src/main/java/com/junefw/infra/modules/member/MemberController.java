@@ -50,12 +50,15 @@ public class MemberController extends BaseController{
 	@RequestMapping(value = "memberForm")
 	public String memberForm(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
 		
+		
 		if (vo.getIfmmSeq().equals("0")) {
 //			insert
 		} else {
 //			update
 			Member item = service.selectOne(vo);
 			model.addAttribute("item", item);
+
+			model.addAttribute("listPhone", service.selectListPhone(vo));
 		}
 		
 		model.addAttribute("codeGender", CodeServiceImpl.selectListCachedCode("3"));
