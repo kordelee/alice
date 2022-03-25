@@ -43,14 +43,14 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	    	setReg(dto);
 //	    	setRegMod.setReg(dto);
 	    	
-	    	dao.insert(dto);
+//	    	dao.insert(dto);
 			
 	    	// infrMemberEmail
 			for(int i = 0 ; i < dto.getIfmeEmailFullArray().length ; i++) {
 				dto.setIfmeDefaultNy(dto.getIfmeDefaultNyArray()[i]);
 				dto.setIfmeTypeCd(dto.getIfmeTypeCdArray()[i]);
 				dto.setIfmeEmailFull(dto.getIfmeEmailFullArray()[i]);
-				dao.insertEmail(dto);
+//				dao.insertEmail(dto);
 			}
 	    	
 			// infrMemberPhone
@@ -60,7 +60,7 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 				dto.setIfmpDeviceCd(dto.getIfmpDeviceCdArray()[i]);
 				dto.setIfmpTelecomCd(dto.getIfmpTelecomCdArray()[i]);
 				dto.setIfmpNumber(dto.getIfmpNumberArray()[i]);
-				dao.insertPhone(dto);
+//				dao.insertPhone(dto);
 			}
 			
 //			infrMemberAddress
@@ -72,7 +72,7 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 				dto.setIfmaAddress2(dto.getIfmaAddress2Array()[i]);
 				dto.setIfmaAddress3(dto.getIfmaAddress3Array()[i]);
 				dto.setIfmaZipcode(dto.getIfmaZipcodeArray()[i]);
-				dao.insertAddress(dto);
+//				dao.insertAddress(dto);
 			}
 			
 			return 1;
@@ -127,6 +127,5 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	}
 	
 
-	
-	
+
 }
