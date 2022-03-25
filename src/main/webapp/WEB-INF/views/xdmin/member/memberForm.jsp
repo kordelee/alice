@@ -95,7 +95,7 @@
 
 <!-- main s -->
 <!-- <form name="form" id="form" method="post" enctype="multipart/form-data"> -->
-<form name="form" id="form" method="post">
+<form name="form" id="form" method="post" autocomplete="off">
 <!-- *Vo.jsp s -->
 <%@include file="memberVo.jsp"%>
 <!-- *Vo.jsp e -->
@@ -167,7 +167,7 @@
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
             <label for="ifmmDob" class="form-label">생일</label>
-            <input type="text" id="ifmmDob" name="ifmmDob" value="<c:out value="${item.ifmmDob }"/>" placeholder="" class="form-control form-control-sm" autocomplete="off">          
+            <input type="text" id="ifmmDob" name="ifmmDob" value="<c:out value="${item.ifmmDob }"/>" placeholder="" class="form-control form-control-sm">          
         </div>
     </div>    
     <div class="row mt-sm-4">    
@@ -178,15 +178,29 @@
             <input type="text" id="ifmeEmailFullArray0" name="ifmeEmailFullArray" value="<c:out value="${item.ifmeEmailFull }"/>" maxlength="50" placeholder="account@example.com" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="ifmmEmailConsentNy" class="form-label">이메일 정보 마케팅 사용 동의</label>
+            <label for="ifmmEmailConsent" class="form-label">이메일 정보 마케팅 사용 동의</label>
             <div class="form-check">
-                <input type="checkbox" id="ifmmEmailConsentNy" name="ifmmEmailConsentNy" value="" class="form-check-input">
+            	<input type="hidden" id="ifmmEmailConsentNy" name="ifmmEmailConsentNy" value="0">
+                <input type="checkbox" id="ifmmEmailConsent" name="ifmmEmailConsent" class="form-check-input" <c:if test="${item.ifmmEmailConsentNy eq 1 }">checked</c:if>>
                 <label for="ifmmEmailConsentNy" class="form-check-label">
                     동의합니다
                 </label>
             </div>
         </div>
     </div>
+
+<c:forEach items="${listPhone}" var="item" varStatus="statusTelecom">
+	<c:choose>
+		<c:when test="${item.ifmpDeviceCd eq 57 }"><c:set var="ifmpNumber57" value="${item.ifmpNumber }"/></c:when>
+		<c:when test="${item.ifmpDeviceCd eq 58 }">
+			<c:set var="ifmpNumber58" value="${item.ifmpNumber }"/>
+			<c:set var="ifmpTelecom58" value="${item.ifmpTelecomCd }"/>
+		</c:when>
+		<c:when test="${item.ifmpDeviceCd eq 59 }"><c:set var="ifmpNumber59" value="${item.ifmpNumber }"/></c:when>
+		<c:otherwise></c:otherwise>
+	</c:choose>
+</c:forEach>
+
     <div class="row mt-sm-4">
         <div class="col-sm-3 mt-3 mt-sm-0">
         	<input type="hidden" id="ifmpDefaultNyArray0" name="ifmpDefaultNyArray" value="1">
@@ -196,18 +210,19 @@
             <select id="ifmpTelecomCdArray0" name="ifmpTelecomCdArray" class="form-select form-select-sm">
 				<option value="">::선택::</option>            
 	            	<c:forEach items="${codeTelecom}" var="itemTelecom" varStatus="statusTelecom">
-				<option value="<c:out value="${itemTelecom.ifcdSeq }"/>" <c:if test="${item.ifmpTelecomCd eq itemTelecom.ifcdSeq }">selected</c:if>><c:out value="${itemTelecom.ifcdName }"/></option>
+				<option value="<c:out value="${itemTelecom.ifcdSeq }"/>" <c:if test="${ifmpTelecom58 eq itemTelecom.ifcdSeq }">selected</c:if>><c:out value="${itemTelecom.ifcdName }"/></option>
 					</c:forEach>
 			</select>
         </div>
         <div class="col-sm-3 mt-3 mt-sm-0">
             <label for="ifmpNumberArray0" class="form-label">핸드폰</label>
-            <input type="text" id="ifmpNumberArray0" name="ifmpNumberArray" value="" maxlength="11" placeholder="숫자만 (01044447777)" class="form-control form-control-sm">
+            <input type="text" id="ifmpNumberArray0" name="ifmpNumberArray" value="<c:out value="${ifmpNumber58 }"/>" maxlength="11" placeholder="숫자만 (01044447777)" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="ifmmSmsConsentNy" class="form-label">핸드폰 정보 마케팅 사용 동의</label>
+            <label for="ifmmSmsConsent" class="form-label">핸드폰 정보 마케팅 사용 동의</label>
             <div class="form-check">
-                <input type="checkbox" id="ifmmSmsConsentNy" name="ifmmSmsConsentNy" value="" class="form-check-input">
+            	<input type="hidden" id="ifmmSmsConsentNy" name="ifmmSmsConsentNy" value="0">
+                <input type="checkbox" id="ifmmSmsConsent" name="ifmmSmsConsent" class="form-check-input" <c:if test="${item.ifmmSmsConsentNy eq 1 }">checked</c:if>>
                 <label for="ifmmSmsConsentNy" class="form-check-label">
                     동의합니다
                 </label>
@@ -222,7 +237,7 @@
         	<input type="hidden" id="ifmpDeviceCdArray1" name="ifmpDeviceCdArray" value="57">
         	<input type="hidden" id="ifmpTelecomCdArray1" name="ifmpTelecomCdArray" value="">
             <label for="ifmpNumberArray1" class="form-label">전화번호</label>
-            <input type="text" id="ifmpNumberArray1" name="ifmpNumberArray" value="" maxlength="11" placeholder="숫자만 (024447777)" class="form-control form-control-sm">
+            <input type="text" id="ifmpNumberArray1" name="ifmpNumberArray" value="<c:out value="${ifmpNumber57 }"/>" maxlength="11" placeholder="숫자만 (024447777)" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
         	<input type="hidden" id="ifmpDefaultNyArray2" name="ifmpDefaultNyArray" value="0">
@@ -230,7 +245,7 @@
         	<input type="hidden" id="ifmpDeviceCdArray2" name="ifmpDeviceCdArray" value="59">
         	<input type="hidden" id="ifmpTelecomCdArray2" name="ifmpTelecomCdArray" value="">
             <label for="ifmpNumberArray2" class="form-label">팩스번호</label>
-            <input type="text" id="ifmpNumberArray2" name="ifmpNumberArray" value="" maxlength="11" placeholder="숫자만 (024447777)" class="form-control form-control-sm">
+            <input type="text" id="ifmpNumberArray2" name="ifmpNumberArray" value="<c:out value="${ifmpNumber59 }"/>" maxlength="11" placeholder="숫자만 (024447777)" class="form-control form-control-sm">
         </div>
     </div>
     <div class="row mt-sm-4">
@@ -354,6 +369,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script>
+
 	$(document).ready(function(){
 		 $("#ifmmDob").datepicker();
 	}); 
@@ -374,6 +390,8 @@
 		if (seq.val() == "0"){
 	   		// insert
 	   		if (validationInst() == false) return false;
+ 			setCheckboxValue($("#ifmmEmailConsent"), $("#ifmmEmailConsentNy"));
+			setCheckboxValue($("#ifmmSmsConsent"), $("#ifmmSmsConsentNy"));
 	   		form.attr("action", goUrlInst).submit();
 	   	} else {
 	   		// update
@@ -384,10 +402,19 @@
 	}); 
 	
 	
+	setCheckboxValue = function(obj, targetObj) {
+	   if(obj.is(":checked")){
+		   targetObj.val("1");
+	    } else {
+	    	targetObj.val("0");
+	    }
+	}
+	
+	
 	validationInst = function() {
 	   	if(validationUpdt() == false) return false;
 	}
-	
+
 	
 	validationUpdt = function() {
 		<!-- if(!checkNull($.trim($("input[name=MENU_NAME]").val()), "MENU_NAME")) return false;  -->
@@ -502,8 +529,6 @@
 		$("#ifmaAddress2Array0").val('');
 		$("#ifmaAddress3Array0").val('');
 	});	  
-	
-	
 
 </script>
 

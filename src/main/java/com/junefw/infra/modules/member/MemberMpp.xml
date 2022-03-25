@@ -238,9 +238,9 @@
 			,ifmpTelecomCd
 			,ifmpNumber
 		FROM
-			infrMemberAddress
+			infrMemberPhone
 		WHERE 1=1
-			AND ifmaDelNy = 0
+			AND ifmpDelNy = 0
 			AND ifmmSeq = #{ifmmSeq}
 	</select>
 	
