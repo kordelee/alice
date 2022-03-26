@@ -309,19 +309,19 @@
     <div class="row mt-sm-4">
         <div class="col-sm-3 mt-3 mt-sm-0">
             <label for="memModTxt" class="form-label">최종수정자</label>
-            <input type="text" id="memModTxt" name="memModTxt" value="장원영" class="form-control form-control-sm" readonly>
+            <input type="text" id="memModTxt" name="memModTxt" value="<c:out value="${item.modSeq }"/>" class="form-control form-control-sm" readonly>
         </div>
         <div class="col-sm-3 mt-3 mt-sm-0">
             <label for="memModDateTime" class="form-label">최종수정일</label>
-            <input type="text" id="memModDateTime" name="memModDateTime" value="2021.01.01 12:12:12" class="form-control form-control-sm" readonly>          
+            <input type="text" id="memModDateTime" name="memModDateTime" value="<c:out value="${item.modDateTime }"/>" class="form-control form-control-sm" readonly>          
         </div>
         <div class="col-sm-3 mt-3 mt-sm-0">
             <label for="memRegTxt" class="form-label">최초등록자</label>
-            <input type="text" id="memRegTxt" name="memRegTxt" value="장원영" class="form-control form-control-sm" readonly>
+            <input type="text" id="memRegTxt" name="memRegTxt" value="<c:out value="${item.regSeq }"/>" class="form-control form-control-sm" readonly>
         </div>
         <div class="col-sm-3 mt-3 mt-sm-0">
             <label for="memRegDateTime" class="form-label">최초등록일</label>
-            <input type="text" id="memRegDateTime" name="memRegDateTime" value="2021.01.01 12:12:12" class="form-control form-control-sm" readonly>          
+            <input type="text" id="memRegDateTime" name="memRegDateTime" value="<c:out value="${item.regDateTime }"/>" class="form-control form-control-sm" readonly>          
         </div>        
     </div>            
 </div>
