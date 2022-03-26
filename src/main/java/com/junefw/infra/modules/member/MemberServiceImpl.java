@@ -6,9 +6,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.junefw.infra.common.base.BaseServiceImpl;
-import com.junefw.infra.common.util.UtilMis;
+import com.junefw.infra.common.util.UtilDateTime;
+import com.junefw.infra.common.util.UtilRegMod;
 
 
 @Service
@@ -40,17 +43,16 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	public int insert(Member dto, HttpServletRequest httpServletRequest) throws Exception {
 	    try {
 	    	
-	    	setReg(dto);
-//	    	setRegMod.setReg(dto);
+	    	setRegMod(dto);
 	    	
-//	    	dao.insert(dto);
+	    	dao.insert(dto);
 			
 	    	// infrMemberEmail
 			for(int i = 0 ; i < dto.getIfmeEmailFullArray().length ; i++) {
 				dto.setIfmeDefaultNy(dto.getIfmeDefaultNyArray()[i]);
 				dto.setIfmeTypeCd(dto.getIfmeTypeCdArray()[i]);
 				dto.setIfmeEmailFull(dto.getIfmeEmailFullArray()[i]);
-//				dao.insertEmail(dto);
+				dao.insertEmail(dto);
 			}
 	    	
 			// infrMemberPhone
@@ -60,7 +62,7 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 				dto.setIfmpDeviceCd(dto.getIfmpDeviceCdArray()[i]);
 				dto.setIfmpTelecomCd(dto.getIfmpTelecomCdArray()[i]);
 				dto.setIfmpNumber(dto.getIfmpNumberArray()[i]);
-//				dao.insertPhone(dto);
+				dao.insertPhone(dto);
 			}
 			
 //			infrMemberAddress
@@ -72,7 +74,7 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 				dto.setIfmaAddress2(dto.getIfmaAddress2Array()[i]);
 				dto.setIfmaAddress3(dto.getIfmaAddress3Array()[i]);
 				dto.setIfmaZipcode(dto.getIfmaZipcodeArray()[i]);
-//				dao.insertAddress(dto);
+				dao.insertAddress(dto);
 			}
 			
 			return 1;
@@ -109,16 +111,19 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 		return dao.selectOneLogin(dto);
 	}
 	
-	public void setReg(Member dto) throws Exception {
-		dto.setRegIp(UtilMis.getClientIP());
-		dto.setRegSeq(UtilMis.getSessionSeq());
-		dto.setRegDateTime(UtilMis.nowDate());
-		UtilMis.getBroswer();
-		System.out.println("asdfasdf");
-	}
 	
 	public void setRegMod(Member dto) throws Exception {
-		dto.setModDateTime(UtilMis.nowDate());
+		HttpServletRequest httpServletRequest = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+		
+		dto.setRegIp(UtilRegMod.getClientIp(httpServletRequest));
+		dto.setRegSeq(UtilRegMod.getSessionSeq(httpServletRequest));
+//		dto.setRegDeviceCd(UtilRegMod.getBroswer());
+		dto.setRegDateTime(UtilDateTime.nowDate());
+		
+		dto.setModIp(UtilRegMod.getClientIp(httpServletRequest));
+		dto.setModSeq(UtilRegMod.getSessionSeq(httpServletRequest));
+//		dto.setModDeviceCd(UtilRegMod.getBroswer());
+		dto.setModDateTime(UtilDateTime.nowDate());
 	}
 
 	@Override

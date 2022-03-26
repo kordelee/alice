@@ -122,7 +122,7 @@
 			,ifmmPushConsentNy
 			,ifmmDesc
 			,ifmmDelNy
-			<!-- <include refid="Base.insertRegModColumn" /> -->
+			<include refid="Base.insertRegModColumn" />
 		)
 		VALUES (
 			1
@@ -153,7 +153,7 @@
 			,#{ifmmPushConsentNy}
 			,#{ifmmDesc}
 			,0
-			<!-- <include refid="Base.insertRegModValue" /> -->
+			<include refid="Base.insertRegModValue" />
 		)
 		 <selectKey resultType="String" keyProperty="ifmmSeq" order="AFTER">
 			SELECT last_insert_id()
@@ -213,6 +213,7 @@
 			,ifmeEmailDomain
 			,ifmeEmailDomainCd
 			,ifmeDelNy
+			<include refid="Base.insertRegModColumn" />
 			,ifmmSeq
 		)
 		VALUES (
@@ -223,6 +224,7 @@
 			,#{ifmeEmailDomain}
 			,#{ifmeEmailDomainCd}
 			,0
+			<include refid="Base.insertRegModValue" />
 			,#{ifmmSeq}
 		)
 	</insert>
@@ -253,6 +255,7 @@
 			,ifmpTelecomCd
 			,ifmpNumber
 			,ifmpDelNy
+			<include refid="Base.insertRegModColumn" />
 			,ifmmSeq
 		)
 		VALUES (
@@ -262,6 +265,7 @@
 			,#{ifmpTelecomCd}
 			,#{ifmpNumber}
 			,0
+			<include refid="Base.insertRegModValue" />
 			,#{ifmmSeq}
 		)
 	</insert>
@@ -278,6 +282,7 @@
 			,ifmaAddress3
 			,ifmaZipcode
 			,ifmaDelNy
+			<include refid="Base.insertRegModColumn" />
 			,ifmmSeq
 		)
 		VALUES (
@@ -289,6 +294,7 @@
 			,#{ifmaAddress3}
 			,#{ifmaZipcode}
 			,0
+			<include refid="Base.insertRegModValue" />
 			,#{ifmmSeq}
 		)
 	</insert>
