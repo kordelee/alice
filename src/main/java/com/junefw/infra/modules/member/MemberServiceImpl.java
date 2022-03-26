@@ -45,6 +45,7 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	    	
 	    	setRegMod(dto);
 	    	
+	    	dto.setIfmmPwdModDate(UtilDateTime.nowDate());
 	    	dao.insert(dto);
 			
 	    	// infrMemberEmail
