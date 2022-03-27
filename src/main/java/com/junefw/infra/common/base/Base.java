@@ -4,14 +4,16 @@ import java.util.Date;
 
 public class Base {
 
-	private String regIp = "";
-	private String regSeq = "";
-	private Integer regDeviceCd  = 0;
+	private String regIp;
+	private String regSeq;
+	private String regId;
+	private Integer regDeviceCd;
 	private Date regDateTime;
 	private Date regDateTimeSvr;
-	private String modIp = "";
-	private String modSeq = "";
-	private Integer modDeviceCd = 0;
+	private String modIp;
+	private String modSeq;
+	private String modId;
+	private Integer modDeviceCd;
 	private Date modDateTime;
 	private Date modDateTimeSvr;
 	// ----------
@@ -26,6 +28,12 @@ public class Base {
 	}
 	public void setRegSeq(String regSeq) {
 		this.regSeq = regSeq;
+	}
+	public String getRegId() {
+		return regId;
+	}
+	public void setRegId(String regId) {
+		this.regId = regId;
 	}
 	public Integer getRegDeviceCd() {
 		return regDeviceCd;
@@ -56,6 +64,12 @@ public class Base {
 	}
 	public void setModSeq(String modSeq) {
 		this.modSeq = modSeq;
+	}
+	public String getModId() {
+		return modId;
+	}
+	public void setModId(String modId) {
+		this.modId = modId;
 	}
 	public Integer getModDeviceCd() {
 		return modDeviceCd;

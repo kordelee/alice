@@ -71,16 +71,7 @@
 			,a.ifmmPushConsentNy
 			,a.ifmmDesc
 			,a.ifmmDelNy
-			,a.regIp
-			,a.regSeq
-			,a.regDeviceCd
-			,a.regDateTime
-			,a.regDateTimeSvr
-			,a.modIp
-			,a.modSeq
-			,a.modDeviceCd
-			,a.modDateTime
-			,a.modDateTimeSvr
+			<include refid="Base.selectRegModWithAlies" />
 			,b.ifmeEmailFull
 			,c.ifmaAddress1
 			,c.ifmaAddress2
