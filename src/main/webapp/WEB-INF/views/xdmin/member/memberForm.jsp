@@ -306,11 +306,11 @@
         <div class="col-sm-6">
         </div>
     </div>  
-    
+<c:if test="${not empty item.ifmmSeq }">
 <!-- regMod s -->
 <%@include file="../include/regmod.jsp"%>
 <!-- regMod e -->
-
+</c:if>
 </div>
  
 <div class="container-fluid px-0 px-sm-5 mt-3">

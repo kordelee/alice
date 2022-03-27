@@ -20,10 +20,6 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	@Autowired
 	MemberDao dao;
 
-//	@Autowired
-//	SetRegMod setRegMod;
-	
-	
 	@Override
 	public int selectOneCount(MemberVo vo){
 		return dao.selectOneCount(vo);
@@ -40,7 +36,7 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	}
 	
 	@Override
-	public int insert(Member dto, HttpServletRequest httpServletRequest) throws Exception {
+	public int insert(Member dto) throws Exception {
 	    try {
 	    	
 	    	setRegMod(dto);
@@ -118,12 +114,12 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 		
 		dto.setRegIp(UtilRegMod.getClientIp(httpServletRequest));
 		dto.setRegSeq(UtilRegMod.getSessionSeq(httpServletRequest));
-//		dto.setRegDeviceCd(UtilRegMod.getBroswer());
+		dto.setRegDeviceCd(UtilRegMod.getDevice());
 		dto.setRegDateTime(UtilDateTime.nowDate());
 		
 		dto.setModIp(UtilRegMod.getClientIp(httpServletRequest));
 		dto.setModSeq(UtilRegMod.getSessionSeq(httpServletRequest));
-//		dto.setModDeviceCd(UtilRegMod.getBroswer());
+		dto.setModDeviceCd(UtilRegMod.getDevice());
 		dto.setModDateTime(UtilDateTime.nowDate());
 	}
 

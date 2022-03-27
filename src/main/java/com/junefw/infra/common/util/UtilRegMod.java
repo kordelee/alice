@@ -70,49 +70,90 @@ public class UtilRegMod {
 	}
 	
 	
-	public static String getBroswer() {
+	public static int getDevice() {
 		HttpServletRequest httpServletRequest = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
-		return getBroswerCore(httpServletRequest);
+		return getDeviceCore(httpServletRequest);
 	}
 	
 	
-	public static String getBroswer(HttpServletRequest httpServletRequest) {
-		return getBroswerCore(httpServletRequest);
+	public static int getDevice(HttpServletRequest httpServletRequest) {
+		return getDeviceCore(httpServletRequest);
 	}
 	
 	
-	public static String getBroswerCore(HttpServletRequest httpServletRequest) {
-		String browser = "";
-		String userAgent = httpServletRequest.getHeader("User-Agent");
+	public static int getDeviceCore(HttpServletRequest httpServletRequest) {
+
+		int device;
+		String userAgent = httpServletRequest.getHeader("User-Agent").toUpperCase();
 		
-		System.out.println("userAgent: " + userAgent);
-		
-		if(userAgent.indexOf("Trident") > -1) {
-			// IE : 5
-			browser = "ie";
-		} else if(userAgent.indexOf("Edge") > -1) {
-			// Edge: 1
-			browser = "edge";
-		} else if(userAgent.indexOf("Whale") > -1) {
-			// Naver Whale : 8
-			browser = "whale";
-		} else if(userAgent.indexOf("Opera") > -1 || userAgent.indexOf("OPR") > -1) {
-			// Opera : 3
-			browser = "opera";
-		} else if(userAgent.indexOf("Firefox") > -1) {
-			// Firefox : 6
-			browser = "firefox";
-		} else if(userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") == -1 ) {
-			// Safari : 7
-			browser = "safari";
-		} else if(userAgent.indexOf("Chrome") > -1) {
-			// Chrome : 4
-			browser = "chrome";
+		if(userAgent.indexOf("MOBI") > -1) {
+			if (userAgent.indexOf("ANDROID") > -1) {
+				device = 13;
+			} else if (userAgent.indexOf("IPHONE") > -1) {
+				device = 14;
+			} else if (userAgent.indexOf("IPAD") > -1) {
+				device = 15;
+			} else {
+				device = 20;	// mobile etc
+			}
 		} else {
-			// 12
-			browser = "other";
+			if(userAgent.indexOf("Trident") > -1) {
+				device = 5;	// ie
+			} else if(userAgent.indexOf("EDGE") > -1) {
+				device = 1;	// edge
+			} else if(userAgent.indexOf("WHALE") > -1) {
+				device = 8;	// Naver Whale
+			} else if(userAgent.indexOf("OPERA") > -1 || userAgent.indexOf("OPR") > -1) {
+				device = 3;	// opera
+			} else if(userAgent.indexOf("FIREFOX") > -1) {
+				device = 6;		// firefox
+			} else if(userAgent.indexOf("SAFARI") > -1 && userAgent.indexOf("CHROME") == -1 ) {
+				device = 7;	// safari
+			} else if(userAgent.indexOf("CHROME") > -1) {
+				device = 4;		// Chrome
+			} else {
+				device = 12;	//web etc
+			}
+			return device;
 		}
-		return browser;
+
+		
+//	   if (userAgent.indexOf("iphone") > -1) {
+//		   device = "iPhone";
+//	    }else if (userAgent.indexOf("ipad") > -1) {
+//	    	device = "iPad";
+//	    }else if (userAgent.indexOf("android") > -1) {
+//	    	device = "android";
+//	    } else {
+//			if(userAgent.indexOf("Trident") > -1) {
+//				// IE : 5
+//				device = "ie";
+//			} else if(userAgent.indexOf("Edge") > -1) {
+//				// Edge: 1
+//				device = "edge";
+//			} else if(userAgent.indexOf("Whale") > -1) {
+//				// Naver Whale : 8
+//				device = "whale";
+//			} else if(userAgent.indexOf("Opera") > -1 || userAgent.indexOf("OPR") > -1) {
+//				// Opera : 3
+//				device = "opera";
+//			} else if(userAgent.indexOf("Firefox") > -1) {
+//				// Firefox : 6
+//				device = "firefox";
+//			} else if(userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") == -1 ) {
+//				// Safari : 7
+//				device = "safari";
+//			} else if(userAgent.indexOf("Chrome") > -1) {
+//				// Chrome : 4
+//				device = "chrome";
+//			} else {
+//				// 12
+//				device = "other";
+//			}
+//	    }
+	   
+		System.out.println("device: " + device);
+		return device;
 	
 	}
 }

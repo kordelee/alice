@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.junefw.infra.common.base.BaseController;
 import com.junefw.infra.common.constants.Constants;
+import com.junefw.infra.common.util.UtilRegMod;
 import com.junefw.infra.modules.code.Code;
 import com.junefw.infra.modules.code.CodeServiceImpl;
 
@@ -32,6 +33,9 @@ public class MemberController extends BaseController{
 	@RequestMapping(value = "memberList")
 	public String memberList(@ModelAttribute("vo") MemberVo vo, Model model, Code code) throws Exception {
 
+		
+		UtilRegMod.getDevice();
+		
 		vo.setParamsPaging(service.selectOneCount(vo));
 		
 		if (vo.getTotalRows() > 0) {
@@ -48,7 +52,6 @@ public class MemberController extends BaseController{
 	
 	@RequestMapping(value = "memberForm")
 	public String memberForm(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
-		
 		
 		if (vo.getIfmmSeq().equals("0")) {
 //			insert
@@ -68,9 +71,9 @@ public class MemberController extends BaseController{
 	
 	@SuppressWarnings(value = {"all"})
 	@RequestMapping(value = "memberInst")
-	public String memberInst(MemberVo vo, Member dto, RedirectAttributes redirectAttributes, HttpServletRequest httpServletRequest) throws Exception {
+	public String memberInst(MemberVo vo, Member dto, RedirectAttributes redirectAttributes) throws Exception {
 
-		service.insert(dto, httpServletRequest);
+		service.insert(dto);
 	
 		vo.setIfmmSeq(dto.getIfmmSeq());
 		
