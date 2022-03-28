@@ -129,10 +129,12 @@
             </select>
         </div>  
         <div class="col">
-            <input type="text" id="shDateStart" name="shDateStart" value="<c:out value="${vo.shDateStart }"/>" placeholder="시작일" class="form-control form-control-sm" autocomplete="off">
+        	<fmt:parseDate var="shDateStart" value="${vo.shDateStart }" pattern="yyyy-MM-dd HH:mm:ss"/>
+            <input type="text" id="shDateStart" name="shDateStart" value="<fmt:formatDate value="${shDateStart }" pattern="yyyy-MM-dd" />" placeholder="시작일" class="form-control form-control-sm" autocomplete="off">
         </div>              
         <div class="col">
-	        <input type="text" id="shDateEnd" name="shDateEnd" value="<c:out value="${vo.shDateEnd }"/>" placeholder="종료일" class="form-control form-control-sm" autocomplete="off">
+			<fmt:parseDate var="shDateEnd" value="${vo.shDateEnd }" pattern="yyyy-MM-dd HH:mm:ss" />
+	        <input type="text" id="shDateEnd" name="shDateEnd" value="<fmt:formatDate value="${shDateEnd }" pattern="yyyy-MM-dd"/>" placeholder="종료일" class="form-control form-control-sm" autocomplete="off">
         </div> 
     </div>
     <div class="row row-cols-2 row-cols-sm-6 g-2 mt-1 px-2">
@@ -202,7 +204,7 @@
 						<c:if test="${item.ifmmGenderCd eq itemGender.ifcdSeq}"><c:out value="${itemGender.ifcdName }"/></c:if>
 					</c:forEach>
                 </td>
-                <td><%-- <fmt:formatDate value="${item.ifmmDob }" pattern="yyyy.MM.dd"/> --%></td>
+                <td><%-- <fmt:formatDate value="${item.ifmmDob }" pattern="yyyy.MM.dd"/></td>
                 <td>--</td>
                 <td>--</td>
                 <td><%-- <fmt:formatDate value="${item.regDateTime }" pattern="yyyy.MM.dd"/> --%></td>

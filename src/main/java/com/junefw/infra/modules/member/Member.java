@@ -2,6 +2,8 @@ package com.junefw.infra.modules.member;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.junefw.infra.common.base.Base;
 
 @SuppressWarnings("all")

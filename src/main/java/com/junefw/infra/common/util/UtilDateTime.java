@@ -8,6 +8,13 @@ import java.util.Date;
 import com.junefw.infra.common.constants.Constants;
 
 public class UtilDateTime {
+	
+	
+	public static LocalDateTime nowLocalDateTime () throws Exception {
+		LocalDateTime localDateTime = LocalDateTime.now();
+		return localDateTime;
+	}
+	
 
 	public static Date nowDate () throws Exception {
 		LocalDateTime localDateTime = LocalDateTime.now();
@@ -23,5 +30,20 @@ public class UtilDateTime {
 		String localDateTimeString = localDateTime.format(DateTimeFormatter.ofPattern(Constants.DATETIME_FORMAT_BASIC));
 		return localDateTimeString;
 	}
+	
+	
+	public static String calculateDayString (LocalDateTime localDateTime, int day) throws Exception {
+		LocalDateTime localDateTimeNew;
+		
+		if(day >= 0) {
+			localDateTimeNew = localDateTime.plusDays(Math.abs(day)); 
+		} else {
+			localDateTimeNew = localDateTime.minusDays(Math.abs(day));
+		}
+
+		String localDateTimeNewString = localDateTimeNew.format(DateTimeFormatter.ofPattern(Constants.DATETIME_FORMAT_BASIC));
+		return localDateTimeNewString;
+	}
+	
 	
 }
