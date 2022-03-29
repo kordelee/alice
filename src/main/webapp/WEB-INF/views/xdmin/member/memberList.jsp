@@ -207,10 +207,22 @@
                 </td>
                 <td><c:out value="${item.ifmmDob }"/></td>
                 <td><c:out value="${item.ifmeEmailFull }"/></td>
-                <td>--</td>
+                <td>
+                	<c:choose>
+                		<c:when test="${fn:length(item.ifmpNumber) eq 10 }">
+							<c:out value="${fn:substring(item.ifmpNumber,0,3)}"/>
+							-<c:out value="${fn:substring(item.ifmpNumber,3,6)}"/>
+							-<c:out value="${fn:substring(item.ifmpNumber,6,10)}"/>
+                		</c:when>
+                		<c:otherwise>
+							<c:out value="${fn:substring(item.ifmpNumber,0,3)}"/>
+							-<c:out value="${fn:substring(item.ifmpNumber,3,7)}"/>
+							-<c:out value="${fn:substring(item.ifmpNumber,7,11)}"/>
+                		</c:otherwise>
+               		</c:choose>
+                </td>
                 <td><fmt:formatDate value="${item.modDateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
             </tr>
-            
 		</c:forEach>
 	</c:otherwise>
 </c:choose>	            
