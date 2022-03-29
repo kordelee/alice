@@ -31,7 +31,7 @@ public class MemberController extends BaseController{
 	
 	
 	@RequestMapping(value = "memberList")
-	public String memberList(@ModelAttribute("vo") MemberVo vo, Model model, Code code) throws Exception {
+	public String memberList(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
 		
 		vo.setShOptionDate(vo.getShOptionDate() == null ? 1 : vo.getShOptionDate());
 		vo.setShDateStart(vo.getShDateStart() == null ? UtilDateTime.calculateDayString(UtilDateTime.nowLocalDateTime(), Constants.DATE_INTERVAL) : UtilDateTime.addStringTime(vo.getShDateStart()));
@@ -45,8 +45,6 @@ public class MemberController extends BaseController{
 			model.addAttribute("list", list);
 		}
 
-		model.addAttribute("codeGender", CodeServiceImpl.selectListCachedCode("2"));
-		
 		return "xdmin/member/memberList";
 	}
 	
