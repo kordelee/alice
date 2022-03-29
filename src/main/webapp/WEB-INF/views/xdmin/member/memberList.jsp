@@ -181,7 +181,8 @@
             </tr>
         </thead>
         <tbody>
-        
+
+<c:set var="listCodeGender" value="${CodeServiceImpl.selectListCachedCode('3')}"/>
 <c:choose>
 	<c:when test="${fn:length(list) eq 0}">
 		<tr>
@@ -200,14 +201,14 @@
                 <td><a href="javascript:goForm(<c:out value="${item.ifmmSeq}"/>)"><c:out value="${item.ifmmName }"/></a></td>
                 <td><c:out value="${item.ifmmId }"/></td>
                 <td>
-					<c:forEach items="${codeGender}" var="itemGender" varStatus="statusGender">
+					<c:forEach items="${listCodeGender}" var="itemGender" varStatus="statusGender">
 						<c:if test="${item.ifmmGenderCd eq itemGender.ifcdSeq}"><c:out value="${itemGender.ifcdName }"/></c:if>
 					</c:forEach>
                 </td>
-                <td><%-- <fmt:formatDate value="${item.ifmmDob }" pattern="yyyy.MM.dd"/></td>
+                <td><c:out value="${item.ifmmDob }"/></td>
+                <td><c:out value="${item.ifmeEmailFull }"/></td>
                 <td>--</td>
-                <td>--</td>
-                <td><%-- <fmt:formatDate value="${item.regDateTime }" pattern="yyyy.MM.dd"/> --%></td>
+                <td><fmt:formatDate value="${item.modDateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
             </tr>
             
 		</c:forEach>
@@ -247,6 +248,17 @@
 <!-- contents e -->
 
 
+
+
+
+<%-- 
+<c:forEach items="${aaa}" var="item" varStatus="status">
+	<c:out value="${item.ifcdName }"/>
+</c:forEach>	
+ --%>
+
+ 
+ 
 <!-- footer s -->
 <%@include file="../include/footer.jsp"%>
 <!-- footer e -->
@@ -264,26 +276,7 @@
 	$(document).ready(function(){
 		divSearchControl();
 		 $("#shDateStart, #shDateEnd").datepicker();
-		 
-		aaa();
 	}); 
-	
-	aaa = function() {
-		today = new Date();
-
-		year = today.getFullYear();
-		var month = ('0' + (today.getMonth() + 1)).slice(-2);
-		var day = ('0' + today.getDate()).slice(-2);
-		var hours = ('0' + today.getHours()).slice(-2); 
-		var minutes = ('0' + today.getMinutes()).slice(-2);
-		var seconds = ('0' + today.getSeconds()).slice(-2); 
-		var dateString = year + '-' + month  + '-' + day;
-		var timeString = hours + ':' + minutes  + ':' + seconds;
-
-//		alert(dateString);
-//		alert(timeString);
-	}
-
 	
 	var goUrlList = "/member/memberList";					/* #-> */
 	var goUrlForm = "/member/memberForm";					/* #-> */

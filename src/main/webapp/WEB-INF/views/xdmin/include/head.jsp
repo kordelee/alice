@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%-- <%@ page import="hanmi.onlinepharm.hmeps.common.constants.Constants" %> --%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="rb" uri="http://www.springframework.org/tags" %>
-<jsp:useBean id="Code" class="com.junefw.infra.modules.code.CodeServiceImpl"></jsp:useBean>
+
+<jsp:useBean id="CodeServiceImpl" class="com.junefw.infra.modules.code.CodeServiceImpl"/>
+
+<% pageContext.setAttribute("br", "\n"); %>
+
 
 <!doctype html>
 <html lang="ko">

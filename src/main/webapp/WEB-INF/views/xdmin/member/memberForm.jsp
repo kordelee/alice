@@ -94,6 +94,9 @@
 		<div class="col-sm-10">
 
 <!-- main s -->
+<c:set var="listCodeGender" value="${CodeServiceImpl.selectListCachedCode('3')}"/>
+<c:set var="listCodeTelecom" value="${CodeServiceImpl.selectListCachedCode('10')}"/>
+
 <!-- <form name="form" id="form" method="post" enctype="multipart/form-data"> -->
 <form name="form" id="form" method="post" autocomplete="off">
 <!-- *Vo.jsp s -->
@@ -160,7 +163,7 @@
             <label for="ifmmGenderCd" class="form-label">성별</label>
             <select id="ifmmGenderCd" name="ifmmGenderCd" class="form-select form-select-sm">
 				<option value="">::선택::</option>
-	            	<c:forEach items="${codeGender}" var="itemGender" varStatus="statusGender">
+	            	<c:forEach items="${listCodeGender}" var="itemGender" varStatus="statusGender">
 				<option value="<c:out value="${itemGender.ifcdSeq }"/>" <c:if test="${item.ifmmGenderCd eq itemGender.ifcdSeq }">selected</c:if>><c:out value="${itemGender.ifcdName }"/></option>
 					</c:forEach>
               </select>
@@ -209,7 +212,7 @@
             <label for="ifmpTelecomCdArray0" class="form-label">통신사</label>
             <select id="ifmpTelecomCdArray0" name="ifmpTelecomCdArray" class="form-select form-select-sm">
 				<option value="">::선택::</option>            
-	            	<c:forEach items="${codeTelecom}" var="itemTelecom" varStatus="statusTelecom">
+	            	<c:forEach items="${listCodeTelecom}" var="itemTelecom" varStatus="statusTelecom">
 				<option value="<c:out value="${itemTelecom.ifcdSeq }"/>" <c:if test="${ifmpTelecom58 eq itemTelecom.ifcdSeq }">selected</c:if>><c:out value="${itemTelecom.ifcdName }"/></option>
 					</c:forEach>
 			</select>
@@ -303,7 +306,10 @@
             <label for="ifmmDesc" class="form-label">설명</label>
             <textarea id="ifmmDesc" name="ifmmDesc" class="form-control"><c:out value="${item.ifmmDesc }"/></textarea>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-6 mt-3 mt-sm-0">
+            <label for="ifmmDesc" class="form-label">설명</label>
+            <%-- <p>${fn:replace(item.ifmmDesc, br, '<br/>')}</p> --%>
+            <p><c:out value="${fn:replace(item.ifmmDesc, br, '<br/>')}" escapeXml = "false"/></p>
         </div>
     </div>  
 <c:if test="${not empty item.ifmmSeq }">
