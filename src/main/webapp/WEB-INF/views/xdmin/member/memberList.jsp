@@ -208,16 +208,17 @@
                 <td><c:out value="${item.ifmmDob }"/></td>
                 <td><c:out value="${item.ifmeEmailFull }"/></td>
                 <td>
+                	<c:set var="numberPhone" value="${item.ifmpNumber }"/>
                 	<c:choose>
-                		<c:when test="${fn:length(item.ifmpNumber) eq 10 }">
-							<c:out value="${fn:substring(item.ifmpNumber,0,3)}"/>
-							-<c:out value="${fn:substring(item.ifmpNumber,3,6)}"/>
-							-<c:out value="${fn:substring(item.ifmpNumber,6,10)}"/>
+                		<c:when test="${fn:length(numberPhone) eq 10 }">
+							<c:out value="${fn:substring(numberPhone,0,3)}"/>
+							- <c:out value="${fn:substring(numberPhone,3,6)}"/>
+							- <c:out value="${fn:substring(numberPhone,6,10)}"/>
                 		</c:when>
                 		<c:otherwise>
-							<c:out value="${fn:substring(item.ifmpNumber,0,3)}"/>
-							-<c:out value="${fn:substring(item.ifmpNumber,3,7)}"/>
-							-<c:out value="${fn:substring(item.ifmpNumber,7,11)}"/>
+							<c:out value="${fn:substring(numberPhone,0,3)}"/>
+							- <c:out value="${fn:substring(numberPhone,3,7)}"/>
+							- <c:out value="${fn:substring(numberPhone,7,11)}"/>
                 		</c:otherwise>
                		</c:choose>
                 </td>

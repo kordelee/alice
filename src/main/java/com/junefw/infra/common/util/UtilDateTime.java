@@ -50,5 +50,4 @@ public class UtilDateTime {
 		return date + " 00:00:00";
 	}
 	
-	
 }
