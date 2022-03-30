@@ -223,7 +223,15 @@
 			<artifactId>geocoder-java</artifactId>
 			<version>0.16</version>
 		</dependency>
-		<!-- geocoder 2 2022.03.22 -->			
+		<!-- geocoder 2 2022.03.22 -->
+				
+		<!-- fileupload s 2022.03.30 -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<!-- fileupload e 2022.03.30 -->
 		
 	</dependencies>
     <build>

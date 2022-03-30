@@ -260,18 +260,6 @@
 </div>
 <!-- contents e -->
 
-
-
-
-
-<%-- 
-<c:forEach items="${aaa}" var="item" varStatus="status">
-	<c:out value="${item.ifcdName }"/>
-</c:forEach>	
- --%>
-
- 
- 
 <!-- footer s -->
 <%@include file="../include/footer.jsp"%>
 <!-- footer e -->
