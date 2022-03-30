@@ -65,6 +65,24 @@
 	</sql>
 	
 	
+	<sql id="insertRegColumn">	
+		,regIp
+		,regSeq
+		,regDeviceCd
+		,regDateTime
+		,regDateTimeSvr
+	</sql>
+    
+    
+    <sql id="insertRegValue">	
+		,#{regIp}
+		,#{regSeq}
+		,#{regDeviceCd}
+		,#{regDateTime}
+		,#{regDateTimeSvr}
+	</sql>
+	
+	
 	<sql id="updateModColumnValue">	
 		,modIp = #{modIp}
 		,modSeq = #{modSeq}

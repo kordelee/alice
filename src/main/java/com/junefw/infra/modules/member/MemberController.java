@@ -167,10 +167,10 @@ public class MemberController extends BaseController{
 	public Map<String, Object> loginProc(Member dto, HttpSession httpSession) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		
-		Member rtMember = service.selectOneLogin(dto);
+		Member rtMember = service.selectOneId(dto);
 
-		if(rtMember.getIfmmSeq() != null) {
-//			rtMember = service.selectOneLogin(dto);
+		if(rtMember != null) {
+			rtMember = service.selectOneLogin(dto);
 
 			if(rtMember.getIfmmSeq() != null) {
 				httpSession.setMaxInactiveInterval( 60 * Constants.SESSION_MINUTE);	//60second * 30 = 30minute  
@@ -180,11 +180,21 @@ public class MemberController extends BaseController{
 				httpSession.setAttribute("sessId", rtMember.getIfmmId());
 				httpSession.setAttribute("sessName", rtMember.getIfmmName());
 				
+				dto.setIfmmSeq(rtMember.getIfmmSeq());
+				dto.setIflgResultNy(1);
+				service.insertLogLogin(dto);
+				
 				returnMap.put("rt", "success");
 			} else {
+				dto.setIflgResultNy(0);
+				service.insertLogLogin(dto);
+				
 				returnMap.put("rt", "fail");
 			}
 		} else {
+			dto.setIflgResultNy(0);
+			service.insertLogLogin(dto);
+			
 			returnMap.put("rt", "fail");
 		}
 		return returnMap;

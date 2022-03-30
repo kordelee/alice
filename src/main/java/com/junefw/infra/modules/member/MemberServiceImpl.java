@@ -128,6 +128,11 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 		return dao.selectListPhone(vo);
 	}
 	
+	
+	public int insertLogLogin(Member dto) throws Exception {
+		setRegMod(dto);
+		return dao.insertLogLogin(dto);
+	}
 
 
 }

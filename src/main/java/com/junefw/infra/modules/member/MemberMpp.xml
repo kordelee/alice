@@ -357,6 +357,24 @@
 	</select>
 	<!-- login e -->
 	
+	
+	<!-- logLogin s -->
+	<insert id="insertLogLogin">
+		INSERT INTO infrLogLogin (
+			ifmmId
+			,ifmmSeq
+			,iflgResultNy
+			,iflgDelNy
+			<include refid="Base.insertRegColumn" />
+		) values (
+			#{ifmmId}
+			,#{ifmmSeq}
+			,#{iflgResultNy}
+			,0
+			<include refid="Base.insertRegValue" />
+		)
+	</insert>
+	<!-- logLogin e -->
 </mapper>
 
 

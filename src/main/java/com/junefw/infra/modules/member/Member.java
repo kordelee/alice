@@ -106,6 +106,14 @@ public class Member extends Base{
 	private String[] ifmaAddress3Array;
 	private String[] ifmaZipcodeArray;
 	private Integer[] ifmaDelNyArray;
+	
+	
+//	infrLogLogin
+	private String iflgSeq;
+//	private Integer ifmmId;
+//	private Integer ifmmSeq;
+	private Integer iflgResultNy;
+	private Integer iflgDelNy;
 //	----------
 	public String getIfmmSeq() {
 		return ifmmSeq;
@@ -533,5 +541,23 @@ public class Member extends Base{
 	public void setIfmaDelNyArray(Integer[] ifmaDelNyArray) {
 		this.ifmaDelNyArray = ifmaDelNyArray;
 	}
-		
+	public String getIflgSeq() {
+		return iflgSeq;
+	}
+	public void setIflgSeq(String iflgSeq) {
+		this.iflgSeq = iflgSeq;
+	}
+	public Integer getIflgResultNy() {
+		return iflgResultNy;
+	}
+	public void setIflgResultNy(Integer iflgResultNy) {
+		this.iflgResultNy = iflgResultNy;
+	}
+	public Integer getIflgDelNy() {
+		return iflgDelNy;
+	}
+	public void setIflgDelNy(Integer iflgDelNy) {
+		this.iflgDelNy = iflgDelNy;
+	}
+	
 }
