@@ -169,8 +169,8 @@ public class MemberController extends BaseController{
 		
 		Member rtMember = service.selectOneLogin(dto);
 
-		if(rtMember != null) {
-			rtMember = service.selectOneLogin(dto);
+		if(rtMember.getIfmmSeq() != null) {
+//			rtMember = service.selectOneLogin(dto);
 
 			if(rtMember.getIfmmSeq() != null) {
 				httpSession.setMaxInactiveInterval( 60 * Constants.SESSION_MINUTE);	//60second * 30 = 30minute  
