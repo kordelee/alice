@@ -401,7 +401,7 @@
 	
 	
 	$("#btnSave").on("click", function(){
-		if (seq.val() == "0"){
+		if (seq.val() == "0" || seq.val() == ""){
 	   		// insert
 	   		if (validationInst() == false) return false;
  			setCheckboxValue($("#ifmmEmailConsent"), $("#ifmmEmailConsentNy"));

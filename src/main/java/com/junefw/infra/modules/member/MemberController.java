@@ -183,6 +183,7 @@ public class MemberController extends BaseController{
 				
 				Date date = rtMember2.getIfmmPwdModDate();
 				LocalDateTime ifmmPwdModDateLocalDateTime = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+				
 				if(ChronoUnit.DAYS.between(ifmmPwdModDateLocalDateTime, UtilDateTime.nowLocalDateTime()) > Constants.PASSWOPRD_CHANGE_INTERVAL) {
 					returnMap.put("changePwd", "true");
 				}
