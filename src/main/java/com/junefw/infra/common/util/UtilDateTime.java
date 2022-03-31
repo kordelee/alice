@@ -46,6 +46,19 @@ public class UtilDateTime {
 	}
 	
 	
+	public static LocalDateTime calculateDayLocalDateTime (LocalDateTime localDateTime, int day) throws Exception {
+		LocalDateTime localDateTimeNew;
+		
+		if(day >= 0) {
+			localDateTimeNew = localDateTime.plusDays(Math.abs(day)); 
+		} else {
+			localDateTimeNew = localDateTime.minusDays(Math.abs(day));
+		}
+		
+		return localDateTimeNew;
+	}
+	
+	
 	public static String addStringTime(String date) {
 		return date + " 00:00:00";
 	}

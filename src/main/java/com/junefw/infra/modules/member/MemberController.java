@@ -1,6 +1,9 @@
 
 package com.junefw.infra.modules.member;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -126,9 +129,7 @@ public class MemberController extends BaseController{
 	@RequestMapping(value = "memberMultiUele")
 	public String memberMultiUele(MemberVo vo, RedirectAttributes redirectAttributes) throws Exception {
 		
-		String[] checkboxSeqArray = vo.getCheckboxSeqArray();
-		
-		for(String checkboxSeq : checkboxSeqArray) {
+		for(String checkboxSeq : vo.getCheckboxSeqArray()) {
 			vo.setIfmmSeq(checkboxSeq);
 			service.uelete(vo);
 		}
@@ -142,9 +143,7 @@ public class MemberController extends BaseController{
 	@RequestMapping(value = "memberMultiDele")
 	public String memberMultiDele(MemberVo vo, RedirectAttributes redirectAttributes) throws Exception {
 		
-		String[] checkboxSeqArray = vo.getCheckboxSeqArray();
-		
-		for(String checkboxSeq : checkboxSeqArray) {
+		for(String checkboxSeq : vo.getCheckboxSeqArray()) {
 			vo.setIfmmSeq(checkboxSeq);
 //			service.delete(vo);
 		}
@@ -182,6 +181,17 @@ public class MemberController extends BaseController{
 				
 				rtMember2.setIflgResultNy(1);
 				service.insertLogLogin(rtMember2);
+				
+				// 
+				
+				
+//				Date date = rtMember2.getIfmmPwdModDate();
+//				LocalDateTime ifmmPwdModDateLocalDateTime = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+				
+//				if (UtilDateTime.calculateDayLocalDateTime(ifmmPwdModDateLocalDateTime, 90) < UtilDateTime.nowLocalDateTime()) {
+//					
+//				}
+
 				
 				returnMap.put("rt", "success");
 			} else {
