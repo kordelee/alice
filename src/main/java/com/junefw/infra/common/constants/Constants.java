@@ -18,4 +18,6 @@ public final class Constants {
 	public static final String DATETIME_FORMAT_BASIC = "yyyy-MM-dd HH:mm:ss";
 	
 	public static final int DATE_INTERVAL = -7;
+	
+	public static final long PASSWOPRD_CHANGE_INTERVAL = 90;
 }

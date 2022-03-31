@@ -66,7 +66,7 @@ sessId: <c:out value="${sessId }"/><br>
 			,data: {}
 			,success: function(response) {
 				if(response.rt == "success") {
-					location.href = URL_LOGINFORM;
+					location.href = URL_LOGIN_FORM;
 				} else {
 					// by pass
 				}

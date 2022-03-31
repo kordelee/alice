@@ -109,7 +109,11 @@
 			,data : { "ifmmId" : $("#ifmmId").val(), "ifmmPassword" : $("#ifmmPassword").val()}
 			,success: function(response) {
 				if(response.rt == "success") {
-					location.href = URL_INDEX_ADMIN;
+					if(response.changePwd == "true") {
+						location.href = URL_CHANGE_PWD_FORM;
+					} else {
+						location.href = URL_INDEX_ADMIN;
+					}
 				} else {
 					alert("회원없음");
 				}

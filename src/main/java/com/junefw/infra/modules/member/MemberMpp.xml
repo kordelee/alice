@@ -376,6 +376,11 @@
 		)
 	</insert>
 	<!-- logLogin e -->
+	
+	
+	<update id="updateIfmmPwdModDate">
+		UPDATE infrMember SET ifmmPwdModDate = #{ifmmPwdModDate} WHERE ifmmSeq = #{ifmmSeq}
+	</update>
 </mapper>
 
 

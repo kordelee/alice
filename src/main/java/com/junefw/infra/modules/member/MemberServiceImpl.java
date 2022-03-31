@@ -10,6 +10,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.junefw.infra.common.base.BaseServiceImpl;
+import com.junefw.infra.common.constants.Constants;
 import com.junefw.infra.common.util.UtilDateTime;
 import com.junefw.infra.common.util.UtilRegMod;
 
@@ -132,6 +133,12 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	public int insertLogLogin(Member dto) throws Exception {
 		setRegMod(dto);
 		return dao.insertLogLogin(dto);
+	}
+	
+	
+	public int updateIfmmPwdModDate(Member dto) throws Exception {
+		dto.setIfmmPwdModDate(UtilDateTime.calculateDayDate(UtilDateTime.nowLocalDateTime(), (int) Constants.PASSWOPRD_CHANGE_INTERVAL));
+		return dao.updateIfmmPwdModDate(dto);
 	}
 
 

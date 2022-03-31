@@ -59,6 +59,23 @@ public class UtilDateTime {
 	}
 	
 	
+	public static Date calculateDayDate (LocalDateTime localDateTime, int day) throws Exception {
+		LocalDateTime localDateTimeNew;
+		
+		if(day >= 0) {
+			localDateTimeNew = localDateTime.plusDays(Math.abs(day)); 
+		} else {
+			localDateTimeNew = localDateTime.minusDays(Math.abs(day));
+		}
+		
+		String localDateTimeNewString = localDateTimeNew.format(DateTimeFormatter.ofPattern(Constants.DATETIME_FORMAT_BASIC));
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Constants.DATETIME_FORMAT_BASIC);
+        Date date = simpleDateFormat.parse(localDateTimeNewString);
+		
+		return date;
+	}
+	
+	
 	public static String addStringTime(String date) {
 		return date + " 00:00:00";
 	}

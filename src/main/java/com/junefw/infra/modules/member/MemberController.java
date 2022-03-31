@@ -3,6 +3,7 @@ package com.junefw.infra.modules.member;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -22,8 +23,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.junefw.infra.common.base.BaseController;
 import com.junefw.infra.common.constants.Constants;
 import com.junefw.infra.common.util.UtilDateTime;
-import com.junefw.infra.modules.code.Code;
-import com.junefw.infra.modules.code.CodeServiceImpl;
 
 @Controller
 @RequestMapping(value="/member/")
@@ -182,16 +181,11 @@ public class MemberController extends BaseController{
 				rtMember2.setIflgResultNy(1);
 				service.insertLogLogin(rtMember2);
 				
-				// 
-				
-				
-//				Date date = rtMember2.getIfmmPwdModDate();
-//				LocalDateTime ifmmPwdModDateLocalDateTime = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
-				
-//				if (UtilDateTime.calculateDayLocalDateTime(ifmmPwdModDateLocalDateTime, 90) < UtilDateTime.nowLocalDateTime()) {
-//					
-//				}
-
+				Date date = rtMember2.getIfmmPwdModDate();
+				LocalDateTime ifmmPwdModDateLocalDateTime = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+				if(ChronoUnit.DAYS.between(ifmmPwdModDateLocalDateTime, UtilDateTime.nowLocalDateTime()) > Constants.PASSWOPRD_CHANGE_INTERVAL) {
+					returnMap.put("changePwd", "true");
+				}
 				
 				returnMap.put("rt", "success");
 			} else {
@@ -225,6 +219,23 @@ public class MemberController extends BaseController{
 	public String findIdPwdForm() throws Exception {
 		
 		return "xdmin/member/findIdPwdForm";
+	}
+	
+	
+	@RequestMapping(value = "changePwdForm")
+	public String changePwdForm() throws Exception {
+		
+		return "xdmin/member/changePwdForm";
+	}
+	
+	
+	@ResponseBody	
+	@RequestMapping(value = "extendPwd")
+	public Map<String, Object> extendPwd(Member dto) throws Exception {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		service.updateIfmmPwdModDate(dto);
+		returnMap.put("rt", "success");
+		return returnMap;
 	}
 	
 //	구글api를 이용하여 주소값을 던지면 위도 경도를 받아오는 정적 함수
