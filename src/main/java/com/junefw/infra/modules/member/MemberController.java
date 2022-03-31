@@ -170,22 +170,22 @@ public class MemberController extends BaseController{
 		Member rtMember = service.selectOneId(dto);
 
 		if(rtMember != null) {
-			rtMember = service.selectOneLogin(dto);
+			Member rtMember2 = service.selectOneLogin(dto);
 
-			if(rtMember.getIfmmSeq() != null) {
+			if(rtMember2 != null) {
 				httpSession.setMaxInactiveInterval( 60 * Constants.SESSION_MINUTE);	//60second * 30 = 30minute  
 //ref			session.setMaxInactiveInterval(-1);		// session time unlimited
 	
-				httpSession.setAttribute("sessSeq", rtMember.getIfmmSeq());
-				httpSession.setAttribute("sessId", rtMember.getIfmmId());
-				httpSession.setAttribute("sessName", rtMember.getIfmmName());
+				httpSession.setAttribute("sessSeq", rtMember2.getIfmmSeq());
+				httpSession.setAttribute("sessId", rtMember2.getIfmmId());
+				httpSession.setAttribute("sessName", rtMember2.getIfmmName());
 				
-				dto.setIfmmSeq(rtMember.getIfmmSeq());
-				dto.setIflgResultNy(1);
-				service.insertLogLogin(dto);
+				rtMember2.setIflgResultNy(1);
+				service.insertLogLogin(rtMember2);
 				
 				returnMap.put("rt", "success");
 			} else {
+				dto.setIfmmSeq(rtMember.getIfmmSeq());
 				dto.setIflgResultNy(0);
 				service.insertLogLogin(dto);
 				
