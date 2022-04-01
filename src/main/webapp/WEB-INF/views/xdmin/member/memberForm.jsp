@@ -9,7 +9,16 @@
 	.addScroll{
 		overflow-y:auto;
 		height: 90px;
+		background-color:#E9ECEF;
 	}
+	
+	.input-file-button{
+		padding: 4px 25px;
+		background-color:#FF6600;
+		border-radius: 4px;
+		color: white;
+		cursor: pointer;
+	}	
 
 </style>
 </head>
@@ -101,7 +110,7 @@
 <c:set var="listCodeTelecom" value="${CodeServiceImpl.selectListCachedCode('10')}"/>
 
 <!-- <form name="form" id="form" method="post" enctype="multipart/form-data"> -->
-<form name="form" id="form" method="post" autocomplete="off">
+<form id="form" name="form" method="post" autocomplete="off" enctype="multipart/form-data">
 <!-- *Vo.jsp s -->
 <%@include file="memberVo.jsp"%>
 <!-- *Vo.jsp e -->
@@ -291,23 +300,27 @@
             <input type="text" id="ifmaAddress2Array0" name="ifmaAddress2Array" value="<c:out value="${item.ifmaAddress2 }"/>" maxlength="50" placeholder="상세주소" class="form-control form-control-sm mt-2">
             <input type="text" id="ifmaAddress3Array0" name="ifmaAddress3Array" value="<c:out value="${item.ifmaAddress3 }"/>" maxlength="50" placeholder="참고항목" class="form-control form-control-sm mt-2" readonly>
         </div>
-        <div class="col-sm-6">     
-			<label for="formFileSm" class="form-label">Small file input example</label>
-			<input class="form-control form-control-sm" id="formFileSm" type="file" multiple="multiple">
+        <div class="col-sm-6 mt-3 mt-sm-0">     
+			<label for="formFileSm" class="form-label input-file-button">파일첨부</label>
+			<input class="form-control form-control-sm" id="formFileSm" type="file" multiple="multiple" style="display: none;">
 			<div class="addScroll">
 				<ul class="list-group">
+ <!--
 					<li class="list-group-item d-flex justify-content-between align-items-center">
 						A list item
 						<span class="badge bg-danger rounded-pill"><i class="fa-solid fa-x"></i></span>
 					</li>
+
 					<li class="list-group-item d-flex justify-content-between align-items-center">
 						A second list item
 						<span class="badge bg-danger rounded-pill"><i class="fa-solid fa-x"></i></span>
 					</li>
+					
 					<li class="list-group-item d-flex justify-content-between align-items-center">
 						A third list item
 						<span class="badge bg-danger rounded-pill"><i class="fa-solid fa-x"></i></span>
 					</li>
+ -->					
 				</ul>
 			</div>
         </div>

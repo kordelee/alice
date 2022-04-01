@@ -22,5 +22,4 @@ public class MemberVo extends BaseVo implements Serializable{
 //	search item extra (optional)
 //	----------
 	
-
 }
