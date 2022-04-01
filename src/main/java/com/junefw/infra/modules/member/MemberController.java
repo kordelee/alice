@@ -54,6 +54,9 @@ public class MemberController extends BaseController{
 	@RequestMapping(value = "memberForm")
 	public String memberForm(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
 		
+		System.out.println("vo.getIfmmSeq(): " + vo.getIfmmSeq());
+
+		
 		if (vo.getIfmmSeq().equals("0") || vo.getIfmmSeq().equals("")) {
 //			insert
 		} else {

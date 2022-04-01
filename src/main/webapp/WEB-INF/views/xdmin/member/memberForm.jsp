@@ -301,8 +301,8 @@
             <input type="text" id="ifmaAddress3Array0" name="ifmaAddress3Array" value="<c:out value="${item.ifmaAddress3 }"/>" maxlength="50" placeholder="참고항목" class="form-control form-control-sm mt-2" readonly>
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">     
-			<label for="formFileSm" class="form-label input-file-button">파일첨부</label>
-			<input class="form-control form-control-sm" id="formFileSm" type="file" multiple="multiple" style="display: none;">
+			<label for="file" class="form-label input-file-button">파일첨부</label>
+			<input class="form-control form-control-sm" id="file" name="file" type="file" multiple="multiple" style="display: none;" onChange="ch(0);">
 			<div class="addScroll">
 				<ul class="list-group">
  <!--
@@ -332,7 +332,29 @@
             <input type="text" id="memAddressAbroad1" name="memAddressAbroad1" value="" maxlength="50" placeholder="주소" class="form-control form-control-sm mt-2">
             <input type="text" id="memAddressAbroad2" name="memAddressAbroad2" value="" maxlength="50" placeholder="상세 주소" class="form-control form-control-sm mt-2">
         </div>
-        <div class="col-sm-6">          
+        <div class="col-sm-6 mt-3 mt-sm-0">
+                 <label for="file2" class="form-label input-file-button">파일첨부</label>
+			<input class="form-control form-control-sm" id="file2" name="file2" type="file" multiple="multiple" style="display: none;" onChange="ch(1);" accept="image/*">
+			<div class="addScroll">
+				<ul class="list-group">
+ <!--
+					<li class="list-group-item d-flex justify-content-between align-items-center">
+						A list item
+						<span class="badge bg-danger rounded-pill"><i class="fa-solid fa-x"></i></span>
+					</li>
+
+					<li class="list-group-item d-flex justify-content-between align-items-center">
+						A second list item
+						<span class="badge bg-danger rounded-pill"><i class="fa-solid fa-x"></i></span>
+					</li>
+					
+					<li class="list-group-item d-flex justify-content-between align-items-center">
+						A third list item
+						<span class="badge bg-danger rounded-pill"><i class="fa-solid fa-x"></i></span>
+					</li>
+ -->					
+				</ul>
+			</div>
         </div>
     </div>
     <div class="row mt-sm-4">
@@ -555,8 +577,40 @@
 		$("#ifmaAddress1Array0").val('');
 		$("#ifmaAddress2Array0").val('');
 		$("#ifmaAddress3Array0").val('');
-	});	  
+	});
+	
+	ch = function(seq) {
+		
+		var fileCount = $("input[type=file]")[seq].files.length;
+		
+		// 전체 갯수 
+		
+		// 전체 파일 용량 , 개별 용량
+		
+		// 파일 타입
+		
+		var check_file_type=new Array();
+		check_file_type=['jpg','gif','png','jpeg','bmp','tif'];
+		
+		for (var i = 0 ; i < fileCount ; i++) {
+			if(check_file_type.indexOf($("input[type=file]")[seq].files[i].type) == -1) {
+				alert("허용된 확장자의 파일이 아닙니다.");
+				return false;
+			}
+/* 			
+			alert($("input[type=file]")[seq].files[i].name);
+			alert($("input[type=file]")[seq].files[i].type);
+			alert($("input[type=file]")[seq].files[i].size);
+			alert($("input[type=file]")[seq].files[i].lastModified);
+ */			
+		}
 
+
+
+		
+	}
+	
+	
 </script>
 
 </body>
