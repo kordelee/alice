@@ -28,3 +28,17 @@ $('#divSearchControl').on('click', function() {
  });
 
 
+
+checkImageExt = function(obj, seq) {
+	alert(seq);
+	
+	var ext = obj.split('.').pop().toLowerCase();
+	
+	if(extArrayImage.indexOf(ext) == -1) {
+		alert("Not allowed");
+		$("#file"+seq).val("");
+		return false;
+	}
+}
+
+

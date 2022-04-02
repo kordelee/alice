@@ -301,8 +301,8 @@
             <input type="text" id="ifmaAddress3Array0" name="ifmaAddress3Array" value="<c:out value="${item.ifmaAddress3 }"/>" maxlength="50" placeholder="참고항목" class="form-control form-control-sm mt-2" readonly>
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">     
-			<label for="file" class="form-label input-file-button">파일첨부</label>
-			<input class="form-control form-control-sm" id="file" name="file" type="file" multiple="multiple" style="display: none;" onChange="ch(0);">
+			<label for="file1" class="form-label input-file-button">파일첨부</label>
+			<input class="form-control form-control-sm" id="file1" name="file1" type="file" multiple="multiple" style="display: none;" onChange="ch(1);">
 			<div class="addScroll">
 				<ul class="list-group">
  <!--
@@ -334,7 +334,7 @@
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
                  <label for="file2" class="form-label input-file-button">파일첨부</label>
-			<input class="form-control form-control-sm" id="file2" name="file2" type="file" multiple="multiple" style="display: none;" onChange="ch(1);" accept="image/*">
+			<input class="form-control form-control-sm" id="file2" name="file2" type="file" multiple="multiple" style="display: none;" onChange="ch(2);" >
 			<div class="addScroll">
 				<ul class="list-group">
  <!--
@@ -582,32 +582,33 @@
 	ch = function(seq) {
 		
 		var fileCount = $("input[type=file]")[seq].files.length;
-		
+		alert("asdasdf");
 		// 전체 갯수 
 		
 		// 전체 파일 용량 , 개별 용량
 		
 		// 파일 타입
 		
-		var check_file_type=new Array();
-		check_file_type=['jpg','gif','png','jpeg','bmp','tif'];
 		
-		for (var i = 0 ; i < fileCount ; i++) {
-			if(check_file_type.indexOf($("input[type=file]")[seq].files[i].type) == -1) {
-				alert("허용된 확장자의 파일이 아닙니다.");
+		for (var i = 1 ; i <= fileCount ; i++) {
+ 			
+			checkImageExt($("input[type=file]")[seq].files[i].name, seq);
+/* 			
+			if(extCheckImage($("input[type=file]")[seq].files[i].name) == false) {
+				alert("허용된 파일이 아닙니다.");
+				$("#file"+seq).val("");
 				return false;
 			}
-/* 			
-			alert($("input[type=file]")[seq].files[i].name);
-			alert($("input[type=file]")[seq].files[i].type);
-			alert($("input[type=file]")[seq].files[i].size);
-			alert($("input[type=file]")[seq].files[i].lastModified);
  */			
+	//		alert(MAX_FILE_SIZE);
+ 
+			if($("input[type=file]")[seq].files[i].size > MAX_FILE_SIZE){
+			    alert("첨부파일 사이즈는 10MB 이내로 등록 가능합니다.");
+			    $("#file"+seq).val("");
+			    return false;
+			}
+			
 		}
-
-
-
-		
 	}
 	
 	
