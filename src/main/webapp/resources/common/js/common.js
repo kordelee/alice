@@ -24,11 +24,11 @@ $.datepicker.setDefaults({
 
 
 var extArrayImage = new Array();
-imageExtArray = ["jpg","gif","png","jpeg","bmp","tif"];
+extArrayImage = ["jpg","gif","png","jpeg","bmp","tif"];
 
 
 var extArrayCommon = new Array();
-imageExtArray = ["txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx"];
+extArrayCommon = ["txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx"];
 
 
 

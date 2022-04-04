@@ -301,8 +301,8 @@
             <input type="text" id="ifmaAddress3Array0" name="ifmaAddress3Array" value="<c:out value="${item.ifmaAddress3 }"/>" maxlength="50" placeholder="참고항목" class="form-control form-control-sm mt-2" readonly>
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">     
-			<label for="file1" class="form-label input-file-button">파일첨부</label>
-			<input class="form-control form-control-sm" id="file1" name="file1" type="file" multiple="multiple" style="display: none;" onChange="ch(1);">
+			<label for="file0" class="form-label input-file-button">파일첨부</label>
+			<input class="form-control form-control-sm" id="file0" name="file0" type="file" multiple="multiple" style="display: none;" onChange="ch(0);">
 			<div class="addScroll">
 				<ul class="list-group">
  <!--
@@ -333,8 +333,8 @@
             <input type="text" id="memAddressAbroad2" name="memAddressAbroad2" value="" maxlength="50" placeholder="상세 주소" class="form-control form-control-sm mt-2">
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
-                 <label for="file2" class="form-label input-file-button">파일첨부</label>
-			<input class="form-control form-control-sm" id="file2" name="file2" type="file" multiple="multiple" style="display: none;" onChange="ch(2);" >
+                 <label for="file1" class="form-label input-file-button">파일첨부</label>
+			<input class="form-control form-control-sm" id="file1" name="file1" type="file" multiple="multiple" style="display: none;" onChange="ch(1);" >
 			<div class="addScroll">
 				<ul class="list-group">
  <!--
@@ -582,33 +582,17 @@
 	ch = function(seq) {
 		
 		var fileCount = $("input[type=file]")[seq].files.length;
-		alert("asdasdf");
-		// 전체 갯수 
 		
-		// 전체 파일 용량 , 개별 용량
+		if(checkUploadedTotalFileNumber(fileCount, seq) == false) { return false; }
 		
-		// 파일 타입
-		
-		
-		for (var i = 1 ; i <= fileCount ; i++) {
- 			
-			checkImageExt($("input[type=file]")[seq].files[i].name, seq);
-/* 			
-			if(extCheckImage($("input[type=file]")[seq].files[i].name) == false) {
-				alert("허용된 파일이 아닙니다.");
-				$("#file"+seq).val("");
-				return false;
-			}
- */			
-	//		alert(MAX_FILE_SIZE);
- 
-			if($("input[type=file]")[seq].files[i].size > MAX_FILE_SIZE){
-			    alert("첨부파일 사이즈는 10MB 이내로 등록 가능합니다.");
-			    $("#file"+seq).val("");
-			    return false;
-			}
-			
+		var totalFileSize;
+		for (var i = 0 ; i < fileCount ; i++) {
+			if(checkUploadedImageExt($("input[type=file]")[seq].files[i].name, seq) == false) { return false; }
+			if(checkUploadedEachFileSize($("input[type=file]")[seq].files[i].name, seq) == false) { return false; }
+			totalFileSize += $("input[type=file]")[seq].files[i].size;
 		}
+		
+		if(checkUploadedTotalFileSize(totalFileSize, seq) == false) { return false; }
 	}
 	
 	
