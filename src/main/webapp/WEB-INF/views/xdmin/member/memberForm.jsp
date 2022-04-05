@@ -301,26 +301,10 @@
             <input type="text" id="ifmaAddress3Array0" name="ifmaAddress3Array" value="<c:out value="${item.ifmaAddress3 }"/>" maxlength="50" placeholder="참고항목" class="form-control form-control-sm mt-2" readonly>
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">     
-			<label for="file0" class="form-label input-file-button">파일첨부</label>
-			<input class="form-control form-control-sm" id="file0" name="file0" type="file" multiple="multiple" style="display: none;" onChange="ch(0);">
+			<label for="file0" class="form-label input-file-button">이미지첨부</label>
+			<input class="form-control form-control-sm" id="file0" name="file0" type="file" multiple="multiple" style="display: none;" onChange="upload(0, 2);">
 			<div class="addScroll">
-				<ul class="list-group">
- <!--
-					<li class="list-group-item d-flex justify-content-between align-items-center">
-						A list item
-						<span class="badge bg-danger rounded-pill"><i class="fa-solid fa-x"></i></span>
-					</li>
-
-					<li class="list-group-item d-flex justify-content-between align-items-center">
-						A second list item
-						<span class="badge bg-danger rounded-pill"><i class="fa-solid fa-x"></i></span>
-					</li>
-					
-					<li class="list-group-item d-flex justify-content-between align-items-center">
-						A third list item
-						<span class="badge bg-danger rounded-pill"><i class="fa-solid fa-x"></i></span>
-					</li>
- -->					
+				<ul id="ulFile0" class="list-group">
 				</ul>
 			</div>
         </div>
@@ -334,25 +318,9 @@
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
                  <label for="file1" class="form-label input-file-button">파일첨부</label>
-			<input class="form-control form-control-sm" id="file1" name="file1" type="file" multiple="multiple" style="display: none;" onChange="ch(1);" >
+			<input class="form-control form-control-sm" id="file1" name="file1" type="file" multiple="multiple" style="display: none;" onChange="upload(1, 1);" >
 			<div class="addScroll">
-				<ul class="list-group">
- <!--
-					<li class="list-group-item d-flex justify-content-between align-items-center">
-						A list item
-						<span class="badge bg-danger rounded-pill"><i class="fa-solid fa-x"></i></span>
-					</li>
-
-					<li class="list-group-item d-flex justify-content-between align-items-center">
-						A second list item
-						<span class="badge bg-danger rounded-pill"><i class="fa-solid fa-x"></i></span>
-					</li>
-					
-					<li class="list-group-item d-flex justify-content-between align-items-center">
-						A third list item
-						<span class="badge bg-danger rounded-pill"><i class="fa-solid fa-x"></i></span>
-					</li>
- -->					
+				<ul id="ulFile1" class="list-group">
 				</ul>
 			</div>
         </div>
@@ -579,7 +547,8 @@
 		$("#ifmaAddress3Array0").val('');
 	});
 	
-	ch = function(seq) {
+	
+	upload = function(seq, div) {
 		
 		var fileCount = $("input[type=file]")[seq].files.length;
 		
@@ -587,12 +556,42 @@
 		
 		var totalFileSize;
 		for (var i = 0 ; i < fileCount ; i++) {
-			if(checkUploadedImageExt($("input[type=file]")[seq].files[i].name, seq) == false) { return false; }
+			if(div == 1) {
+				if(checkUploadedAllExt($("input[type=file]")[seq].files[i].name, seq) == false) { return false; }
+			} else if (div == 2){
+				if(checkUploadedImageExt($("input[type=file]")[seq].files[i].name, seq) == false) { return false; }
+			} else {
+				return false;
+			}
+			
 			if(checkUploadedEachFileSize($("input[type=file]")[seq].files[i].name, seq) == false) { return false; }
 			totalFileSize += $("input[type=file]")[seq].files[i].size;
 		}
 		
 		if(checkUploadedTotalFileSize(totalFileSize, seq) == false) { return false; }
+		
+		for (var i = 0 ; i < fileCount ; i++) {
+			addUploadLi(seq, i, $("input[type=file]")[seq].files[i].name);
+		}
+	}
+	
+	
+	addUploadLi = function (seq, index, name){
+		
+		var ul_list = $("#ulFile0");
+		
+		li = '<li id="li_'+seq+'_'+index+'" class="list-group-item d-flex justify-content-between align-items-center">';
+		li = li + name;
+		li = li + '<span class="badge bg-danger rounded-pill" onClick="delLi('+ seq +','+ index +')"><i class="fa-solid fa-x" style="cursor: pointer;"></i></span>';
+		li = li + '</li>';
+		
+		$("#ulFile"+seq).append(li);
+	}
+	
+	
+	delLi = function(seq, index) {
+		alert("asdfasdf");
+		$("#li_"+seq+"_"+index).remove();
 	}
 	
 	

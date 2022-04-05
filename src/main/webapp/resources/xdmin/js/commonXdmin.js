@@ -39,8 +39,17 @@ checkUploadedTotalFileNumber = function(totalSize, seq) {
 
 checkUploadedImageExt = function(obj, seq) {
 	var ext = obj.split('.').pop().toLowerCase();
-	alert(ext);
 	if(extArrayImage.indexOf(ext) == -1) {
+		alert("허용된 확장자가 아닙니다.");
+		$("#file"+seq).val("");
+		return false;
+	}
+}
+
+
+checkUploadedAllExt = function(obj, seq) {
+	var ext = obj.split('.').pop().toLowerCase();
+	if(extArrayAll.indexOf(ext) == -1) {
 		alert("허용된 확장자가 아닙니다.");
 		$("#file"+seq).val("");
 		return false;

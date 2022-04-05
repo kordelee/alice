@@ -3,6 +3,7 @@ package com.junefw.infra.common.util;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
 
 import com.junefw.infra.common.constants.Constants;
@@ -36,7 +37,7 @@ public class UtilDateTime {
 		LocalDateTime localDateTimeNew;
 		
 		if(day >= 0) {
-			localDateTimeNew = localDateTime.plusDays(Math.abs(day)); 
+			localDateTimeNew = localDateTime.plusDays(day); 
 		} else {
 			localDateTimeNew = localDateTime.minusDays(Math.abs(day));
 		}
