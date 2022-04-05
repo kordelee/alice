@@ -534,9 +534,33 @@
                     guideTextBox.innerHTML = '';
                     guideTextBox.style.display = 'none';
                 }
- */                    
+ */               
+                aaa();
             }
+   
         }).open();
+        
+
+    }
+	
+	
+	aaa = function() {
+		alert("asdasdf");
+		//initAutocomplete();
+	}
+	
+    // geoCoding
+    var placeSearch, autocomplete;
+    function initAutocomplete() {
+      autocomplete = new google.maps.places.Autocomplete(
+                                          (document.getElementById('autocomplete')),{types: ['geocode']});
+      autocomplete.addListener('place_changed', fillInAddress);
+    }
+    
+    function fillInAddress() {
+      var place = autocomplete.getPlace();
+        document.getElementById("stlcIat").value=place.geometry.location.lat();
+        document.getElementById("stlcIng").value=place.geometry.location.lng();
     }
 	
 
