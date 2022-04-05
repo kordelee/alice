@@ -1,6 +1,7 @@
 
 package com.junefw.infra.modules.member;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
@@ -15,9 +16,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.junefw.infra.common.base.BaseController;
@@ -27,6 +30,8 @@ import com.junefw.infra.common.util.UtilDateTime;
 @Controller
 @RequestMapping(value="/member/")
 public class MemberController extends BaseController{
+	
+	//private final static String filePath = "D://factory/ws_sts4_4131/alice/src/main/webapp/resources/uploaded";
 	
 	@Autowired
 	MemberServiceImpl service;
@@ -54,9 +59,6 @@ public class MemberController extends BaseController{
 	@RequestMapping(value = "memberForm")
 	public String memberForm(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
 		
-		System.out.println("vo.getIfmmSeq(): " + vo.getIfmmSeq());
-
-		
 		if (vo.getIfmmSeq().equals("0") || vo.getIfmmSeq().equals("")) {
 //			insert
 		} else {
@@ -75,19 +77,48 @@ public class MemberController extends BaseController{
 	
 	@SuppressWarnings(value = {"all"})
 	@RequestMapping(value = "memberInst")
-	public String memberInst(MemberVo vo, Member dto, RedirectAttributes redirectAttributes) throws Exception {
+	public String memberInst(MemberVo vo, Member dto, RedirectAttributes redirectAttributes, MultipartFile[] multipartFileArray) throws Exception {
 
-		service.insert(dto);
-	
-		vo.setIfmmSeq(dto.getIfmmSeq());
-		
-		redirectAttributes.addFlashAttribute("vo", vo);
-
-		if (Constants.INSERT_AFTER_TYPE == 1) {
-			return "redirect:/member/memberForm";
-		} else {
-			return "redirect:/member/memberList";
+		for(MultipartFile multipartFile : multipartFileArray ) {
+        	String fileName = multipartFile.getOriginalFilename();
+        	System.out.println(fileName);
+			
 		}
+        for(MultipartFile multipartFile : dto.getFile0() ) {
+        	String fileName = multipartFile.getOriginalFilename();
+        	System.out.println(fileName);
+        	multipartFile.transferTo(new File("/resources/uploaded/"+ fileName));
+        	
+        	
+        	File directory = new File("./");
+        	   System.out.println(directory.getAbsolutePath());
+//        	File target = new File("/resources/uploaded", fileName);
+//            FileCopyUtils.copy(multipartFile.getBytes(), target);
+//            mv.addObject("file", multipartFile);
+        	
+        }
+        
+        for(MultipartFile multipartFile : dto.getFile1() ) {
+        	String fileName = multipartFile.getOriginalFilename();
+        	System.out.println(fileName);
+        	
+        }
+		
+//        File target = new File("/resources/upload", fileName);
+		
+		return null;
+		
+//		service.insert(dto);
+//	
+//		vo.setIfmmSeq(dto.getIfmmSeq());
+//		
+//		redirectAttributes.addFlashAttribute("vo", vo);
+//
+//		if (Constants.INSERT_AFTER_TYPE == 1) {
+//			return "redirect:/member/memberForm";
+//		} else {
+//			return "redirect:/member/memberList";
+//		}
 	}
 	
 	@SuppressWarnings(value = {"all"})
