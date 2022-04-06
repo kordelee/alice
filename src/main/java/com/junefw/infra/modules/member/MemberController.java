@@ -1,7 +1,6 @@
 
 package com.junefw.infra.modules.member;
 
-import java.io.File;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
@@ -9,7 +8,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,7 +18,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.junefw.infra.common.base.BaseController;
@@ -78,89 +75,19 @@ public class MemberController extends BaseController {
 	@RequestMapping(value = "memberInst")
 	public String memberInst(MemberVo vo, Member dto, RedirectAttributes redirectAttributes) throws Exception {
 
+		service.insert(dto);
+	
+		vo.setIfmmSeq(dto.getIfmmSeq());
 		
-//		  for(MultipartFile multipartFile : multipartFileArray ) { 
-//			  
-//			  // 폴더 체크 없으면 생성
-//			  this.getClass().getName();
-//
-//
-//			  // 파일 이름 생성
-//			  
-//			  // 파일 이름 변경
-//			  
-//			  // 파일 저장
-//			  
-//			  // 디비 수생
-//			  // seq, index 확장자 용량
-//			  String fileName = multipartFile.getOriginalFilename();
-//			  
-//			  
-//			  System.out.println("multipartFileArray: " + fileName);
-//		  
-//		  } 
-		  
-		  for(MultipartFile multipartFile : dto.getFile0() ) { 
-			  String fileName = multipartFile.getOriginalFilename();
-			  String ext = fileName.substring(fileName.lastIndexOf(".") + 1);
-			  String uuid = UUID.randomUUID().toString();
-			  String uuidFileName = uuid + "." + ext;
-			  String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("controller", "");
-			  String nowString = UtilDateTime.nowString();
-			  String pathDate = nowString.substring(0,4) + "/" + nowString.substring(5,7) + "/" + nowString.substring(8,10); 
-			  String path = Constants.UPLOAD_PATH_PREFIX + "/" + pathModule + "/" + pathDate;
-			  
-			  System.out.println("fileName: " + fileName);
-			  System.out.println("ext: " + ext);
-			  System.out.println("uuidFileName: " + uuidFileName);
-			  System.out.println("path: " + path);
-			  
-			  File uploadPath = new File(path);
-				if (!uploadPath.exists()) {
-					uploadPath.mkdir();
-				} else {
-					// by pass
-				}
-				
-				multipartFile.transferTo(new File(path + uuidFileName));
-				
-				
-			  
-//			  System.out.println("dto.getFile0(): " + fileName);
-//			  multipartFile.transferTo(new File("/resources/uploaded/"+ fileName));
-		  
-//		  	  File directory = new File("./");
-//		  	  System.out.println(directory.getAbsolutePath()); // File target = new
-		  
-//		  	  File("/resources/uploaded", fileName); 
-//		  	  FileCopyUtils.copy(multipartFile.getBytes(), target); 
-//		  	  mv.addObject("file",		  multipartFile);
-		  
-		  }
-		  
-		  for(MultipartFile multipartFile : dto.getFile1() ) { 
-			  String fileName = multipartFile.getOriginalFilename();
-			  System.out.println("dto.getFile1(): " + fileName);
-		  
-		  }
-		  
-		  // File target = new File("/resources/upload", fileName);
-		  
-		  return null;
-		 
-//		service.insert(dto);
-//	
-//		vo.setIfmmSeq(dto.getIfmmSeq());
-//		
-//		redirectAttributes.addFlashAttribute("vo", vo);
-//
-//		if (Constants.INSERT_AFTER_TYPE == 1) {
-//			return "redirect:/member/memberForm";
-//		} else {
-//			return "redirect:/member/memberList";
-//		}
-	}
+		redirectAttributes.addFlashAttribute("vo", vo);
 
+		if (Constants.INSERT_AFTER_TYPE == 1) {
+			return "redirect:/member/memberForm";
+		} else {
+			return "redirect:/member/memberList";
+		}
+	}
+	
 	@SuppressWarnings(value = { "all" })
 	@RequestMapping(value = "memberUpdt")
 	public String memberUpdt(MemberVo vo, Member dto, RedirectAttributes redirectAttributes) throws Exception {

@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.junefw.infra.common.base.BaseServiceImpl;
 import com.junefw.infra.common.constants.Constants;
 import com.junefw.infra.common.util.UtilDateTime;
 import com.junefw.infra.common.util.UtilRegMod;
+import com.junefw.infra.common.util.UtilUpload;
 
 
 @Service
@@ -41,6 +43,16 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	    try {
 	    	
 	    	setRegMod(dto);
+	    	
+			  for(MultipartFile multipartFile : dto.getFile0() ) {
+				  String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("controller", "");
+				  UtilUpload.upload(multipartFile, pathModule);
+			  }
+			  
+			  for(MultipartFile multipartFile : dto.getFile1() ) { 
+				  String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("controller", "");
+				  UtilUpload.upload(multipartFile, pathModule);
+			  }
 	    	
 	    	dto.setIfmmPwdModDate(UtilDateTime.nowDate());
 	    	dao.insert(dto);
