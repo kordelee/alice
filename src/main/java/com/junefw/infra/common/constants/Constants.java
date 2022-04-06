@@ -22,4 +22,6 @@ public final class Constants {
 	public static final int DATE_INTERVAL = -7;
 	
 	public static final long PASSWOPRD_CHANGE_INTERVAL = 90;
+	
+	public static final String UPLOAD_PATH_PREFIX = "D://factory/ws_sts4_4131/alice/src/main/webapp/resources/uploaded";
 }

@@ -1,7 +1,6 @@
 
 package com.junefw.infra.modules.member;
 
-import java.io.File;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
@@ -9,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,24 +27,24 @@ import com.junefw.infra.common.constants.Constants;
 import com.junefw.infra.common.util.UtilDateTime;
 
 @Controller
-@RequestMapping(value="/member/")
-public class MemberController extends BaseController{
-	
-	//private final static String filePath = "D://factory/ws_sts4_4131/alice/src/main/webapp/resources/uploaded";
-	
+@RequestMapping(value = "/member/")
+public class MemberController extends BaseController {
+
 	@Autowired
 	MemberServiceImpl service;
-	
-	
+
 	@RequestMapping(value = "memberList")
 	public String memberList(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
-		
+
 		vo.setShOptionDate(vo.getShOptionDate() == null ? 1 : vo.getShOptionDate());
-		vo.setShDateStart(vo.getShDateStart() == null ? UtilDateTime.calculateDayString(UtilDateTime.nowLocalDateTime(), Constants.DATE_INTERVAL) : UtilDateTime.add00TimeString(vo.getShDateStart()));
-		vo.setShDateEnd(vo.getShDateEnd() == null ? UtilDateTime.nowString() : UtilDateTime.addNowTimeString(vo.getShDateEnd()));
-		
+		vo.setShDateStart(vo.getShDateStart() == null
+				? UtilDateTime.calculateDayString(UtilDateTime.nowLocalDateTime(), Constants.DATE_INTERVAL)
+				: UtilDateTime.add00TimeString(vo.getShDateStart()));
+		vo.setShDateEnd(vo.getShDateEnd() == null ? UtilDateTime.nowString()
+				: UtilDateTime.addNowTimeString(vo.getShDateEnd()));
+
 		vo.setParamsPaging(service.selectOneCount(vo));
-		
+
 		if (vo.getTotalRows() > 0) {
 			List<Member> list = service.selectList(vo);
 //			List<?> list = service.selectList(vo);
@@ -54,11 +53,10 @@ public class MemberController extends BaseController{
 
 		return "xdmin/member/memberList";
 	}
-	
-	
+
 	@RequestMapping(value = "memberForm")
 	public String memberForm(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
-		
+
 		if (vo.getIfmmSeq().equals("0") || vo.getIfmmSeq().equals("")) {
 //			insert
 		} else {
@@ -68,175 +66,204 @@ public class MemberController extends BaseController{
 
 			model.addAttribute("listPhone", service.selectListPhone(vo));
 		}
-		
+
 //		model.addAttribute("codeGender", CodeServiceImpl.selectListCachedCode("3"));
 //		model.addAttribute("codeTelecom", CodeServiceImpl.selectListCachedCode("10"));
-	
+
 		return "xdmin/member/memberForm";
 	}
-	
-	@SuppressWarnings(value = {"all"})
+
+	@SuppressWarnings(value = { "all" })
 	@RequestMapping(value = "memberInst")
-	public String memberInst(MemberVo vo, Member dto, RedirectAttributes redirectAttributes, MultipartFile[] multipartFileArray) throws Exception {
+	public String memberInst(MemberVo vo, Member dto, RedirectAttributes redirectAttributes) throws Exception {
 
-		/*
-		 * for(MultipartFile multipartFile : multipartFileArray ) { String fileName =
-		 * multipartFile.getOriginalFilename(); System.out.println(fileName);
-		 * 
-		 * } for(MultipartFile multipartFile : dto.getFile0() ) { String fileName =
-		 * multipartFile.getOriginalFilename(); System.out.println(fileName);
-		 * multipartFile.transferTo(new File("/resources/uploaded/"+ fileName));
-		 * 
-		 * 
-		 * File directory = new File("./");
-		 * System.out.println(directory.getAbsolutePath()); // File target = new
-		 * File("/resources/uploaded", fileName); //
-		 * FileCopyUtils.copy(multipartFile.getBytes(), target); // mv.addObject("file",
-		 * multipartFile);
-		 * 
-		 * }
-		 * 
-		 * for(MultipartFile multipartFile : dto.getFile1() ) { String fileName =
-		 * multipartFile.getOriginalFilename(); System.out.println(fileName);
-		 * 
-		 * }
-		 * 
-		 * // File target = new File("/resources/upload", fileName);
-		 * 
-		 * return null;
-		 */		
-		service.insert(dto);
-	
-		vo.setIfmmSeq(dto.getIfmmSeq());
 		
-		redirectAttributes.addFlashAttribute("vo", vo);
-
-		if (Constants.INSERT_AFTER_TYPE == 1) {
-			return "redirect:/member/memberForm";
-		} else {
-			return "redirect:/member/memberList";
-		}
+//		  for(MultipartFile multipartFile : multipartFileArray ) { 
+//			  
+//			  // 폴더 체크 없으면 생성
+//			  this.getClass().getName();
+//
+//
+//			  // 파일 이름 생성
+//			  
+//			  // 파일 이름 변경
+//			  
+//			  // 파일 저장
+//			  
+//			  // 디비 수생
+//			  // seq, index 확장자 용량
+//			  String fileName = multipartFile.getOriginalFilename();
+//			  
+//			  
+//			  System.out.println("multipartFileArray: " + fileName);
+//		  
+//		  } 
+		  
+		  for(MultipartFile multipartFile : dto.getFile0() ) { 
+			  String fileName = multipartFile.getOriginalFilename();
+			  String ext = fileName.substring(fileName.lastIndexOf(".") + 1);
+			  String uuid = UUID.randomUUID().toString();
+			  String uuidFileName = uuid + "." + ext;
+			  String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("controller", "");
+			  String pathDate = "";
+			  String path = Constants.UPLOAD_PATH_PREFIX + "/" + pathModule;
+			  
+			  System.out.println("fileName: " + fileName);
+			  System.out.println("ext: " + ext);
+			  System.out.println("uuid: " + uuid);
+			  System.out.println("uuidFileName: " + uuidFileName);
+			  System.out.println("pathModule: " + pathModule);
+			  System.out.println("path: " + path);
+			  
+//			  System.out.println("dto.getFile0(): " + fileName);
+//			  multipartFile.transferTo(new File("/resources/uploaded/"+ fileName));
+		  
+//		  	  File directory = new File("./");
+//		  	  System.out.println(directory.getAbsolutePath()); // File target = new
+		  
+//		  	  File("/resources/uploaded", fileName); 
+//		  	  FileCopyUtils.copy(multipartFile.getBytes(), target); 
+//		  	  mv.addObject("file",		  multipartFile);
+		  
+		  }
+		  
+		  for(MultipartFile multipartFile : dto.getFile1() ) { 
+			  String fileName = multipartFile.getOriginalFilename();
+			  System.out.println("dto.getFile1(): " + fileName);
+		  
+		  }
+		  
+		  // File target = new File("/resources/upload", fileName);
+		  
+		  return null;
+		 
+//		service.insert(dto);
+//	
+//		vo.setIfmmSeq(dto.getIfmmSeq());
+//		
+//		redirectAttributes.addFlashAttribute("vo", vo);
+//
+//		if (Constants.INSERT_AFTER_TYPE == 1) {
+//			return "redirect:/member/memberForm";
+//		} else {
+//			return "redirect:/member/memberList";
+//		}
 	}
-	
-	@SuppressWarnings(value = {"all"})
+
+	@SuppressWarnings(value = { "all" })
 	@RequestMapping(value = "memberUpdt")
 	public String memberUpdt(MemberVo vo, Member dto, RedirectAttributes redirectAttributes) throws Exception {
-		
+
 		service.update(dto);
-		
+
 		redirectAttributes.addFlashAttribute("vo", vo);
-		
+
 		if (Constants.UPDATE_AFTER_TYPE == 1) {
 			return "redirect:/member/memberForm";
 		} else {
 			return "redirect:/member/memberList";
 		}
 	}
-	
-	
+
 	@RequestMapping(value = "memberUele")
 	public String memberUele(MemberVo vo, RedirectAttributes redirectAttributes) throws Exception {
-		
+
 		service.uelete(vo);
-		
+
 		redirectAttributes.addFlashAttribute("vo", vo);
-		
+
 		return "redirect:/member/memberList";
 	}
-	
-	
+
 	@RequestMapping(value = "memberDele")
 	public String memberDele(MemberVo vo, RedirectAttributes redirectAttributes) throws Exception {
-		
+
 		service.delete(vo);
-		
+
 		redirectAttributes.addFlashAttribute("vo", vo);
-		
+
 		return "redirect:/member/memberList";
 	}
-	
-	
+
 	@RequestMapping(value = "memberMultiUele")
 	public String memberMultiUele(MemberVo vo, RedirectAttributes redirectAttributes) throws Exception {
-		
-		for(String checkboxSeq : vo.getCheckboxSeqArray()) {
+
+		for (String checkboxSeq : vo.getCheckboxSeqArray()) {
 			vo.setIfmmSeq(checkboxSeq);
 			service.uelete(vo);
 		}
-		
+
 		redirectAttributes.addFlashAttribute("vo", vo);
-		
+
 		return "redirect:/member/memberList";
 	}
-	
-	
+
 	@RequestMapping(value = "memberMultiDele")
 	public String memberMultiDele(MemberVo vo, RedirectAttributes redirectAttributes) throws Exception {
-		
-		for(String checkboxSeq : vo.getCheckboxSeqArray()) {
+
+		for (String checkboxSeq : vo.getCheckboxSeqArray()) {
 			vo.setIfmmSeq(checkboxSeq);
 //			service.delete(vo);
 		}
-		
+
 		redirectAttributes.addFlashAttribute("vo", vo);
-		
+
 		return "redirect:/member/memberList";
 	}
-	
-	
+
 	@RequestMapping(value = "loginForm")
 	public String loginForm(HttpServletRequest httpServletRequest) throws Exception {
-		
+
 		return "xdmin/member/loginForm";
 	}
-	
-	
+
 	@ResponseBody
 	@RequestMapping(value = "loginProc")
 	public Map<String, Object> loginProc(Member dto, HttpSession httpSession) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
-		
+
 		Member rtMember = service.selectOneId(dto);
 
-		if(rtMember != null) {
+		if (rtMember != null) {
 			Member rtMember2 = service.selectOneLogin(dto);
 
-			if(rtMember2 != null) {
-				httpSession.setMaxInactiveInterval( 60 * Constants.SESSION_MINUTE);	//60second * 30 = 30minute  
+			if (rtMember2 != null) {
+				httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE); // 60second * 30 = 30minute
 //ref			session.setMaxInactiveInterval(-1);		// session time unlimited
-	
+
 				httpSession.setAttribute("sessSeq", rtMember2.getIfmmSeq());
 				httpSession.setAttribute("sessId", rtMember2.getIfmmId());
 				httpSession.setAttribute("sessName", rtMember2.getIfmmName());
-				
+
 				rtMember2.setIflgResultNy(1);
 				service.insertLogLogin(rtMember2);
-				
+
 				Date date = rtMember2.getIfmmPwdModDate();
-				LocalDateTime ifmmPwdModDateLocalDateTime = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
-				
-				if(ChronoUnit.DAYS.between(ifmmPwdModDateLocalDateTime, UtilDateTime.nowLocalDateTime()) > Constants.PASSWOPRD_CHANGE_INTERVAL) {
+				LocalDateTime ifmmPwdModDateLocalDateTime = LocalDateTime.ofInstant(date.toInstant(),
+						ZoneId.systemDefault());
+
+				if (ChronoUnit.DAYS.between(ifmmPwdModDateLocalDateTime,
+						UtilDateTime.nowLocalDateTime()) > Constants.PASSWOPRD_CHANGE_INTERVAL) {
 					returnMap.put("changePwd", "true");
 				}
-				
+
 				returnMap.put("rt", "success");
 			} else {
 				dto.setIfmmSeq(rtMember.getIfmmSeq());
 				dto.setIflgResultNy(0);
 				service.insertLogLogin(dto);
-				
+
 				returnMap.put("rt", "fail");
 			}
 		} else {
 			dto.setIflgResultNy(0);
 			service.insertLogLogin(dto);
-			
+
 			returnMap.put("rt", "fail");
 		}
 		return returnMap;
 	}
-	
-	
+
 	@ResponseBody
 	@RequestMapping(value = "logoutProc")
 	public Map<String, Object> logoutProc(HttpSession httpSession) throws Exception {
@@ -245,23 +272,20 @@ public class MemberController extends BaseController{
 		returnMap.put("rt", "success");
 		return returnMap;
 	}
-	
-	
+
 	@RequestMapping(value = "findIdPwdForm")
 	public String findIdPwdForm() throws Exception {
-		
+
 		return "xdmin/member/findIdPwdForm";
 	}
-	
-	
+
 	@RequestMapping(value = "changePwdForm")
 	public String changePwdForm() throws Exception {
-		
+
 		return "xdmin/member/changePwdForm";
 	}
-	
-	
-	@ResponseBody	
+
+	@ResponseBody
 	@RequestMapping(value = "extendPwd")
 	public Map<String, Object> extendPwd(Member dto) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
@@ -269,7 +293,7 @@ public class MemberController extends BaseController{
 		returnMap.put("rt", "success");
 		return returnMap;
 	}
-	
+
 //	구글api를 이용하여 주소값을 던지면 위도 경도를 받아오는 정적 함수
 //	구글 계정 등록이 필요하여 현재는 주석 처리
 //	@ResponseBody

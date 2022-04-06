@@ -306,7 +306,7 @@
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">     
 			<label for="file0" class="form-label input-file-button">이미지첨부</label>
-			<!-- <input class="form-control form-control-sm" id="file0" name="file0" type="file" multiple="multiple" style="display: none;" onChange="upload(0, 2);"> -->
+			<input class="form-control form-control-sm" id="file0" name="file0" type="file" multiple="multiple" style="display: none;" onChange="upload(0, 2);">
 			<div class="addScroll">
 				<ul id="ulFile0" class="list-group">
 				</ul>
@@ -322,7 +322,7 @@
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
                  <label for="file1" class="form-label input-file-button">파일첨부</label>
-			<!-- <input class="form-control form-control-sm" id="file1" name="file1" type="file" multiple="multiple" style="display: none;" onChange="upload(1, 1);" > -->
+			<input class="form-control form-control-sm" id="file1" name="file1" type="file" multiple="multiple" style="display: none;" onChange="upload(1, 1);" >
 			<div class="addScroll">
 				<ul id="ulFile1" class="list-group">
 				</ul>
