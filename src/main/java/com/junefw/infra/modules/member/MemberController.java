@@ -1,6 +1,7 @@
 
 package com.junefw.infra.modules.member;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
@@ -105,15 +106,25 @@ public class MemberController extends BaseController {
 			  String uuid = UUID.randomUUID().toString();
 			  String uuidFileName = uuid + "." + ext;
 			  String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("controller", "");
-			  String pathDate = "";
-			  String path = Constants.UPLOAD_PATH_PREFIX + "/" + pathModule;
+			  String nowString = UtilDateTime.nowString();
+			  String pathDate = nowString.substring(0,4) + "/" + nowString.substring(5,7) + "/" + nowString.substring(8,10); 
+			  String path = Constants.UPLOAD_PATH_PREFIX + "/" + pathModule + "/" + pathDate;
 			  
 			  System.out.println("fileName: " + fileName);
 			  System.out.println("ext: " + ext);
-			  System.out.println("uuid: " + uuid);
 			  System.out.println("uuidFileName: " + uuidFileName);
-			  System.out.println("pathModule: " + pathModule);
 			  System.out.println("path: " + path);
+			  
+			  File uploadPath = new File(path);
+				if (!uploadPath.exists()) {
+					uploadPath.mkdir();
+				} else {
+					// by pass
+				}
+				
+				multipartFile.transferTo(new File(path + uuidFileName));
+				
+				
 			  
 //			  System.out.println("dto.getFile0(): " + fileName);
 //			  multipartFile.transferTo(new File("/resources/uploaded/"+ fileName));
