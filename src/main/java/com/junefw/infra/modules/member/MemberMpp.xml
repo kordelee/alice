@@ -311,6 +311,8 @@
 			,ifmaAddress2
 			,ifmaAddress3
 			,ifmaZipcode
+			,ifmaLat
+			,ifmaLng
 			,ifmaDelNy
 			<include refid="Base.insertRegModColumn" />
 			,ifmmSeq
@@ -323,6 +325,8 @@
 			,#{ifmaAddress2}
 			,#{ifmaAddress3}
 			,#{ifmaZipcode}
+			,#{ifmaLat}
+			,#{ifmaLng}
 			,0
 			<include refid="Base.insertRegModValue" />
 			,#{ifmmSeq}

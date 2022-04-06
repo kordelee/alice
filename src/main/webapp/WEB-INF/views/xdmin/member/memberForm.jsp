@@ -299,10 +299,14 @@
             <input type="text" id="ifmaAddress1Array0" name="ifmaAddress1Array" value="<c:out value="${item.ifmaAddress1 }"/>" maxlength="50" placeholder="주소" class="form-control form-control-sm mt-2" readonly>
             <input type="text" id="ifmaAddress2Array0" name="ifmaAddress2Array" value="<c:out value="${item.ifmaAddress2 }"/>" maxlength="50" placeholder="상세주소" class="form-control form-control-sm mt-2">
             <input type="text" id="ifmaAddress3Array0" name="ifmaAddress3Array" value="<c:out value="${item.ifmaAddress3 }"/>" maxlength="50" placeholder="참고항목" class="form-control form-control-sm mt-2" readonly>
+			<div class="row">
+				<div class="col-sm-6"><input type="text" id="ifmaLatArray0" name="ifmaLatArray" value="<c:out value="${item.ifmaLat }"/>" maxlength="50" placeholder="위도" class="form-control form-control-sm mt-2" readonly></div>
+				<div class="col-sm-6"><input type="text" id="ifmaLngArray0" name="ifmaLngArray" value="<c:out value="${item.ifmaLng }"/>" maxlength="50" placeholder="경도" class="form-control form-control-sm mt-2" readonly></div>
+			</div>
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">     
 			<label for="file0" class="form-label input-file-button">이미지첨부</label>
-			<input class="form-control form-control-sm" id="file0" name="file0" type="file" multiple="multiple" style="display: none;" onChange="upload(0, 2);">
+			<!-- <input class="form-control form-control-sm" id="file0" name="file0" type="file" multiple="multiple" style="display: none;" onChange="upload(0, 2);"> -->
 			<div class="addScroll">
 				<ul id="ulFile0" class="list-group">
 				</ul>
@@ -318,7 +322,7 @@
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
                  <label for="file1" class="form-label input-file-button">파일첨부</label>
-			<input class="form-control form-control-sm" id="file1" name="file1" type="file" multiple="multiple" style="display: none;" onChange="upload(1, 1);" >
+			<!-- <input class="form-control form-control-sm" id="file1" name="file1" type="file" multiple="multiple" style="display: none;" onChange="upload(1, 1);" > -->
 			<div class="addScroll">
 				<ul id="ulFile1" class="list-group">
 				</ul>
@@ -384,13 +388,14 @@
 <!-- linkJs e -->
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=45c6f58ea9a7ecfabff6e596d5079958&libraries=services"></script>
 <script>
 
 	$(document).ready(function(){
 		 $("#ifmmDob").datepicker();
 	}); 
-	
+
+
 	var goUrlList = "/member/memberList"; 			/* #-> */
 	var goUrlInst = "/member/memberInst"; 			/* #-> */
 	var goUrlUpdt = "/member/memberUpdt";			/* #-> */
@@ -535,32 +540,55 @@
                     guideTextBox.style.display = 'none';
                 }
  */               
-                aaa();
-            }
+				
+ 				/* lat and lng from address s */
+ 				
+				// 주소-좌표 변환 객체를 생성
+				var geocoder = new daum.maps.services.Geocoder();
+				
+				// 주소로 좌표를 검색
+				geocoder.addressSearch(roadAddr, function(result, status) {
+				 
+					// 정상적으로 검색이 완료됐으면,
+					if (status == daum.maps.services.Status.OK) {
+						
+						document.getElementById("ifmaLatArray0").value=result[0].x;
+						document.getElementById("ifmaLngArray0").value=result[0].y;
+						
+/* 						
+						var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+				
+						y = result[0].x;
+						x = result[0].y;
+				
+						// 결과값으로 받은 위치를 마커로 표시합니다.
+						var marker = new daum.maps.Marker({
+							map: map,
+							position: coords
+						});
+				
+						// 인포윈도우로 장소에 대한 설명표시
+						var infowindow = new daum.maps.InfoWindow({
+							content: '<div style="width:150px;text-align:center;padding:5px 0;">좌표위치</div>'
+						});
+				
+						infowindow.open(map,marker);
+				
+						// 지도 중심을 이동
+						map.setCenter(coords);
+						
+						document.getElementById("ifmaLatArray0").value=x;
+						document.getElementById("ifmaLngArray0").value=y;
+ */						
+					}
+				});
+				/* lat and lng from address e */
+
+       }
    
         }).open();
         
 
-    }
-	
-	
-	aaa = function() {
-		alert("asdasdf");
-		//initAutocomplete();
-	}
-	
-    // geoCoding
-    var placeSearch, autocomplete;
-    function initAutocomplete() {
-      autocomplete = new google.maps.places.Autocomplete(
-                                          (document.getElementById('autocomplete')),{types: ['geocode']});
-      autocomplete.addListener('place_changed', fillInAddress);
-    }
-    
-    function fillInAddress() {
-      var place = autocomplete.getPlace();
-        document.getElementById("stlcIat").value=place.geometry.location.lat();
-        document.getElementById("stlcIng").value=place.geometry.location.lng();
     }
 	
 

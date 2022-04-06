@@ -79,46 +79,43 @@ public class MemberController extends BaseController{
 	@RequestMapping(value = "memberInst")
 	public String memberInst(MemberVo vo, Member dto, RedirectAttributes redirectAttributes, MultipartFile[] multipartFileArray) throws Exception {
 
-		for(MultipartFile multipartFile : multipartFileArray ) {
-        	String fileName = multipartFile.getOriginalFilename();
-        	System.out.println(fileName);
-			
+		/*
+		 * for(MultipartFile multipartFile : multipartFileArray ) { String fileName =
+		 * multipartFile.getOriginalFilename(); System.out.println(fileName);
+		 * 
+		 * } for(MultipartFile multipartFile : dto.getFile0() ) { String fileName =
+		 * multipartFile.getOriginalFilename(); System.out.println(fileName);
+		 * multipartFile.transferTo(new File("/resources/uploaded/"+ fileName));
+		 * 
+		 * 
+		 * File directory = new File("./");
+		 * System.out.println(directory.getAbsolutePath()); // File target = new
+		 * File("/resources/uploaded", fileName); //
+		 * FileCopyUtils.copy(multipartFile.getBytes(), target); // mv.addObject("file",
+		 * multipartFile);
+		 * 
+		 * }
+		 * 
+		 * for(MultipartFile multipartFile : dto.getFile1() ) { String fileName =
+		 * multipartFile.getOriginalFilename(); System.out.println(fileName);
+		 * 
+		 * }
+		 * 
+		 * // File target = new File("/resources/upload", fileName);
+		 * 
+		 * return null;
+		 */		
+		service.insert(dto);
+	
+		vo.setIfmmSeq(dto.getIfmmSeq());
+		
+		redirectAttributes.addFlashAttribute("vo", vo);
+
+		if (Constants.INSERT_AFTER_TYPE == 1) {
+			return "redirect:/member/memberForm";
+		} else {
+			return "redirect:/member/memberList";
 		}
-        for(MultipartFile multipartFile : dto.getFile0() ) {
-        	String fileName = multipartFile.getOriginalFilename();
-        	System.out.println(fileName);
-        	multipartFile.transferTo(new File("/resources/uploaded/"+ fileName));
-        	
-        	
-        	File directory = new File("./");
-        	   System.out.println(directory.getAbsolutePath());
-//        	File target = new File("/resources/uploaded", fileName);
-//            FileCopyUtils.copy(multipartFile.getBytes(), target);
-//            mv.addObject("file", multipartFile);
-        	
-        }
-        
-        for(MultipartFile multipartFile : dto.getFile1() ) {
-        	String fileName = multipartFile.getOriginalFilename();
-        	System.out.println(fileName);
-        	
-        }
-		
-//        File target = new File("/resources/upload", fileName);
-		
-		return null;
-		
-//		service.insert(dto);
-//	
-//		vo.setIfmmSeq(dto.getIfmmSeq());
-//		
-//		redirectAttributes.addFlashAttribute("vo", vo);
-//
-//		if (Constants.INSERT_AFTER_TYPE == 1) {
-//			return "redirect:/member/memberForm";
-//		} else {
-//			return "redirect:/member/memberList";
-//		}
 	}
 	
 	@SuppressWarnings(value = {"all"})

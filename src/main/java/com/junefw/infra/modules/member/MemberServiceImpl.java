@@ -44,7 +44,7 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	    	
 	    	dto.setIfmmPwdModDate(UtilDateTime.nowDate());
 	    	dao.insert(dto);
-			
+	    	
 	    	// infrMemberEmail
 			for(int i = 0 ; i < dto.getIfmeEmailFullArray().length ; i++) {
 				dto.setIfmeDefaultNy(dto.getIfmeDefaultNyArray()[i]);
@@ -72,6 +72,8 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 				dto.setIfmaAddress2(dto.getIfmaAddress2Array()[i]);
 				dto.setIfmaAddress3(dto.getIfmaAddress3Array()[i]);
 				dto.setIfmaZipcode(dto.getIfmaZipcodeArray()[i]);
+				dto.setIfmaLat(dto.getIfmaLatArray()[i]);
+				dto.setIfmaLng(dto.getIfmaLngArray()[i]);
 				dao.insertAddress(dto);
 			}
 			

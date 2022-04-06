@@ -94,6 +94,8 @@ public class Member extends Base{
 	private String ifmaAddress2;
 	private String ifmaAddress3;
 	private String ifmaZipcode;
+	private Double ifmaLat;
+	private Double ifmaLng;
 	private Integer ifmaDelNy;
 	
 	
@@ -106,6 +108,8 @@ public class Member extends Base{
 	private String[] ifmaAddress2Array;
 	private String[] ifmaAddress3Array;
 	private String[] ifmaZipcodeArray;
+	private Double[] ifmaLatArray;
+	private Double[] ifmaLngArray;	
 	private Integer[] ifmaDelNyArray;
 	
 	
@@ -491,6 +495,18 @@ public class Member extends Base{
 	public void setIfmaZipcode(String ifmaZipcode) {
 		this.ifmaZipcode = ifmaZipcode;
 	}
+	public Double getIfmaLat() {
+		return ifmaLat;
+	}
+	public void setIfmaLat(Double ifmaLat) {
+		this.ifmaLat = ifmaLat;
+	}
+	public Double getIfmaLng() {
+		return ifmaLng;
+	}
+	public void setIfmaLng(Double ifmaLng) {
+		this.ifmaLng = ifmaLng;
+	}
 	public Integer getIfmaDelNy() {
 		return ifmaDelNy;
 	}
@@ -538,6 +554,18 @@ public class Member extends Base{
 	}
 	public void setIfmaZipcodeArray(String[] ifmaZipcodeArray) {
 		this.ifmaZipcodeArray = ifmaZipcodeArray;
+	}
+	public Double[] getIfmaLatArray() {
+		return ifmaLatArray;
+	}
+	public void setIfmaLatArray(Double[] ifmaLatArray) {
+		this.ifmaLatArray = ifmaLatArray;
+	}
+	public Double[] getIfmaLngArray() {
+		return ifmaLngArray;
+	}
+	public void setIfmaLngArray(Double[] ifmaLngArray) {
+		this.ifmaLngArray = ifmaLngArray;
 	}
 	public Integer[] getIfmaDelNyArray() {
 		return ifmaDelNyArray;
