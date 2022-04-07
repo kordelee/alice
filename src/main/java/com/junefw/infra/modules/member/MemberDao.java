@@ -9,7 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class MemberDao {
+public class MemberDao{
 	  
 	@Inject
 	@Resource(name = "sqlSession")
@@ -41,5 +41,8 @@ public class MemberDao {
 	public Member selectOneLogin(Member dto) { return sqlSession.selectOne(namespace + ".selectOneLogin", dto); }
 	public int insertLogLogin(Member dto) { return sqlSession.insert(namespace + ".insertLogLogin", dto); }
 	public int updateIfmmPwdModDate(Member dto) { return sqlSession.update(namespace + ".updateIfmmPwdModDate", dto); }
+	
+//	uploaded
+	public int insertUploaded(Member dto) { return sqlSession.insert("Base" + ".insertUploaded", dto); }
 	
 }

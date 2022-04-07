@@ -44,18 +44,40 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	    	
 	    	setRegMod(dto);
 	    	
-			  for(MultipartFile multipartFile : dto.getFile0() ) {
-				  String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("controller", "");
-				  UtilUpload.upload(multipartFile, pathModule);
-			  }
-			  
-			  for(MultipartFile multipartFile : dto.getFile1() ) { 
-				  String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("controller", "");
-				  UtilUpload.upload(multipartFile, pathModule);
-			  }
-	    	
 	    	dto.setIfmmPwdModDate(UtilDateTime.nowDate());
 	    	dao.insert(dto);
+	    	
+	    	int j = 0;
+	    	for(MultipartFile multipartFile : dto.getFile0() ) {
+	    		String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("controller", "");
+	    		UtilUpload.upload(multipartFile, pathModule, dto);
+	    		
+	    		dto.setTableName("infrMemberUploaded");
+	    		dto.setType(0);
+	    		dto.setDefaultNy(0);
+	    		dto.setSort(j);
+	    		dto.setDefaultNy(0);
+	    		dto.setPseq(dto.getIfmmSeq());
+
+				dao.insertUploaded(dto);
+				j++;
+	    	}
+	    	
+	    	j = 0;
+	    	for(MultipartFile multipartFile : dto.getFile1() ) {
+	    			String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("controller", "");		
+	    			UtilUpload.upload(multipartFile, pathModule, dto);
+	    			
+		    		dto.setTableName("infrMemberUploaded");
+		    		dto.setType(1);
+		    		dto.setDefaultNy(0);
+		    		dto.setSort(j);
+		    		dto.setDefaultNy(0);
+		    		dto.setPseq(dto.getIfmmSeq());
+
+					dao.insertUploaded(dto);
+					j++;
+	    	}
 	    	
 	    	// infrMemberEmail
 			for(int i = 0 ; i < dto.getIfmeEmailFullArray().length ; i++) {

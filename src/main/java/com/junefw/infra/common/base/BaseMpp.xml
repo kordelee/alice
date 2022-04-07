@@ -122,6 +122,33 @@
 		,a.modDateTime
 		,a.modDateTimeSvr
 	</sql>
+	
+	
+	<!-- uploaded s -->
+	<insert id="insertUploaded">
+		INSERT INTO ${tableName} (
+			type
+			,defaultNy
+			,sort
+			,originalName
+			,uuidName
+			,ext
+			,delNy
+			<include refid="Base.insertRegColumn" />
+			,pseq
+		) values (
+			#{type}
+			,#{defaultNy}
+			,#{sort}
+			,#{originalName}
+			,#{uuidName}
+			,#{ext}
+			,0
+			<include refid="Base.insertRegValue" />
+			,#{pseq}
+		)
+	</insert>
+	<!-- uploaded e -->	
 
 </mapper>
 

@@ -122,6 +122,16 @@ public class Member extends Base{
 	
 	private MultipartFile[] file0;
 	private MultipartFile[] file1;
+	
+	
+//	private String seq;
+//	private Integer type;
+//	private Integer defaultNy;
+//	private Integer sort;
+//	private String originalName;
+//	private String uuidName;
+//	private String ext;
+//	private Integer delNy;
 //	----------
 	public String getIfmmSeq() {
 		return ifmmSeq;
@@ -603,5 +613,54 @@ public class Member extends Base{
 	public void setFile1(MultipartFile[] file1) {
 		this.file1 = file1;
 	}
+//	public String getSeq() {
+//		return seq;
+//	}
+//	public void setSeq(String seq) {
+//		this.seq = seq;
+//	}
+//	public Integer getType() {
+//		return type;
+//	}
+//	public void setType(Integer type) {
+//		this.type = type;
+//	}
+//	public Integer getDefaultNy() {
+//		return defaultNy;
+//	}
+//	public void setDefaultNy(Integer defaultNy) {
+//		this.defaultNy = defaultNy;
+//	}
+//	public Integer getSort() {
+//		return sort;
+//	}
+//	public void setSort(Integer sort) {
+//		this.sort = sort;
+//	}
+//	public String getOriginalName() {
+//		return originalName;
+//	}
+//	public void setOriginalName(String originalName) {
+//		this.originalName = originalName;
+//	}
+//	public String getUuidName() {
+//		return uuidName;
+//	}
+//	public void setUuidName(String uuidName) {
+//		this.uuidName = uuidName;
+//	}
+//	public String getExt() {
+//		return ext;
+//	}
+//	public void setExt(String ext) {
+//		this.ext = ext;
+//	}
+//	public Integer getDelNy() {
+//		return delNy;
+//	}
+//	public void setDelNy(Integer delNy) {
+//		this.delNy = delNy;
+//	}
+
 	
 }

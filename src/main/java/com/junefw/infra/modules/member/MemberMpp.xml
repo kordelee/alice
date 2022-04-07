@@ -116,6 +116,8 @@
 			,c.ifmaAddress2
 			,c.ifmaAddress3
 			,c.ifmaZipcode
+			,c.ifmaLat
+			,c.ifmaLng
 		FROM
 			infrMember a
 			LEFT JOIN infrMemberEmail b ON b.ifmeDelNy = 0 AND b.ifmeDefaultNy = 1 AND b.ifmmSeq = a.ifmmSeq
