@@ -49,7 +49,7 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	    	
 	    	int j = 0;
 	    	for(MultipartFile multipartFile : dto.getFile0() ) {
-	    		String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("controller", "");
+	    		String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("serviceimpl", "");
 	    		UtilUpload.upload(multipartFile, pathModule, dto);
 	    		
 	    		dto.setTableName("infrMemberUploaded");
@@ -65,7 +65,7 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	    	
 	    	j = 0;
 	    	for(MultipartFile multipartFile : dto.getFile1() ) {
-	    			String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("controller", "");		
+	    			String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("serviceimpl", "");		
 	    			UtilUpload.upload(multipartFile, pathModule, dto);
 	    			
 		    		dto.setTableName("infrMemberUploaded");

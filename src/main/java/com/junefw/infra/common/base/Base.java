@@ -15,6 +15,7 @@ public class Base {
 	private String originalName;
 	private String uuidName;
 	private String ext;
+	private long size;
 	private Integer delNy;
 	private String pseq;
 	
@@ -80,6 +81,12 @@ public class Base {
 	}
 	public void setExt(String ext) {
 		this.ext = ext;
+	}
+	public long getSize() {
+		return size;
+	}
+	public void setSize(long size) {
+		this.size = size;
 	}
 	public Integer getDelNy() {
 		return delNy;

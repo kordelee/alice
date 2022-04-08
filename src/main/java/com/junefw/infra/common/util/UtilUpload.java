@@ -19,14 +19,15 @@ public class UtilUpload {
 		String nowString = UtilDateTime.nowString();
 		String pathDate = nowString.substring(0,4) + "/" + nowString.substring(5,7) + "/" + nowString.substring(8,10); 
 		String path = Constants.UPLOAD_PATH_PREFIX + "/" + pathModule + "/" + pathDate + "/";
-		  
+		
 		createPath(path);
 		  
 		multipartFile.transferTo(new File(path + uuidFileName));
-		  
+		
 		dto.setOriginalName(fileName);
 		dto.setUuidName(uuidFileName);
 		dto.setExt(ext);
+		dto.setSize(multipartFile.getSize());
 
 	}
 	

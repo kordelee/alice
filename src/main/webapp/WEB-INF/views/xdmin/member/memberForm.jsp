@@ -602,6 +602,8 @@
 	
 	upload = function(seq, div) {
 		
+		$("#ulFile0").children().remove();
+		
 		var fileCount = $("input[type=file]")[seq].files.length;
 		
 		if(checkUploadedTotalFileNumber(fileCount, seq) == false) { return false; }
@@ -642,7 +644,6 @@
 	
 	
 	delLi = function(seq, index) {
-		alert("asdfasdf");
 		$("#li_"+seq+"_"+index).remove();
 	}
 	
