@@ -9,7 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -151,13 +153,18 @@ public class MemberController extends BaseController {
 
 	@RequestMapping(value = "loginForm")
 	public String loginForm(HttpServletRequest httpServletRequest) throws Exception {
+		
+		for(Cookie aa : httpServletRequest.getCookies()) {
+			System.out.println("aa: " + aa.);
+
+		}
 
 		return "xdmin/member/loginForm";
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "loginProc")
-	public Map<String, Object> loginProc(Member dto, HttpSession httpSession) throws Exception {
+	public Map<String, Object> loginProc(Member dto, HttpSession httpSession, HttpServletResponse httprvletResponse) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 
 		Member rtMember = service.selectOneId(dto);
@@ -166,6 +173,16 @@ public class MemberController extends BaseController {
 			Member rtMember2 = service.selectOneLogin(dto);
 
 			if (rtMember2 != null) {
+				
+				if(dto.getAutoLogin() == true) {
+					Cookie cookieLogin = new Cookie("cookieSeq", rtMember2.getIfmmSeq());
+					cookieLogin.setPath("/");
+					cookieLogin.setMaxAge(60 * 60 * 24 * 365);	// 365 day
+					httprvletResponse.addCookie(cookieLogin);
+				} else {
+					// by pass
+				}
+				
 				httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE); // 60second * 30 = 30minute
 //ref			session.setMaxInactiveInterval(-1);		// session time unlimited
 

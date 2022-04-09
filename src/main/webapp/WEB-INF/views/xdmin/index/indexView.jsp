@@ -29,6 +29,8 @@
 sessSeq: <c:out value="${sessSeq }"/><br>
 sessName: <c:out value="${sessName }"/><br>
 sessId: <c:out value="${sessId }"/><br>
+<hr>
+cookie.seq: <c:out value="${cookie.cookieSeq.value }"/><br>
 <c:if test="${not empty sessSeq}">
 	<button type="button" class="btn btn-danger btn-sm" name="" id="btnLogout"><i class="fa-solid fa-power-off"></i></button>
 </c:if>

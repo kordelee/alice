@@ -69,8 +69,8 @@
 		</div>
 		<div class="col">
 			<div class="form-check form-switch">
-			  <input type="checkbox" id="flexSwitchCheckChecked" name="autoLogin" checked role="switch" class="form-check-input">
-			  <label class="form-check-label" for="flexSwitchCheckChecked">Auto login</label>
+			  <input type="checkbox" id="autoLogin" name="autoLogin" checked role="switch" class="form-check-input">
+			  <label class="form-check-label" for="autoLogin">Auto login</label>
 			</div>		
 		</div>
 		<div class="d-grid gap-2 mt-3">
@@ -99,6 +99,7 @@
 
 	$("#btnLogin").on("click", function(){
 		if(validation() == false) return false;
+		
 		$.ajax({
 			async: true 
 			,cache: false
@@ -106,7 +107,7 @@
 			/* ,dataType:"json" */
 			,url: "/member/loginProc"
 			/* ,data : $("#formLogin").serialize() */
-			,data : { "ifmmId" : $("#ifmmId").val(), "ifmmPassword" : $("#ifmmPassword").val()}
+			,data : { "ifmmId" : $("#ifmmId").val(), "ifmmPassword" : $("#ifmmPassword").val(), "autoLogin" : $("#autoLogin").is(":checked")}
 			,success: function(response) {
 				if(response.rt == "success") {
 					if(response.changePwd == "true") {
