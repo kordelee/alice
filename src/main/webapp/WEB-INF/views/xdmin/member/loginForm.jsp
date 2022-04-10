@@ -77,6 +77,7 @@
 			<button class="btn btn-secondary" type="button" id="btnLogin" name="">Login</button>
 			<a href="/member/findIdPwdForm" class="text-center">Find Id/Password</a>
 			<hr>
+			cookie.seq: <c:out value="${cookie.cookieSeq.value }"/><br>
 			<button class="btn my-btn-kakao" type="button">Kakao</button>
 			<button class="btn my-btn-naver" type="button">Naver</button>
 			<button class="btn my-btn-google" type="button">Google</button>
