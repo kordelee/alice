@@ -2,12 +2,11 @@ package com.junefw.infra.modules.member;
 
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.junefw.infra.common.base.Base;
 
-@SuppressWarnings("all")
+
 public class Member extends Base{
 	
 //	infrMember
