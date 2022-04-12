@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 
-<%@include file="../include/head.jsp"%>
+<%@include file="../../include/head.jsp"%>
 
 <style type="text/css">
 	
@@ -9,15 +9,15 @@
 <body>
 
 <!-- top s -->
-<%@include file="../include/top.jsp"%>
+<%@include file="../../include/top.jsp"%>
 <!-- top e -->
 
 <!-- gnb s -->
-<%@include file="../include/gnb.jsp"%>
+<%@include file="../../include/gnb.jsp"%>
 <!-- gnb e -->
 
 <!-- right menu s -->
-<%@include file="../include/right.jsp"%>
+<%@include file="../../include/right.jsp"%>
 <!-- right menu e -->
 
 <!-- contents s -->
@@ -95,9 +95,9 @@
 	<input type="hidden" name="thisPage" value="<c:out value="${vo.thisPage}" default="1"/>">
 	<input type="hidden" name="rowNumToShow" value="<c:out value="${vo.rowNumToShow}"/>">
 	<input type="hidden" name="checkboxSeqArray" >
-	<input type="hidden" name="ifnaSeq">	<!-- #-> -->
+	<input type="hidden" name="ltltSeq">	<!-- #-> -->
 	
-<h3 class="mt-3 mb-0">국가코드관리</h3>			<!-- #-> -->
+<h3 class="mt-3 mb-0">위치관리</h3>			<!-- #-> -->
 
 <!--  -->
 <div class="container-fluid px-0 d-block d-sm-none">
@@ -155,7 +155,7 @@
 <!-- search e -->
 
 <!-- totalAndRowNum s -->
-<%@include file="../include/totalAndRowNum.jsp"%>
+<%@include file="../../include/totalAndRowNum.jsp"%>
 <!-- totalAndRowNumu e -->
 
 <!-- table s -->
@@ -170,9 +170,13 @@
                 </th>
                 <th width="80px">#</th>
                 <th>이름</th>
-                <th>이름(영문)</th>
-                <th>코드(2)</th>
-                <th>코드(3)</th>
+                <th>설립일</th>
+                <th>시작일</th>
+                <th>대표자</th>
+                <th>이메일</th>
+                <th>연락처</th>
+                <th>모바일</th>
+                <th>주소</th>
                 <th width="180px">최근수정일</th>
             </tr>
         </thead>
@@ -181,7 +185,7 @@
 <c:choose>
 	<c:when test="${fn:length(list) eq 0}">
 		<tr>
-			<td class="text-center" colspan="7">There is no data!</td>
+			<td class="text-center" colspan="10">There is no data!</td>
 		</tr>	
 	</c:when>
 	<c:otherwise>
@@ -189,14 +193,18 @@
             <tr>
                 <td class="text-center">
                     <div>
-                        <input type="checkbox" id="checkboxSeq" name="checkboxSeq" value="<c:out value="${item.ifnaSeq }"/>" class="form-check-input">
+                        <input type="checkbox" id="checkboxSeq" name="checkboxSeq" value="<c:out value="${item.ltltSeq }"/>" class="form-check-input">
                     </div>
                 </td>
                 <td><c:out value="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + status.index) }"/></td>
-                <td><a href="javascript:goForm(<c:out value="${item.ifnaSeq}"/>)"><c:out value="${item.ifnaName }"/></a></td>
-                <td><c:out value="${item.ifnaNameEng }"/></td>
-                <td><c:out value="${item.ifnaCode2Char }"/></td>
-                <td><c:out value="${item.ifnaCode3Char }"/></td>
+                <td><a href="javascript:goForm(<c:out value="${item.ltltSeq}"/>)"><c:out value="${item.ltltName }"/></a></td>
+                <td><c:out value="${item.ltltEstDate }"/></td>
+                <td><c:out value="${item.ltltStartDate }"/></td>
+                <td><c:out value="${item.ltltCeo }"/></td>
+                <td><c:out value="${item.ltltEmail }"/></td>
+                <td><c:out value="${item.ltltPhone1 }"/></td>
+                <td><c:out value="${item.ltltMobile }"/></td>
+                <td><c:out value="${item.ltltAddress1 }"/></td>
                 <td><fmt:formatDate value="${item.modDateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
             </tr>
 		</c:forEach>
@@ -209,7 +217,7 @@
 <!-- table e -->
 
 <!-- pagination s -->
-<%@include file="../include/pagination.jsp"%>
+<%@include file="../../include/pagination.jsp"%>
 <!-- pagination e -->
 
 <!-- button s -->
@@ -236,15 +244,15 @@
 <!-- contents e -->
 
 <!-- footer s -->
-<%@include file="../include/footer.jsp"%>
+<%@include file="../../include/footer.jsp"%>
 <!-- footer e -->
 
 <!-- modalBase s -->
-<%@include file="../include/modalBase.jsp"%>
+<%@include file="../../include/modalBase.jsp"%>
 <!-- modalBase e -->
 
 <!-- linkJs s -->
-<%@include file="../include/linkJs.jsp"%>
+<%@include file="../../include/linkJs.jsp"%>
 <!-- linkJs e -->
 
 <script>
@@ -254,12 +262,12 @@
 		 $("#shDateStart, #shDateEnd").datepicker();
 	}); 
 	
-	var goUrlList = "/nationality/nationalityList";					/* #-> */
-	var goUrlForm = "/nationality/nationalityForm";					/* #-> */
-	var goUrlMultiUele = "/nationality/nationalityMultiUele";			/* #-> */
-	var goUrlMultiDele = "/nationality/nationalityMultiDele";			/* #-> */
+	var goUrlList = "/location/locationList";					/* #-> */
+	var goUrlForm = "/location/locationForm";					/* #-> */
+	var goUrlMultiUele = "/location/locationMultiUele";			/* #-> */
+	var goUrlMultiDele = "/location/locationMultiDele";			/* #-> */
 	
-	var seq = $("input:hidden[name=ifnaSeq]");				/* #-> */
+	var seq = $("input:hidden[name=ltltSeq]");				/* #-> */
 	
 	var form = $("form[name=formList]");
 	
@@ -278,7 +286,7 @@
 	
 	
  	$("#btnReset").on("click", function(){
-		$(nationality).attr("href", goUrlList);
+		$(location).attr("href", goUrlList);
 	});
  	
  		

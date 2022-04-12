@@ -150,12 +150,17 @@ public class MemberController extends BaseController {
 	}
 
 	@RequestMapping(value = "loginForm")
-	public String loginForm(Member dto, HttpSession httpSession) throws Exception {
+	public String loginForm(MemberVo vo, HttpSession httpSession) throws Exception {
 		if(UtilCookie.getValue(Constants.COOKIE_NAME_SEQ) != null) {
 			//	auto login
+			
+			System.out.println("UtilCookie.getValue(Constants.COOKIE_NAME_SEQ): " + UtilCookie.getValue(Constants.COOKIE_NAME_SEQ));
+			
 			if(httpSession.getAttribute("sessSeq") == null) {
 				
-				Member rtMember = service.selectOneLogin(dto);
+				vo.setIfmmSeq(UtilCookie.getValue(Constants.COOKIE_NAME_SEQ));
+				
+				Member rtMember = service.selectOne(vo);
 				
 				httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE); // 60second * 30 = 30minute
 				httpSession.setAttribute("sessSeq", rtMember.getIfmmSeq());

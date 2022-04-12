@@ -21,7 +21,8 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.junefw.infra" />
+	<!-- <context:component-scan base-package="com.junefw.infra" /> -->
+	<context:component-scan base-package="com.junefw" />
 	
 	<!-- session interceptor s 2022.03.13 for logincheck -->
 	<interceptors>
