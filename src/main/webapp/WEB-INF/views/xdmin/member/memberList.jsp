@@ -315,7 +315,7 @@
 	
 	goForm = function(key) {
     	/* if(key != 0) seq.val(btoa(key)); */
-		$("input:hidden[name=ifmmSeq]").val(key);
+		seq.val(key);
 		form.attr("action", goUrlForm).submit();
 	}
 	

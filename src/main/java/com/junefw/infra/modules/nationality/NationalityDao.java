@@ -22,7 +22,7 @@ public class NationalityDao{
 	public Nationality selectOne(NationalityVo vo) { return sqlSession.selectOne(namespace + ".selectOne", vo); }
 	public int insert(Nationality dto) { return sqlSession.insert(namespace + ".insert", dto); }
 	public int update(Nationality dto) { return sqlSession.update(namespace + ".update", dto); }
-	public int uelete(NationalityVo vo) { return sqlSession.update(namespace + ".uelete", vo); }
+	public int uelete(Nationality dto) { return sqlSession.update(namespace + ".uelete", dto); }
 	public int delete(NationalityVo vo) { return sqlSession.delete(namespace + ".delete", vo); }
-		
+	
 }

@@ -71,8 +71,8 @@
 	
 	
 	<insert id="insert">
-		INSERT INTO infrMember (
-			,ifnaName
+		INSERT INTO infrNationality (
+			ifnaName
 			,ifnaNameKor
 			,ifnaNameEng
 			,ifnaCode2Char
@@ -84,7 +84,7 @@
 			<include refid="Base.insertRegModColumn" />
 		)
 		VALUES (
-			,#{ifnaName}
+			#{ifnaName}
 			,#{ifnaNameKor}
 			,#{ifnaNameEng}
 			,#{ifnaCode2Char}
@@ -102,8 +102,7 @@
 
 
 	<update id="update">
-		UPDATE
-			infrNationality
+		UPDATE infrNationality
 		SET
 			ifnaName = #{ifnaName}
 			,ifnaNameKor = #{ifnaNameKor}
@@ -120,7 +119,11 @@
 	
 	
 	<update id="uelete">
-		UPDATE infrNationality SET ifnaDelNy = 1 WHERE ifnaSeq = #{ifnaSeq}
+		UPDATE infrNationality
+		SET
+			ifnaDelNy = 1
+			<include refid="Base.updateModColumnValue" />
+		WHERE ifnaSeq = #{ifnaSeq}
 	</update>
 	
 	

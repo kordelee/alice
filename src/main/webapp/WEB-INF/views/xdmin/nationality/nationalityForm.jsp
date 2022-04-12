@@ -155,8 +155,8 @@
  
     <div class="row mt-sm-4">
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="ifmmDesc" class="form-label">설명</label>
-            <textarea id="ifmmDesc" name="ifmmDesc" rows="5" class="form-control"><c:out value="${item.ifmmDesc }"/></textarea>
+            <label for="ifnaDesc" class="form-label">설명</label>
+            <textarea id="ifnaDesc" name="ifnaDesc" rows="5" class="form-control"><c:out value="${item.ifnaDesc }"/></textarea>
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
         </div>
@@ -174,14 +174,14 @@
             <button type="button" class="btn btn-secondary btn-sm" name="" id="btnList"><i class="fa-solid fa-bars"></i></button>
         </div>
         <div class="col-6 text-end">
+<c:if test="${not empty item.ifnaSeq }">	<!-- #-> -->        
             <button type="button" class="btn btn-danger btn-sm" name="" id="btnDelete"><i class="fa-solid fa-x"></i></button>
             <button type="button" class="btn btn-danger btn-sm" name="" id="btnUelete"><i class="far fa-trash-alt"></i></button>
+</c:if>            
             <button type="button" class="btn btn-success btn-sm" name="" id="btnSave"><i class="fa-regular fa-bookmark"></i></button>
         </div>
     </div>
 </div>
-
-<%-- <c:out value="${Code.selectListCachedCode("15") }"/> --%>
 
 </form>
 <form name="formVo" id="formVo" method="post">

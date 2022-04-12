@@ -47,7 +47,6 @@ public class NationalityController extends BaseController {
 		if (vo.getIfnaSeq().equals("0") || vo.getIfnaSeq().equals("")) {
 			//	insert
 		} else {
-			System.out.println("asdfasdf");
 			Nationality item = service.selectOne(vo);
 			model.addAttribute("item", item);
 		}
@@ -88,9 +87,9 @@ public class NationalityController extends BaseController {
 	}
 
 	@RequestMapping(value = "nationalityUele")
-	public String nationalityUele(NationalityVo vo, RedirectAttributes redirectAttributes) throws Exception {
+	public String nationalityUele(NationalityVo vo, Nationality dto, RedirectAttributes redirectAttributes) throws Exception {
 
-		service.uelete(vo);
+		service.uelete(dto);
 
 		redirectAttributes.addFlashAttribute("vo", vo);
 
@@ -108,11 +107,11 @@ public class NationalityController extends BaseController {
 	}
 
 	@RequestMapping(value = "nationalityMultiUele")
-	public String nationalityMultiUele(NationalityVo vo, RedirectAttributes redirectAttributes) throws Exception {
+	public String nationalityMultiUele(NationalityVo vo, Nationality dto, RedirectAttributes redirectAttributes) throws Exception {
 
 		for (String checkboxSeq : vo.getCheckboxSeqArray()) {
-			vo.setIfnaSeq(checkboxSeq);
-			service.uelete(vo);
+			dto.setIfnaSeq(checkboxSeq);
+			service.uelete(dto);
 		}
 
 		redirectAttributes.addFlashAttribute("vo", vo);
