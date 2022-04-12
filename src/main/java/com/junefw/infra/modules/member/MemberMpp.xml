@@ -360,7 +360,7 @@
 			infrMember a
 		WHERE 1=1
 			AND a.ifmmId = #{ifmmId}
-			AND a.ifmmPassword = #{ifmmPassword}
+			<if test="ifmmPassword != null and !ifmmPassword.equals('')">AND a.ifmmPassword = #{ifmmPassword}</if>
 	</select>
 	<!-- login e -->
 	

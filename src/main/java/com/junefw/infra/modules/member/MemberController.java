@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.junefw.infra.common.base.BaseController;
 import com.junefw.infra.common.constants.Constants;
+import com.junefw.infra.common.util.UtilCookie;
 import com.junefw.infra.common.util.UtilDateTime;
 
 @Controller
@@ -150,9 +150,25 @@ public class MemberController extends BaseController {
 	}
 
 	@RequestMapping(value = "loginForm")
-	public String loginForm(HttpServletRequest httpServletRequest) throws Exception {
-
-		return "xdmin/member/loginForm";
+	public String loginForm(Member dto, HttpSession httpSession) throws Exception {
+		if(UtilCookie.getValue(Constants.COOKIE_NAME_SEQ) != null) {
+			//	auto login
+			if(httpSession.getAttribute("sessSeq") == null) {
+				
+				Member rtMember = service.selectOneLogin(dto);
+				
+				httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE); // 60second * 30 = 30minute
+				httpSession.setAttribute("sessSeq", rtMember.getIfmmSeq());
+				httpSession.setAttribute("sessId", rtMember.getIfmmId());
+				httpSession.setAttribute("sessName", rtMember.getIfmmName());
+			} else {
+				//	by pass
+			}
+			return "redirect:/index/indexView";
+		} else {
+			//	by pass
+			return "xdmin/member/loginForm";
+		}
 	}
 
 	@ResponseBody
@@ -166,9 +182,14 @@ public class MemberController extends BaseController {
 			Member rtMember2 = service.selectOneLogin(dto);
 
 			if (rtMember2 != null) {
+				
+				if(dto.getAutoLogin() == true) {
+					UtilCookie.createCookie(Constants.COOKIE_NAME_SEQ, rtMember2.getIfmmSeq(), Constants.COOKIE_DOMAIN, Constants.COOKIE_PATH, Constants.COOKIE_MAXAGE);
+				} else {
+					// by pass
+				}
+				
 				httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE); // 60second * 30 = 30minute
-//ref			session.setMaxInactiveInterval(-1);		// session time unlimited
-
 				httpSession.setAttribute("sessSeq", rtMember2.getIfmmSeq());
 				httpSession.setAttribute("sessId", rtMember2.getIfmmId());
 				httpSession.setAttribute("sessName", rtMember2.getIfmmName());
@@ -177,11 +198,9 @@ public class MemberController extends BaseController {
 				service.insertLogLogin(rtMember2);
 
 				Date date = rtMember2.getIfmmPwdModDate();
-				LocalDateTime ifmmPwdModDateLocalDateTime = LocalDateTime.ofInstant(date.toInstant(),
-						ZoneId.systemDefault());
+				LocalDateTime ifmmPwdModDateLocalDateTime = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
 
-				if (ChronoUnit.DAYS.between(ifmmPwdModDateLocalDateTime,
-						UtilDateTime.nowLocalDateTime()) > Constants.PASSWOPRD_CHANGE_INTERVAL) {
+				if (ChronoUnit.DAYS.between(ifmmPwdModDateLocalDateTime, UtilDateTime.nowLocalDateTime()) > Constants.PASSWOPRD_CHANGE_INTERVAL) {
 					returnMap.put("changePwd", "true");
 				}
 
@@ -206,6 +225,7 @@ public class MemberController extends BaseController {
 	@RequestMapping(value = "logoutProc")
 	public Map<String, Object> logoutProc(HttpSession httpSession) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
+		UtilCookie.deleteCookie();
 		httpSession.invalidate();
 		returnMap.put("rt", "success");
 		return returnMap;
