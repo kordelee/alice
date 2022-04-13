@@ -253,11 +253,13 @@
 <script>
 
 	$(document).ready(function(){
-		 $("#ltltEstDate").datepicker();
-		 $("#ltltStartDate").datepicker();
+		$("#ltltEstDate, #ltltStartDate").datepicker();
+		 
+		setMap();
 	}); 
 
-
+	var state = '<c:out value="${item.ltltSeq }" default="0"/>';
+	
 	var goUrlList = "/location/locationList"; 			/* #-> */
 	var goUrlInst = "/location/locationInst"; 			/* #-> */
 	var goUrlUpdt = "/location/locationUpdt";			/* #-> */
@@ -393,53 +395,24 @@
  */               
 				
  				/* lat and lng from address s */
- 				
-				// 주소-좌표 변환 객체를 생성
 				var geocoder = new daum.maps.services.Geocoder();
-				
-				// 주소로 좌표를 검색
 				geocoder.addressSearch(roadAddr, function(result, status) {
-				 
-					// 정상적으로 검색이 완료됐으면,
 					if (status == daum.maps.services.Status.OK) {
+						document.getElementById("ltltLat").value=result[0].y;
+						document.getElementById("ltltLng").value=result[0].x;
 						
-						document.getElementById("ltltLat").value=result[0].x;
-						document.getElementById("ltltLng").value=result[0].y;
-						
- 						
-						var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-				
-						y = result[0].x;
-						x = result[0].y;
-				
-						// 결과값으로 받은 위치를 마커로 표시합니다.
-						var marker = new daum.maps.Marker({
-							map: map,
-							position: coords
-						});
-				
-						// 인포윈도우로 장소에 대한 설명표시
-						var infowindow = new daum.maps.InfoWindow({
-							content: '<div style="width:150px;text-align:center;padding:5px 0;">좌표위치</div>'
-						});
-				
-						infowindow.open(map,marker);
-				
-						// 지도 중심을 이동
-						map.setCenter(coords);
-/* 						
-						document.getElementById("ifmaLatArray0").value=x;
-						document.getElementById("ifmaLngArray0").value=y;
- */ 						
+						var moveLatLon = new kakao.maps.LatLng(result[0].y, result[0].x);
+					    map.setCenter(moveLatLon);
+					    
+						var markerPosition  = new kakao.maps.LatLng(result[0].y, result[0].x); 
+						var marker = new kakao.maps.Marker({ position: markerPosition });
+						marker.setMap(null);   
+						marker.setMap(map);
 					}
 				});
 				/* lat and lng from address e */
-
-       }
-   
+	       }
         }).open();
-        
-
     }
 	
 
@@ -451,23 +424,69 @@
 	});
 	
 	
-	var container = document.getElementById('map');
-	var options = {
-		center: new kakao.maps.LatLng(33.450701, 126.570667),
-		level: 3
-	};
+	setMap = function() {
+		if(state == "0") {
+			getNowLatLng();
+		} else {
+			var lat = '<c:out value="${item.ltltLat }"/>';
+			var lng = '<c:out value="${item.ltltLng}"/>';
+			
+			/* kakao source s */
+			var container = document.getElementById("map");
+		 	var options = {
+		 			center: new kakao.maps.LatLng(lat, lng),
+		 			level: 3
+		 		};
+			map = new kakao.maps.Map(container, options);
+			
+			var markerPosition  = new kakao.maps.LatLng(lat, lng); 
+			var marker = new kakao.maps.Marker({ position: markerPosition });
+			marker.setMap(null);   
+			marker.setMap(map);
+			/* kakao source e */
+		}
+	}
 
-	var map = new kakao.maps.Map(container, options);
 	
-/* 	
-    var address      = document.getElementById("address");
-    var mapContainer = document.getElementById("map");
-    var x,y          = "";
+	function getNowLatLng(){
+		if (navigator.geolocation) {
+			var options = {timeout:60000};
+			navigator.geolocation.getCurrentPosition(showLocation, errorHandler, options);
+		} else {
+			alert("현재 위치 정보 사용이 불가능합니다.");
+		}
+	}
+	
+	
+	function showLocation(position) {
+		var lat = position.coords.latitude;
+		var lng = position.coords.longitude;
+		
+		/* kakao source s */
+		var container = document.getElementById("map");
+	 	var options = {
+	 			center: new kakao.maps.LatLng(lat, lng),
+	 			level: 3
+	 		};
+		map = new kakao.maps.Map(container, options);
+		
+		var markerPosition  = new kakao.maps.LatLng(lat, lng); 
+		var marker = new kakao.maps.Marker({ position: markerPosition });
+		marker.setMap(null);   
+		marker.setMap(map);
+		/* kakao source e */
+	}
+	
+	
+	function errorHandler(error) {
+		if(error.code == 1) {
+			alert("접근차단");
+		} else if( err.code == 2) {
+			alert("위치를 반환할 수 없습니다.");
+		}
+	}
 
-    // 지도 생성
-    var map = new daum.maps.Map(mapContainer, mapOption);
- */	
-	
+
 </script>
 
 </body>

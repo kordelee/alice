@@ -99,6 +99,8 @@
 	
 <h3 class="mt-3 mb-0">위치관리</h3>			<!-- #-> -->
 
+<div id="map" style="height:400px;"></div>
+
 <!--  -->
 <div class="container-fluid px-0 d-block d-sm-none">
     <div class="row">
@@ -255,11 +257,15 @@
 <%@include file="../../include/linkJs.jsp"%>
 <!-- linkJs e -->
 
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=45c6f58ea9a7ecfabff6e596d5079958&libraries=services"></script>
+
 <script>
 
 	$(document).ready(function(){
 		divSearchControl();
 		 $("#shDateStart, #shDateEnd").datepicker();
+		 
+		 getNowLatLng();
 	}); 
 	
 	var goUrlList = "/location/locationList";					/* #-> */
@@ -385,7 +391,68 @@
 		if(total != checked) $("#checkboxAll").prop("checked", false);
 		else $("#checkboxAll").prop("checked", true); 
 	});
+	
+	
+	function getNowLatLng(){
+		if (navigator.geolocation) {
+			var options = {timeout:60000};
+			navigator.geolocation.getCurrentPosition(showLocation, errorHandler, options);
+		} else {
+			alert("현재 위치 정보 사용이 불가능합니다.");
+		}
+	}
+	
+	
+	function showLocation(position) {
+		lat = position.coords.latitude;
+		lng = position.coords.longitude;
+		
+		/* kakao source s */
+		var container = document.getElementById("map");
+	 	var options = {
+	 			center: new kakao.maps.LatLng(lat, lng),
+	 			level: 3
+	 		};
+		map = new kakao.maps.Map(container, options);
+		
+		var markerPosition  = new kakao.maps.LatLng(lat, lng); 
+		var marker = new kakao.maps.Marker({ position: markerPosition });
+		marker.setMap(null);   
+		marker.setMap(map);
+		
+		<c:forEach items='${list}' var='item' varStatus='status'>
+			var markerPosition  = new kakao.maps.LatLng('<c:out value="${item.ltltLat }"/>', '<c:out value="${item.ltltLng }"/>'); 
+			var marker = new kakao.maps.Marker({ position: markerPosition });
+			marker.setMap(null);   
+			marker.setMap(map);
+		</c:forEach>
+		/* kakao source e */
+	}
+	
+	
+	function errorHandler(error) {
+		if(error.code == 1) {
+			alert("접근차단");
+		} else if( err.code == 2) {
+			alert("위치를 반환할 수 없습니다.");
+		}
+	}
      
+	
+function getDistanceFromLatLonInKm(lat1,lng1,lat2,lng2) {
+	
+function deg2rad(deg) {
+		return deg * (Math.PI/180)
+	}
+	
+	var R = 6371; // Radius of the earth in km
+	var dLat = deg2rad(lat2-lat1);// deg2rad below
+	var dLon = deg2rad(lng2-lng1);
+	var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
+	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+	var d = R * c * 1000; // Distance in meters
+	return d;
+	}	
 </script>
 
 </body>
