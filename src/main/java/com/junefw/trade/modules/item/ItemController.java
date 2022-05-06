@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.junefw.infra.common.base.BaseController;
 
 @Controller
-@RequestMapping(value = "/location/")
+@RequestMapping(value = "/item/")
 public class ItemController extends BaseController {
 
-	@RequestMapping(value = "locationForm")
+	@RequestMapping(value = "itemForm")
 //	public String locationForm(@ModelAttribute("vo") LocationVo vo, Model model) throws Exception {
-	public String locationForm() throws Exception {
+	public String itemForm() throws Exception {
 
 //		if (vo.getLtltSeq().equals("0") || vo.getLtltSeq().equals("")) {
 //			//	insert

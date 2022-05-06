@@ -36,10 +36,16 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/map")
+	@RequestMapping(value = "/test/map")
 	public String map() {
 		
 		return "test/map";
+	}
+	
+	@RequestMapping(value = "/test/zoomList")
+	public String zoomList() {
+		
+		return "test/zoomList";
 	}
 	
 }
