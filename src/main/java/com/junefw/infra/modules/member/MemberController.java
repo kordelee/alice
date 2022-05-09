@@ -53,7 +53,7 @@ public class MemberController extends BaseController {
 		return "xdmin/member/memberList";
 	}
 
-	@RequestMapping(value = "memberForm")
+	@RequestMapping(value = "memberForm", method = RequestMethod.)
 	public String memberForm(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
 
 		if (vo.getIfmmSeq().equals("0") || vo.getIfmmSeq().equals("")) {
