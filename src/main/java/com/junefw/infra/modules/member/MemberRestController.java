@@ -37,6 +37,7 @@ public class MemberRestController extends BaseController {
 		return list;
 	}
 	
+	
 	@RequestMapping(value = "/member3", method = RequestMethod.GET)
 	public Object member3(MemberVo vo) throws Exception {
 		List<Member> list = service.selectList(vo);
