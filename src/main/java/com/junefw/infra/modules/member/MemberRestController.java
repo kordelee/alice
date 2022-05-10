@@ -1,11 +1,12 @@
 
 package com.junefw.infra.modules.member;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,50 +14,42 @@ import org.springframework.web.bind.annotation.RestController;
 import com.junefw.infra.common.base.BaseController;
 
 @RestController
-//@RequestMapping("/member")
+@RequestMapping("/rest/member")
 public class MemberRestController extends BaseController {
 
 	@Autowired
 	MemberServiceImpl service;
 	
-	@RequestMapping(value = "/member", method = RequestMethod.GET)
-	public Map<String, Object> member(MemberVo vo) throws Exception {
-		Map<String, Object> returnMap = new HashMap<String, Object>();
-		
-		List<Member> list = service.selectList(vo);
-		
-		returnMap.put("list", list);
-		returnMap.put("rt", "success");
-		return returnMap;
-	}
-	
-	
-	@RequestMapping(value = "/member2", method = RequestMethod.GET)
-	public List<Member> member2(MemberVo vo) throws Exception {
+	@RequestMapping(value = "", method = RequestMethod.GET)
+//	@GetMapping("")
+	public List<Member> selectList(MemberVo vo) throws Exception {
 		List<Member> list = service.selectList(vo);
 		return list;
 	}
 	
+
+	@RequestMapping(value = "/{seq}", method = RequestMethod.GET)
+//	@GetMapping("/{seq}")
+	public Member selectOne(@PathVariable String seq, MemberVo vo) throws Exception {
+		vo.setIfmmSeq(seq);
+		Member item = service.selectOne(vo);
+		return item;
+	}
 	
-	@RequestMapping(value = "/member3", method = RequestMethod.GET)
-	public Object member3(MemberVo vo) throws Exception {
-		List<Member> list = service.selectList(vo);
-		return list;
+
+	@RequestMapping(value = "", method = RequestMethod.POST)
+//	@PostMapping("")
+	public String insert(@RequestBody Member dto) throws Exception {
+		service.insert(dto);
+		return dto.getIfmmSeq();
 	}
 	
 	
-	
-	
-//	@RequestMapping(value = "/{seq}", method = RequestMethod.GET)
-//	public Map<String, Object> member(@PathVariable String seq) throws Exception {
-//		Map<String, Object> returnMap = new HashMap<String, Object>();
-//		
-//		Member item = service.selectOne(vo);
-//		
-//		returnMap.put("item", list);
-//		returnMap.put("rt", "success");
-//		return returnMap;
-//	}
-	
+	@RequestMapping(value = "/{seq}", method = RequestMethod.PATCH)
+//	@PatchMapping("/{seq}")
+	public void update(@PathVariable String seq, @RequestBody Member dto) throws Exception {
+		dto.setIfmmSeq(seq);
+		service.update(dto);
+	}
 	
 }

@@ -139,13 +139,11 @@
 			,ifmmFirstNameEng
 			,ifmmId
 			,ifmmPassword
-			,ifmmPwdModDate
 			,ifmmNickname
 			,ifmmGenderCd
 			,ifmmDob
 			,ifmmSavedCd
 			,ifmmMarriageCd
-			,ifmmMarriageDate
 			,ifmmChildrenNum
 			,ifmmFavoriteColor
 			,ifmmRecommenderSeq
@@ -167,7 +165,6 @@
 			,#{ifmmFirstNameEng}
 			,#{ifmmId}
 			,#{ifmmPassword}
-			,#{ifmmPwdModDate}
 			,#{ifmmNickname}
 			,#{ifmmGenderCd}
 			<choose>
@@ -176,7 +173,6 @@
 			</choose>
 			,#{ifmmSavedCd}
 			,#{ifmmMarriageCd}
-			,#{ifmmMarriageDate}
 			,#{ifmmChildrenNum}
 			,#{ifmmFavoriteColor}
 			,#{ifmmRecommenderSeq}
@@ -197,7 +193,7 @@
 		UPDATE
 			infrMember
 		SET
-			,ifmmAdminNy = #{ifmmAdminNy}
+			ifmmAdminNy = #{ifmmAdminNy}
 			,ifmmDormancyNy = #{ifmmDormancyNy}
 			,ifmmName = #{ifmmName}
 			,ifmmNameEng = #{ifmmNameEng}
