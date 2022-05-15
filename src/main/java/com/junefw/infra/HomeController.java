@@ -6,7 +6,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.junefw.infra.modules.member.Member;
 
 
 /**
@@ -58,10 +58,48 @@ public class HomeController {
 	}
 	
 	
+	@RequestMapping(value = "/test/memberView")
+	public String memberView(Model model) throws Exception {
+
+		String apiUrl = "http://localhost:8090/rest/member/22";
+		
+		URL url = new URL(apiUrl);
+		HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+		httpURLConnection.setRequestMethod("GET");
+		
+		BufferedReader bufferedReader;
+		 
+		if (httpURLConnection.getResponseCode() >= 200 && httpURLConnection.getResponseCode() <= 300) {
+			bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+		} else {
+			bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getErrorStream()));
+		}
+		
+		StringBuilder stringBuilder = new StringBuilder();
+		String line;
+		while ((line = bufferedReader.readLine()) != null) {
+			stringBuilder.append(line);
+		}
+		
+		bufferedReader.close();
+		httpURLConnection.disconnect();
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		
+		Member member = objectMapper.readValue(stringBuilder.toString(), Member.class);
+		
+		model.addAttribute("item", member);
+		
+		return "test/memberView";
+	}
+	
+	
 	@RequestMapping(value = "/test/publicCorona1List")
 	public String publicCorona1List(Model model) throws Exception {
 		
-		String apiUrl = "http://apis.data.go.kr/1471000/CovidDagnsRgntProdExprtStusService/getCovidDagnsRgntProdExprtStusInq?serviceKey=dNLcjyriV9IBD5djvIMsq16GYwW%2F8N%2FCtnCNvRj66yaLV9jXKhipDNCJFDcDzorgqnVsJsz5gmYoibNbAG0sdw%3D%3D&numOfRows=3&pageNo=1&type=json";
+//		String apiUrl = "http://apis.data.go.kr/1471000/CovidDagnsRgntProdExprtStusService/getCovidDagnsRgntProdExprtStusInq?serviceKey=dNLcjyriV9IBD5djvIMsq16GYwW%2F8N%2FCtnCNvRj66yaLV9jXKhipDNCJFDcDzorgqnVsJsz5gmYoibNbAG0sdw%3D%3D&numOfRows=3&pageNo=1&type=json";
+		String apiUrl = "http://localhost:8090/rest/member";
+//		String apiUrl = "http://localhost:8090/rest/member/22";
 		
 		//나중에 사용할 map을 선언해줍니다.
 //		Map<String, Object> map = new HashMap<String, Object>();
@@ -86,7 +124,7 @@ public class HomeController {
 		StringBuilder stringBuilder = new StringBuilder();
 		String line;
 		while ((line = bufferedReader.readLine()) != null) {
-			System.out.println(line);
+			System.out.println("line: " + line);
 			stringBuilder.append(line);
 		}
 		bufferedReader.close();
@@ -103,13 +141,15 @@ public class HomeController {
 		ObjectMapper objectMapper = new ObjectMapper();
 		Map<String, String> map = objectMapper.readValue(stringBuilder.toString(), Map.class);
 
-//		for (String key : map.keySet()) {
-//			String value = map.get(key);
-//		    System.out.println("[key]:" + key + ", [value]:" + value);
-//		}   
+		for (String key : map.keySet()) {
+//			String value = (String) map.get(key);	// error casting
+			String value = String.valueOf(map.get(key));	// ok recognize null to string null
+//			String value = map.get(key).toString();	// error null
+		    System.out.println("[key]:" + key + ", [value]:" + value);
+		}   
 		
 		
-		System.out.println("map.get(\"resultCode\"): " + map.get("resultCode"));
+//		System.out.println("map.get(\"resultCode\"): " + map.get("resultCode"));
 //		System.out.println("map.get(\"header\"): " + map.get("header"));
 		
 		
@@ -143,5 +183,91 @@ public class HomeController {
 		
 		return "test/publicCorona1List";
 	}
+	
+	
+	@RequestMapping(value = "/test/memberList")
+	public String memberList(Model model) throws Exception {
+		
+		String apiUrl = "http://localhost:8090/rest/member";
+		
+		URL url = new URL(apiUrl);
+		HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+		httpURLConnection.setRequestMethod("GET");
+		
+//		conn.setRequestProperty("Content-type", "application/json");
+		
+		System.out.println("Response code: " + httpURLConnection.getResponseCode());
+		
+		BufferedReader bufferedReader;
+		 
+		if (httpURLConnection.getResponseCode() >= 200 && httpURLConnection.getResponseCode() <= 300) {
+			bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+		} else {
+			bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getErrorStream()));
+		}
+		
+		
+		StringBuilder stringBuilder = new StringBuilder();
+		String line;
+		while ((line = bufferedReader.readLine()) != null) {
+			System.out.println("line: " + line);
+			stringBuilder.append(line);
+		}
+		bufferedReader.close();
+		httpURLConnection.disconnect();
+		url =null;
+		//StringBuilder로 위에 파라미터 더 한값을 toString으로 불러옵니다.
+		//그리고 println으로 확인을 하면 xml형식이 나오게됩니다.
+		System.out.println(stringBuilder.toString());
+
+//		String json = "{\"name\":\"intruder\", \"phone\":\"01054221111\"}";
+
+
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		Map<String, String> map = objectMapper.readValue(stringBuilder.toString(), Map.class);
+
+		for (String key : map.keySet()) {
+//			String value = (String) map.get(key);	// error casting
+			String value = String.valueOf(map.get(key));	// ok recognize null to string null
+//			String value = map.get(key).toString();	// error null
+		    System.out.println("[key]:" + key + ", [value]:" + value);
+		}   
+		
+		
+//		System.out.println("map.get(\"resultCode\"): " + map.get("resultCode"));
+//		System.out.println("map.get(\"header\"): " + map.get("header"));
+		
+		
+////		JSONObject jsonObject = new JSONObject();
+//		for( Map.Entry<String, String> entry : map.entrySet()  ){
+//		    String key = entry.getKey();
+//		    System.out.println(key);
+////		    Object value = entry.getValue();
+////		    jsonObject.put(key, value);
+//		}
+//		
+//		HashMap header = new HashMap();
+//		header = (HashMap) map.get("header");
+//		
+//		System.out.println("header.get(resultCode): " + header.get("resultCode"));
+		
+		
+		
+		
+//		Home home = objectMapper.readValue(stringBuilder.toString(), Home.class);
+//		System.out.println("home: " + home);
+//		
+//		System.out.println("home.getResultCode(): " + home.getResultCode());
+//		System.out.println("home.getResultMsg(): " + home.getResultMsg());
+//		System.out.println("home.getPageNo(): " + home.getPageNo());
+//		System.out.println("home.getTotalCount(): " + home.getTotalCount());
+		
+		
+		
+//		model.addAttribute("list", home.items);
+		
+		return "test/publicCorona1List";
+	}	
 	
 }
