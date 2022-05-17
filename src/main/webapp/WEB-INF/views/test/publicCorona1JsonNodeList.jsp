@@ -4,10 +4,12 @@
 
 </head>
 <body>
-publicCorona1List
+publicCorona1JsonNodeList
 
 <br>aaa : <c:out value="${resultCode }"/>
-<br>aaa : <c:out value="${resultMsg }"/>
+<br>aaa : <c:out value="${header.resultCode }"/>
+<br>aaa : <c:out value="${node.resultMsg }"/>
+<br>aaa : <c:out value="${node.header.resultMsg }"/>
 <br>aaa : <c:out value="${pageNo }"/>
 <br>aaa : <c:out value="${totalCount }"/>
 <br>aaa : <c:out value="${numOfRows }"/>

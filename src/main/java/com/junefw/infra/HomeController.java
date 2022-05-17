@@ -1,5 +1,7 @@
 package com.junefw.infra;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.head;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -138,6 +140,7 @@ public class HomeController {
 	}
 	
 	
+
 	@RequestMapping(value = "/test/publicCorona1List")
 	public String publicCorona1List(Model model) throws Exception {
 		
@@ -164,88 +167,91 @@ public class HomeController {
 		bufferedReader.close();
 		httpURLConnection.disconnect();
 
-//		System.out.println(stringBuilder.toString());
-
-		ObjectMapper objectMapper = new ObjectMapper();
-//		JsonNode node = objectMapper.readTree(stringBuilder.toString());
-//		
-//		String resultMsg = node.get("resultMsg").asText();
-//		
-//		System.out.println("resultMsg: " + resultMsg);
+		System.out.println("stringBuilder.toString(): " + stringBuilder.toString());
 		
-		Map<String, Object> map = objectMapper.readValue(stringBuilder.toString(), Map.class);
+//		json object + array string -> java map
 		
-//		Map<String, String> map = objectMapper.readValue(stringBuilder.toString(), Map.class);
-
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String, Object> map = objectMapper.readValue(stringBuilder.toString(), Map.class);
+        
+        System.out.println("######## Map");
 		for (String key : map.keySet()) {
-//			String value = (String) map.get(key);	// error casting
-			String value = String.valueOf(map.get(key));	// ok recognize null to string null
-//			String value = map.get(key).toString();	// error null
-		    System.out.println("[key]:" + key + ", [value]:" + value);
-		}   
+			String value = String.valueOf(map.get(key));	// ok
+			System.out.println("[key]:" + key + ", [value]:" + value);
+		}
 		
-		HashMap header = new HashMap();
-		header = (HashMap) map.get("header");
+		Map<String, Object> header = new HashMap<String, Object>();
+		header = (Map<String, Object>) map.get("header");
 		
-		System.out.println("header: " + header.get("resultCode"));
-		System.out.println("header: " + header.get("resultMsg"));
+		System.out.println("######## Header");
+		for (String key : header.keySet()) {
+			String value = String.valueOf(header.get(key));	// ok
+			System.out.println("[key]:" + key + ", [value]:" + value);
+		}
 		
-		HashMap body = new HashMap();
-		body = (HashMap) map.get("body");
+		String aaa = (String) header.get("resultCode");
 		
-		System.out.println("body.get(\"pageNo\": " + body.get("pageNo"));
-		System.out.println("body.get(\"totalCount\": " + body.get("totalCount"));
-		System.out.println("body.get(\"numOfRows\": " + body.get("numOfRows"));
-		System.out.println("body.get(\"items\": " + body.get("items"));
+		System.out.println("header.get(\"resultCode\"): " + header.get("resultCode"));
+		System.out.println("header.get(\"resultMsg\"): " + header.get("resultMsg"));
 		
-//		HashMap items = new HashMap();
-//		items = (HashMap) body.get("items");
+		Map<String, Object> body = new HashMap<String, Object>();
+		body = (Map<String, Object>) map.get("body");
 		
-		ArrayList<Home> items = new ArrayList<Home>();
-		items = (ArrayList<Home>) body.get("items");
-		
-		System.out.println("items: " + items);
+		List<Home> items = new ArrayList<Home>();
+		items = (List<Home>) body.get("items");
 		
 		
+		System.out.println("items.size(): " + items.size());
 		
+		for(Home item : items) {
+			System.out.println(item.getMM());
+		}
 		
-		
-		
-//		System.out.println("map.get(\"resultCode\"): " + map.get("resultCode"));
-//		System.out.println("map.get(\"header\"): " + map.get("header"));
-		
-		
-////		JSONObject jsonObject = new JSONObject();
-//		for( Map.Entry<String, String> entry : map.entrySet()  ){
-//		    String key = entry.getKey();
-//		    System.out.println(key);
-////		    Object value = entry.getValue();
-////		    jsonObject.put(key, value);
-//		}
-//		
-//		HashMap header = new HashMap();
-//		header = (HashMap) map.get("header");
-//		
-//		System.out.println("header.get(resultCode): " + header.get("resultCode"));
-		
-		
-		
-		
-//		Home home = objectMapper.readValue(stringBuilder.toString(), Home.class);
-//		System.out.println("home: " + home);
-//		
-//		System.out.println("home.getResultCode(): " + home.getResultCode());
-//		System.out.println("home.getResultMsg(): " + home.getResultMsg());
-//		System.out.println("home.getPageNo(): " + home.getPageNo());
-//		System.out.println("home.getTotalCount(): " + home.getTotalCount());
-		
-		
-		
-//		model.addAttribute("list", home.items);
+		model.addAllAttributes(header);
+		model.addAllAttributes(body);
 		
 		return "test/publicCorona1List";
 	}
 	
+	
+	@RequestMapping(value = "/test/publicCorona1JsonNodeList")
+	public String publicCorona1JsonNodeList(Model model) throws Exception {
+		
+		String apiUrl = "http://apis.data.go.kr/1471000/CovidDagnsRgntProdExprtStusService/getCovidDagnsRgntProdExprtStusInq?serviceKey=dNLcjyriV9IBD5djvIMsq16GYwW%2F8N%2FCtnCNvRj66yaLV9jXKhipDNCJFDcDzorgqnVsJsz5gmYoibNbAG0sdw%3D%3D&numOfRows=3&pageNo=1&type=json";
+		
+		URL url = new URL(apiUrl);
+		HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+		httpURLConnection.setRequestMethod("GET");
+		
+		BufferedReader bufferedReader;
+		if (httpURLConnection.getResponseCode() >= 200 && httpURLConnection.getResponseCode() <= 300) {
+			bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+		} else {
+			bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getErrorStream()));
+		}
+		
+		StringBuilder stringBuilder = new StringBuilder();
+		String line;
+		while ((line = bufferedReader.readLine()) != null) {
+			System.out.println("line: " + line);
+			stringBuilder.append(line);
+		}
+
+		bufferedReader.close();
+		httpURLConnection.disconnect();
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		JsonNode node = objectMapper.readTree(stringBuilder.toString());
+		
+		System.out.println("node.get(\"header\").get(\"resultCode\").asText(): " + node.get("header").get("resultCode").asText());
+		System.out.println("node.get(\"header\").get(\"resultMsg\").asText(): " + node.get("header").get("resultMsg").asText());
+		System.out.println("node.get(\"header\").get(\"resultMsg\").asText(): " + node.get("body").get("items").get(0).get("KIT_PROD_QTY").asText());
+		
+		model.addAttribute("node", node);
+		
+		
+		return "test/publicCorona1JsonNodeList";
+	}
 	
 
 	
