@@ -255,6 +255,10 @@ public class HomeController {
 		return "test/publicCorona1JsonNodeList";
 	}
 	
-
 	
+	@RequestMapping(value = "/test/rtcView")
+	public String rtcView(Model model) throws Exception {
+
+		return "test/rtcView";
+	}
 }
