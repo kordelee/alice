@@ -249,6 +249,8 @@ public class HomeController {
 		
 		model.addAttribute("node", node);
 		
+//		model.addAttribute(node);
+		
 		
 		return "test/publicCorona1JsonNodeList";
 	}
