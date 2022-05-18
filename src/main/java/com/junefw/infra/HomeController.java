@@ -1,7 +1,5 @@
 package com.junefw.infra;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.head;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -20,7 +18,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -250,7 +247,6 @@ public class HomeController {
 		model.addAttribute("node", node);
 		
 //		model.addAttribute(node);
-		
 		
 		return "test/publicCorona1JsonNodeList";
 	}
