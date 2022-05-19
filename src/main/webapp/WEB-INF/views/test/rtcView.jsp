@@ -10,7 +10,7 @@
     <body>
         <h1>rtcView</h1>
         
-        <video id="localVideo" autoplay playsinline controls="false"/>here
+        <video id="localVideo" autoplay playsinline controls="false"/>
         
 <!-- javascript start -->
 <script type="text/javascript">

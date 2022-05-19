@@ -257,4 +257,16 @@ public class HomeController {
 
 		return "test/rtcView";
 	}
+
+	
+	@RequestMapping(value = "/test/peerconnection/pc1")
+	public String pc1(Model model) throws Exception {
+
+		return "webrtc/content/peerconnection/pc1/index";
+	}
+	
+	
+	
+	
+	
 }
