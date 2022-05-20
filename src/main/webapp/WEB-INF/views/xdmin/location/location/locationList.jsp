@@ -182,8 +182,8 @@
                 <th width="180px">최근수정일</th>
             </tr>
         </thead>
-        <tbody>
-
+        <tbody id="tbody">
+<%-- 
 <c:choose>
 	<c:when test="${fn:length(list) eq 0}">
 		<tr>
@@ -212,7 +212,7 @@
 		</c:forEach>
 	</c:otherwise>
 </c:choose>	            
-            
+ --%>            
          </tbody>
     </table>
 </div>
@@ -267,7 +267,6 @@
 		 
 		 getNowLatLng();
 		 
-		 getInfo();
 	}); 
 	
 	var goUrlList = "/location/locationList";					/* #-> */
@@ -429,6 +428,40 @@
 			marker.setMap(map);
 		</c:forEach>
 		/* kakao source e */
+		
+		getInfo();
+		
+		// 아작스
+		$.ajax({
+			async: true 
+			,cache: false
+			,type: "post"
+			/* ,dataType:"json" */
+			,url: "/location/locationAjaxList"
+			/* ,data : $("#formLogin").serialize() */
+			,data : { }
+			,success: function(response) {
+				if(response.rt == "success") {
+					/* alert(response.list[0].ltltSeq); */
+					
+					var listHtml = "";
+					
+					for(var i in response.list) {
+						/* alert(i); */
+						/* alert(response.list[i].ltltName); */
+						
+						
+				
+					}
+				} else {
+					
+				}
+			}
+			,error : function(jqXHR, textStatus, errorThrown){
+				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+			}
+		});
+		
 	}
 	
 	
@@ -477,21 +510,7 @@
 	    // ex) console.log(message);
 	}
 	
-	
-function getDistanceFromLatLonInKm(lat1,lng1,lat2,lng2) {
-	
-function deg2rad(deg) {
-		return deg * (Math.PI/180)
-	}
-	
-	var R = 6371; // Radius of the earth in km
-	var dLat = deg2rad(lat2-lat1);// deg2rad below
-	var dLon = deg2rad(lng2-lng1);
-	var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
-	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-	var d = R * c * 1000; // Distance in meters
-	return d;
-	}	
+
 </script>
 
 </body>

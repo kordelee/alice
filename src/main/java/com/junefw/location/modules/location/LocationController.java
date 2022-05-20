@@ -1,17 +1,23 @@
 
 package com.junefw.location.modules.location;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.junefw.infra.common.base.BaseController;
 import com.junefw.infra.common.constants.Constants;
+import com.junefw.infra.common.util.UtilCookie;
 import com.junefw.infra.common.util.UtilDateTime;
 
 @Controller
@@ -22,7 +28,31 @@ public class LocationController extends BaseController {
 	LocationServiceImpl service;
 
 	@RequestMapping(value = "locationList")
-	public String locationList(@ModelAttribute("vo") LocationVo vo, Model model) throws Exception {
+//	public String locationList(@ModelAttribute("vo") LocationVo vo, Model model) throws Exception {
+	public String locationList() throws Exception {
+
+//		vo.setShOptionDate(vo.getShOptionDate() == null ? 1 : vo.getShOptionDate());
+//		vo.setShDateStart(vo.getShDateStart() == null
+//				? UtilDateTime.calculateDayString(UtilDateTime.nowLocalDateTime(), Constants.DATE_INTERVAL)
+//				: UtilDateTime.add00TimeString(vo.getShDateStart()));
+//		vo.setShDateEnd(vo.getShDateEnd() == null ? UtilDateTime.nowString()
+//				: UtilDateTime.addNowTimeString(vo.getShDateEnd()));
+//
+//		vo.setParamsPaging(service.selectOneCount(vo));
+//
+//		if (vo.getTotalRows() > 0) {
+//			List<Location> list = service.selectList(vo);
+//			model.addAttribute("list", list);
+//		}
+
+		return "xdmin/location/location/locationList";
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "locationAjaxList")
+	public Map<String, Object> locationAjaxList(LocationVo vo) throws Exception {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
 
 		vo.setShOptionDate(vo.getShOptionDate() == null ? 1 : vo.getShOptionDate());
 		vo.setShDateStart(vo.getShDateStart() == null
@@ -35,11 +65,17 @@ public class LocationController extends BaseController {
 
 		if (vo.getTotalRows() > 0) {
 			List<Location> list = service.selectList(vo);
-			model.addAttribute("list", list);
+			
+			System.out.println("list.size(): " + list.size());
+			returnMap.put("list", list);
 		}
-
-		return "xdmin/location/location/locationList";
+		
+		returnMap.put("rt", "success");
+		
+		return returnMap;
 	}
+
+	
 
 	@RequestMapping(value = "locationForm")
 	public String locationForm(@ModelAttribute("vo") LocationVo vo, Model model) throws Exception {
