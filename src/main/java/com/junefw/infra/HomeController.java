@@ -265,8 +265,4 @@ public class HomeController {
 		return "webrtc/content/peerconnection/pc1/index";
 	}
 	
-	
-	
-	
-	
 }
