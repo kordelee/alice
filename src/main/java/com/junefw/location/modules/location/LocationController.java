@@ -66,8 +66,13 @@ public class LocationController extends BaseController {
 		if (vo.getTotalRows() > 0) {
 			List<Location> list = service.selectList(vo);
 			
-			System.out.println("list.size(): " + list.size());
+			System.out.println("list.get(0).getModDateTime(): " + list.get(0).getModDateTime());
+			System.out.println();
 			returnMap.put("list", list);
+			returnMap.put("count", list.size());
+			
+		} else {
+			returnMap.put("count", 0);
 		}
 		
 		returnMap.put("rt", "success");

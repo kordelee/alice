@@ -443,16 +443,38 @@
 			,success: function(response) {
 				if(response.rt == "success") {
 					/* alert(response.list[0].ltltSeq); */
-					
 					var listHtml = "";
 					
-					for(var i in response.list) {
-						/* alert(i); */
-						/* alert(response.list[i].ltltName); */
-						
-						
-				
+					if (response.count == 0) {
+						listHtml += '<tr>';
+						listHtml += '	<td class="text-center" colspan="11">There is no data!</td>';
+						listHtml += '</tr>';
+						$("#tbody").append(listHtml);
+					} else {
+						for(var i in response.list) {
+							
+						    listHtml += '<tr>';
+						    listHtml += '<td class="text-center">';
+						    listHtml += '<div>';
+						    listHtml += '    <input type="checkbox" id="checkboxSeq" name="checkboxSeq" value="'+response.list[i].ltltSeq+'" class="form-check-input">';
+						    listHtml += '</div>';
+						    listHtml += '</td>';
+						    listHtml += '<td>-</td>';
+						    listHtml += '<td><a href="javascript:goForm('+response.list[i].ltltSeq+')">'+response.list[i].ltltName+'</a></td>';
+						    listHtml += '<td>'+response.list[i].ltltEstDate+'</td>';
+						    listHtml += '<td>'+response.list[i].ltltStartDate+'</td>';
+						    listHtml += '<td>'+response.list[i].ltltCeo+'</td>';
+						    listHtml += '<td>'+response.list[i].ltltEmail+'</td>';
+						    listHtml += '<td>'+response.list[i].ltltPhone1+'</td>';
+						    listHtml += '<td>'+response.list[i].ltltMobile+'</td>';
+						    listHtml += '<td>'+response.list[i].ltltAddress1+'</td>';
+						    listHtml += '<td>'+timestampToDate(response.list[i].modDateTime)+'</td>';
+						    listHtml += '</tr>';
+						}
+						$("#tbody").append(listHtml);
 					}
+					
+					
 				} else {
 					
 				}
@@ -464,6 +486,22 @@
 		
 	}
 	
+	function timestampToDate (paramDate) {
+		var date = new Date(paramDate);
+		var rtDate = date.getFullYear()+ 
+			        "-"+(("00"+(date.getMonth()+1).toString()).slice(-2))+
+			        "-"+(("00"+date.getDate().toString()).slice(-2))+
+			        " "+(("00"+date.getHours().toString()).slice(-2))+
+			        ":"+(("00"+date.getMinutes().toString()).slice(-2))+
+			        ":"+(("00"+date.getSeconds().toString()).slice(-2));
+		return rtDate;
+	}
+	
+	function nullToEmpty (paramData) {
+		
+
+		return rtData
+	}
 	
 	function errorHandler(error) {
 		if(error.code == 1) {

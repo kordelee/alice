@@ -18,7 +18,7 @@
 				<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
 				<when test="shOptionDate == 2">AND a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
 			</choose>
- -->
+ -->			
 			<choose>
 				<when test="shOption == 1">AND ltltName LIKE CONCAT('%',#{shValue},'%')</when>
 			</choose>
