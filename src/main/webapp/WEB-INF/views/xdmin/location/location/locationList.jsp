@@ -267,7 +267,7 @@
 		 
 		 getNowLatLng();
 		 
-	}); 
+	});
 	
 	var goUrlList = "/location/locationList";					/* #-> */
 	var goUrlForm = "/location/locationForm";					/* #-> */
@@ -496,13 +496,17 @@
 	}
 	
 	
+	
+	
+	
 	function nullToEmpty (paramData) {
 		if(paramData == null) {
 			paramData = '';
 		}
 		return rtData = paramData;
 	}
-	c
+	
+	
 	function errorHandler(error) {
 		if(error.code == 1) {
 			alert("접근차단");
@@ -543,7 +547,7 @@
 	    message += '북동쪽 좌표는 ' + neLatLng.getLat() + ', ' + neLatLng.getLng() + ' 입니다';
 	    
 	    
-	    // alert(message);
+	    alert(message);
 	    // 개발자도구를 통해 직접 message 내용을 확인해 보세요.
 	    // ex) console.log(message);
 	}
