@@ -233,6 +233,15 @@
 		</dependency>
 		<!-- fileupload e 2022.03.30 -->
 		
+		<!-- mail s 2022.05.26 -->	
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+		<!-- mail e 2022.05.26 -->
+		
+		
 	</dependencies>
     <build>
         <plugins>
