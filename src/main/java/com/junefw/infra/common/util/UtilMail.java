@@ -15,7 +15,7 @@ public class UtilMail {
 	public static void sendMail() {
 		
 		final String username = "zestykboy@gmail.com";
-        final String password = "ayekttpcwuzqwhaq";
+        final String password = "";
 
         Properties prop = new Properties();
 		prop.put("mail.smtp.host", "smtp.gmail.com");
