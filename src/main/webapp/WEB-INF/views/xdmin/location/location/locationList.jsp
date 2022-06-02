@@ -267,7 +267,7 @@
 		 
 		 getNowLatLng();
 		 
-	}); 
+	});
 	
 	var goUrlList = "/location/locationList";					/* #-> */
 	var goUrlForm = "/location/locationForm";					/* #-> */
@@ -452,7 +452,6 @@
 						$("#tbody").append(listHtml);
 					} else {
 						for(var i in response.list) {
-							
 						    listHtml += '<tr>';
 						    listHtml += '<td class="text-center">';
 						    listHtml += '<div>';
@@ -461,22 +460,20 @@
 						    listHtml += '</td>';
 						    listHtml += '<td>-</td>';
 						    listHtml += '<td><a href="javascript:goForm('+response.list[i].ltltSeq+')">'+response.list[i].ltltName+'</a></td>';
-						    listHtml += '<td>'+response.list[i].ltltEstDate+'</td>';
-						    listHtml += '<td>'+response.list[i].ltltStartDate+'</td>';
-						    listHtml += '<td>'+response.list[i].ltltCeo+'</td>';
-						    listHtml += '<td>'+response.list[i].ltltEmail+'</td>';
-						    listHtml += '<td>'+response.list[i].ltltPhone1+'</td>';
-						    listHtml += '<td>'+response.list[i].ltltMobile+'</td>';
-						    listHtml += '<td>'+response.list[i].ltltAddress1+'</td>';
+						    listHtml += '<td>'+nullToEmpty(response.list[i].ltltEstDate)+'</td>';
+						    listHtml += '<td>'+nullToEmpty(response.list[i].ltltStartDate)+'</td>';
+						    listHtml += '<td>'+nullToEmpty(response.list[i].ltltCeo)+'</td>';
+						    listHtml += '<td>'+nullToEmpty(response.list[i].ltltEmail)+'</td>';
+						    listHtml += '<td>'+nullToEmpty(response.list[i].ltltPhone1)+'</td>';
+						    listHtml += '<td>'+nullToEmpty(response.list[i].ltltMobile)+'</td>';
+						    listHtml += '<td>'+nullToEmpty(response.list[i].ltltAddress1)+'</td>';
 						    listHtml += '<td>'+timestampToDate(response.list[i].modDateTime)+'</td>';
 						    listHtml += '</tr>';
 						}
 						$("#tbody").append(listHtml);
 					}
-					
-					
 				} else {
-					
+					/* by pass */
 				}
 			}
 			,error : function(jqXHR, textStatus, errorThrown){
@@ -485,6 +482,7 @@
 		});
 		
 	}
+	
 	
 	function timestampToDate (paramDate) {
 		var date = new Date(paramDate);
@@ -497,11 +495,17 @@
 		return rtDate;
 	}
 	
+	
+	
+	
+	
 	function nullToEmpty (paramData) {
-		
-
-		return rtData
+		if(paramData == null) {
+			paramData = '';
+		}
+		return rtData = paramData;
 	}
+	
 	
 	function errorHandler(error) {
 		if(error.code == 1) {
