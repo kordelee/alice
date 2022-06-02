@@ -56,12 +56,6 @@ public class HomeController {
 		return "test/map";
 	}
 	
-	@RequestMapping(value = "/test/zoomList")
-	public String zoomList() {
-		
-		return "test/zoomList";
-	}
-	
 	
 	@RequestMapping(value = "/test/memberList")
 	public String memberList(Model model) throws Exception {
@@ -264,5 +258,40 @@ public class HomeController {
 
 		return "webrtc/content/peerconnection/pc1/index";
 	}
+	
+	
+	@RequestMapping(value = "/test/zoomList")
+	public String zoomList(Model model) throws Exception {
+		
+		String apiUrl = "https://api.zoom.us/v2/users/excitingmvr@gmail.com/meetings";
+		
+		URL url = new URL(apiUrl);
+		HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+		httpURLConnection.setRequestMethod("GET");
+		httpURLConnection.setRequestProperty("authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6ImpZZUF6bURXU0pDN0Q0RHhEZ1Z4Y1EiLCJleHAiOjE2NTM0NDUwNTAsImlhdCI6MTY1MzQzOTY1M30.M-ClBp_0hADXERd5VrXOqtANh85L8OfRML0bxiQZDmc");
+		
+		BufferedReader bufferedReader;
+		if (httpURLConnection.getResponseCode() >= 200 && httpURLConnection.getResponseCode() <= 300) {
+			bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+		} else {
+			bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getErrorStream()));
+		}
+		
+		StringBuilder stringBuilder = new StringBuilder();
+		String line;
+		while ((line = bufferedReader.readLine()) != null) {
+			System.out.println("line: " + line);
+			stringBuilder.append(line);
+		}
+
+		bufferedReader.close();
+		httpURLConnection.disconnect();
+
+		System.out.println("stringBuilder.toString(): " + stringBuilder.toString());
+		
+		
+		return "test/zoomList";
+	}
+	
 	
 }

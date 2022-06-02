@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.junefw.infra.common.base.BaseServiceImpl;
 import com.junefw.infra.common.constants.Constants;
 import com.junefw.infra.common.util.UtilDateTime;
+import com.junefw.infra.common.util.UtilMail;
 import com.junefw.infra.common.util.UtilRegMod;
 import com.junefw.infra.common.util.UtilUpload;
 
@@ -47,67 +48,69 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	    	dto.setIfmmPwdModDate(UtilDateTime.nowDate());
 	    	dao.insert(dto);
 	    	
-	    	int j = 0;
-	    	for(MultipartFile multipartFile : dto.getFile0() ) {
-	    		String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("serviceimpl", "");
-	    		UtilUpload.upload(multipartFile, pathModule, dto);
-	    		
-	    		dto.setTableName("infrMemberUploaded");
-	    		dto.setType(0);
-	    		dto.setDefaultNy(0);
-	    		dto.setSort(j);
-	    		dto.setPseq(dto.getIfmmSeq());
-
-				dao.insertUploaded(dto);
-				j++;
-	    	}
-	    	
-	    	j = 0;
-	    	for(MultipartFile multipartFile : dto.getFile1() ) {
-	    			String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("serviceimpl", "");		
-	    			UtilUpload.upload(multipartFile, pathModule, dto);
-	    			
-		    		dto.setTableName("infrMemberUploaded");
-		    		dto.setType(1);
-		    		dto.setDefaultNy(0);
-		    		dto.setSort(j);
-		    		dto.setPseq(dto.getIfmmSeq());
-
-					dao.insertUploaded(dto);
-					j++;
-	    	}
-	    	
-	    	// infrMemberEmail
-			for(int i = 0 ; i < dto.getIfmeEmailFullArray().length ; i++) {
-				dto.setIfmeDefaultNy(dto.getIfmeDefaultNyArray()[i]);
-				dto.setIfmeTypeCd(dto.getIfmeTypeCdArray()[i]);
-				dto.setIfmeEmailFull(dto.getIfmeEmailFullArray()[i]);
-				dao.insertEmail(dto);
-			}
-	    	
-			// infrMemberPhone
-			for(int i = 0 ; i < dto.getIfmpNumberArray().length ; i++) {
-				dto.setIfmpDefaultNy(dto.getIfmpDefaultNyArray()[i]);
-				dto.setIfmpTypeCd(dto.getIfmpTypeCdArray()[i]);
-				dto.setIfmpDeviceCd(dto.getIfmpDeviceCdArray()[i]);
-				dto.setIfmpTelecomCd(dto.getIfmpTelecomCdArray()[i]);
-				dto.setIfmpNumber(dto.getIfmpNumberArray()[i]);
-				dao.insertPhone(dto);
-			}
+//	    	int j = 0;
+//	    	for(MultipartFile multipartFile : dto.getFile0() ) {
+//	    		String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("serviceimpl", "");
+//	    		UtilUpload.upload(multipartFile, pathModule, dto);
+//	    		
+//	    		dto.setTableName("infrMemberUploaded");
+//	    		dto.setType(0);
+//	    		dto.setDefaultNy(0);
+//	    		dto.setSort(j);
+//	    		dto.setPseq(dto.getIfmmSeq());
+//
+//				dao.insertUploaded(dto);
+//				j++;
+//	    	}
+//	    	
+//	    	j = 0;
+//	    	for(MultipartFile multipartFile : dto.getFile1() ) {
+//	    			String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("serviceimpl", "");		
+//	    			UtilUpload.upload(multipartFile, pathModule, dto);
+//	    			
+//		    		dto.setTableName("infrMemberUploaded");
+//		    		dto.setType(1);
+//		    		dto.setDefaultNy(0);
+//		    		dto.setSort(j);
+//		    		dto.setPseq(dto.getIfmmSeq());
+//
+//					dao.insertUploaded(dto);
+//					j++;
+//	    	}
+//	    	
+//	    	// infrMemberEmail
+//			for(int i = 0 ; i < dto.getIfmeEmailFullArray().length ; i++) {
+//				dto.setIfmeDefaultNy(dto.getIfmeDefaultNyArray()[i]);
+//				dto.setIfmeTypeCd(dto.getIfmeTypeCdArray()[i]);
+//				dto.setIfmeEmailFull(dto.getIfmeEmailFullArray()[i]);
+//				dao.insertEmail(dto);
+//			}
+//	    	
+//			// infrMemberPhone
+//			for(int i = 0 ; i < dto.getIfmpNumberArray().length ; i++) {
+//				dto.setIfmpDefaultNy(dto.getIfmpDefaultNyArray()[i]);
+//				dto.setIfmpTypeCd(dto.getIfmpTypeCdArray()[i]);
+//				dto.setIfmpDeviceCd(dto.getIfmpDeviceCdArray()[i]);
+//				dto.setIfmpTelecomCd(dto.getIfmpTelecomCdArray()[i]);
+//				dto.setIfmpNumber(dto.getIfmpNumberArray()[i]);
+//				dao.insertPhone(dto);
+//			}
+//			
+////			infrMemberAddress
+//			for(int i = 0 ; i < dto.getIfmaZipcodeArray().length ; i++) {
+//				dto.setIfmaDefaultNy(dto.getIfmaDefaultNyArray()[i]);
+//				dto.setIfmaTypeCd(dto.getIfmaTypeCdArray()[i]);
+//				dto.setIfmaTitle(dto.getIfmaTitleArray()[i]);
+//				dto.setIfmaAddress1(dto.getIfmaAddress1Array()[i]);
+//				dto.setIfmaAddress2(dto.getIfmaAddress2Array()[i]);
+//				dto.setIfmaAddress3(dto.getIfmaAddress3Array()[i]);
+//				dto.setIfmaZipcode(dto.getIfmaZipcodeArray()[i]);
+//				dto.setIfmaLat(dto.getIfmaLatArray()[i]);
+//				dto.setIfmaLng(dto.getIfmaLngArray()[i]);
+//				dao.insertAddress(dto);
+//			}
 			
-//			infrMemberAddress
-			for(int i = 0 ; i < dto.getIfmaZipcodeArray().length ; i++) {
-				dto.setIfmaDefaultNy(dto.getIfmaDefaultNyArray()[i]);
-				dto.setIfmaTypeCd(dto.getIfmaTypeCdArray()[i]);
-				dto.setIfmaTitle(dto.getIfmaTitleArray()[i]);
-				dto.setIfmaAddress1(dto.getIfmaAddress1Array()[i]);
-				dto.setIfmaAddress2(dto.getIfmaAddress2Array()[i]);
-				dto.setIfmaAddress3(dto.getIfmaAddress3Array()[i]);
-				dto.setIfmaZipcode(dto.getIfmaZipcodeArray()[i]);
-				dto.setIfmaLat(dto.getIfmaLatArray()[i]);
-				dto.setIfmaLng(dto.getIfmaLngArray()[i]);
-				dao.insertAddress(dto);
-			}
+			UtilMail.sendMail();
 			
 			return 1;
 
