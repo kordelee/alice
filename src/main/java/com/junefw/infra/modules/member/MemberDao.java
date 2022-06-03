@@ -15,6 +15,10 @@ public class MemberDao{
 	@Resource(name = "sqlSession")
 	private SqlSession sqlSession;
 	
+	@Inject
+	@Resource(name = "sqlSessionOracle")
+	private SqlSession sqlSessionOracle;
+	
 	private static String namespace = "com.junefw.infra.modules.member.MemberMpp";
 	
 //	infrMember
@@ -44,5 +48,10 @@ public class MemberDao{
 	
 //	uploaded
 	public int insertUploaded(Member dto) { return sqlSession.insert("Base" + ".insertUploaded", dto); }
+	
+	
+	public List<Member> selectListOracle(MemberVo vo){ return sqlSessionOracle.selectList(namespace + ".selectListOracle", vo); }
+	
+	
 	
 }

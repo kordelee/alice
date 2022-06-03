@@ -177,6 +177,11 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 		dto.setIfmmPwdModDate(UtilDateTime.calculateDayDate(UtilDateTime.nowLocalDateTime(), (int) Constants.PASSWOPRD_CHANGE_INTERVAL));
 		return dao.updateIfmmPwdModDate(dto);
 	}
+	
+	
+	public List<Member> selectListOracle(MemberVo vo) throws Exception {
+		return dao.selectListOracle(vo);
+	}
 
 
 }

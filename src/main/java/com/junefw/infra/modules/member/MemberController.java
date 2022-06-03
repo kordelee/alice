@@ -257,6 +257,18 @@ public class MemberController extends BaseController {
 		returnMap.put("rt", "success");
 		return returnMap;
 	}
+	
+	
+	@RequestMapping(value = "memberOracleList")
+	public String memberOracleList(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
+
+
+			List<Member> list = service.selectListOracle(vo);
+			model.addAttribute("list", list);
+
+		return "xdmin/member/memberOracleList";
+	}
+	
 
 //	구글api를 이용하여 주소값을 던지면 위도 경도를 받아오는 정적 함수
 //	구글 계정 등록이 필요하여 현재는 주석 처리

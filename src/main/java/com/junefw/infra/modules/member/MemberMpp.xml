@@ -383,6 +383,19 @@
 	<update id="updateIfmmPwdModDate">
 		UPDATE infrMember SET ifmmPwdModDate = #{ifmmPwdModDate} WHERE ifmmSeq = #{ifmmSeq}
 	</update>
+	
+	
+	
+	<select id="selectListOracle" resultMap="resultMapObj">
+		SELECT
+			a.ifmmSeq
+			,a.ifmmId
+			,a.ifmmName
+			,a.ifmmAge
+		FROM
+			member a
+	</select>
+	
 </mapper>
 
 
