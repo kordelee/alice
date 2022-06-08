@@ -392,6 +392,7 @@
 			,a.ifmmId
 			,a.ifmmName
 			,a.ifmmAge
+			,a.ifmmDob
 		FROM
 			member a
 	</select>

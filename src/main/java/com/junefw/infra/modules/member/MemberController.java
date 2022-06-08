@@ -265,7 +265,8 @@ public class MemberController extends BaseController {
 
 			List<Member> list = service.selectListOracle(vo);
 			model.addAttribute("list", list);
-
+			
+			
 		return "xdmin/member/memberOracleList";
 	}
 	
