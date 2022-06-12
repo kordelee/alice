@@ -157,7 +157,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.27</version>
+			<version>8.0.29</version>
 		</dependency>
 		<!-- mysql e 2022.02.25 -->	
 		
@@ -165,7 +165,8 @@
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
 			<artifactId>mariadb-java-client</artifactId>
-			<version>2.7.4</version>
+			<!-- <version>2.7.5</version> -->
+			<version>3.0.5</version>
 		</dependency>
 		<!-- mariadb s 2022.02.13 -->
 
