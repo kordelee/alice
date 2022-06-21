@@ -402,7 +402,12 @@
 		if(total != checked) $("#checkboxAll").prop("checked", false);
 		else $("#checkboxAll").prop("checked", true); 
 	});
-     
+
+	
+	$("#btnExcel").click(function() {
+		form.attr("action", "/member/excelDownload").submit();
+	});
+	
 </script>
 
 </body>
