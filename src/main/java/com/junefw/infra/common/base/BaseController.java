@@ -117,6 +117,13 @@ public class BaseController {
 		String dateRt = simpleDateFormat.format(dateParam);
 		return dateRt;
 	}
+
+	
+	public String dateTimeToString(Date dateTimeParam) {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String dateTimeRt = simpleDateFormat.format(dateTimeParam);
+		return dateTimeRt;
+	}
 	
 	
 

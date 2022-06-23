@@ -316,12 +316,15 @@ public class MemberController extends BaseController {
 	        
 	        for (int i=0; i<list.size(); i++) {
 	            row = sheet.createRow(rowNum++);
+	            
 	            cell = row.createCell(0);
-	            cell.setCellValue(String.valueOf(list.get(i).getIfmmSeq()));
+	            cell.setCellValue(Integer.parseInt(list.get(i).getIfmmSeq()));
 	            cell = row.createCell(1);
 	            cell.setCellValue(list.get(i).getIfmmName());
 	            cell = row.createCell(2);
-	            cell.setCellValue(i+"_title");
+	            cell.setCellValue(list.get(i).getIfmmDob());
+	            cell = row.createCell(3);
+	            cell.setCellValue(dateTimeToString(list.get(i).getRegDateTime()));
 	        }
 	
 	        // 컨텐츠 타입과 파일명 지정
