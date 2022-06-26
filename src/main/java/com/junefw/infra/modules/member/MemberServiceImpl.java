@@ -1,5 +1,6 @@
 package com.junefw.infra.modules.member;
 
+import java.awt.Toolkit;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -110,7 +111,16 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 //				dao.insertAddress(dto);
 //			}
 			
-			UtilMail.sendMail();
+//			UtilMail.sendMail();
+	    	
+			Thread thread = new Thread(new Runnable() {
+				@Override
+				public void run() {
+					UtilMail.sendMail();
+				}
+			});
+			
+			thread.start();
 			
 			return 1;
 
