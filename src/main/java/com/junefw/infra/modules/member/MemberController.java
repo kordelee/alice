@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -39,9 +41,7 @@ public class MemberController extends BaseController {
 	@Autowired
 	MemberServiceImpl service;
 
-	@RequestMapping(value = "memberList")
-	public String memberList(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
-
+	public void search(MemberVo vo) throws Exception {
 		vo.setShOptionDate(vo.getShOptionDate() == null ? 1 : vo.getShOptionDate());
 		vo.setShDateStart(vo.getShDateStart() == null
 				? UtilDateTime.calculateDayString(UtilDateTime.nowLocalDateTime(), Constants.DATE_INTERVAL)
@@ -50,6 +50,13 @@ public class MemberController extends BaseController {
 				: UtilDateTime.addNowTimeString(vo.getShDateEnd()));
 
 		vo.setParamsPaging(service.selectOneCount(vo));
+	}
+	
+	
+	@RequestMapping(value = "memberList")
+	public String memberList(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
+
+		search(vo);
 
 		if (vo.getTotalRows() > 0) {
 			List<Member> list = service.selectList(vo);
@@ -281,62 +288,74 @@ public class MemberController extends BaseController {
 	@RequestMapping("excelDownload")
     public void excelDownload(MemberVo vo, HttpServletResponse httpServletResponse) throws Exception {
 		
-		vo.setShOptionDate(vo.getShOptionDate() == null ? 1 : vo.getShOptionDate());
-		vo.setShDateStart(vo.getShDateStart() == null
-				? UtilDateTime.calculateDayString(UtilDateTime.nowLocalDateTime(), Constants.DATE_INTERVAL)
-				: UtilDateTime.add00TimeString(vo.getShDateStart()));
-		vo.setShDateEnd(vo.getShDateEnd() == null ? UtilDateTime.nowString()
-				: UtilDateTime.addNowTimeString(vo.getShDateEnd()));
-
-		vo.setParamsPaging(service.selectOneCount(vo));
+		search(vo);
 
 		if (vo.getTotalRows() > 0) {
 			List<Member> list = service.selectList(vo);
-//			List<?> list = service.selectList(vo);
-
-		
-		
-	//        Workbook wb = new HSSFWorkbook();
-	        Workbook wb = new XSSFWorkbook();
-	        Sheet sheet = wb.createSheet("첫번째 시트");
+			
+//			Workbook workbook = new HSSFWorkbook();	// for xls
+	        Workbook workbook = new XSSFWorkbook();
+	        Sheet sheet = workbook.createSheet("첫번째 시트");
+	        CellStyle cellStyle = workbook.createCellStyle();        
 	        Row row = null;
 	        Cell cell = null;
 	        int rowNum = 0;
-	
-	        // Header
+			
+	        sheet.setColumnWidth(0, 2100);
+	        sheet.setColumnWidth(1, 3100);
+
+//	        Header
+	        String[] tableHeader = {"번호","이름","아이디","생년월일","수정일"};
+
 	        row = sheet.createRow(rowNum++);
-	        cell = row.createCell(0);
-	        cell.setCellValue("번호");
-	        cell = row.createCell(1);
-	        cell.setCellValue("이름");
-	        cell = row.createCell(2);
-	        cell.setCellValue("제목");
-	
+			for(int i=0; i<tableHeader.length; i++) {
+				cell = row.createCell(i);
+	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	        	cell.setCellStyle(cellStyle);
+				cell.setCellValue(tableHeader[i]);
+			}
+
 	        // Body
-	        
 	        for (int i=0; i<list.size(); i++) {
 	            row = sheet.createRow(rowNum++);
 	            
 	            cell = row.createCell(0);
+	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	        	cell.setCellStyle(cellStyle);
 	            cell.setCellValue(Integer.parseInt(list.get(i).getIfmmSeq()));
+	            
 	            cell = row.createCell(1);
-	            cell.setCellValue(list.get(i).getIfmmName());
+	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	        	cell.setCellStyle(cellStyle);
+	        	cell.setCellValue(list.get(i).getIfmmName());
+	        	
 	            cell = row.createCell(2);
-	            cell.setCellValue(list.get(i).getIfmmDob());
+	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	        	cell.setCellStyle(cellStyle);
+	        	cell.setCellValue(list.get(i).getIfmmId());
+	        	
 	            cell = row.createCell(3);
+	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	        	cell.setCellStyle(cellStyle);
+	            cell.setCellValue(list.get(i).getIfmmDob());
+	            
+	            cell = row.createCell(4);
+	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	        	cell.setCellStyle(cellStyle);
 	            cell.setCellValue(dateTimeToString(list.get(i).getRegDateTime()));
 	        }
-	
-	        // 컨텐츠 타입과 파일명 지정
+
 	        httpServletResponse.setContentType("ms-vnd/excel");
-	//        response.setHeader("Content-Disposition", "attachment;filename=example.xls");
+//	        httpServletResponse.setHeader("Content-Disposition", "attachment;filename=example.xls");	// for xls
 	        httpServletResponse.setHeader("Content-Disposition", "attachment;filename=example.xlsx");
-	
-	        // Excel File Output
-	        wb.write(httpServletResponse.getOutputStream());
-	        wb.close();
+
+	        workbook.write(httpServletResponse.getOutputStream());
+	        workbook.close();
 		}
     }
+	
+	
+	
 
 //	구글api를 이용하여 주소값을 던지면 위도 경도를 받아오는 정적 함수
 //	구글 계정 등록이 필요하여 현재는 주석 처리
