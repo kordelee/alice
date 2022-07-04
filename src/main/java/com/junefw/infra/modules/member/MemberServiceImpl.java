@@ -1,6 +1,5 @@
 package com.junefw.infra.modules.member;
 
-import java.awt.Toolkit;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,14 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.junefw.infra.common.base.BaseServiceImpl;
 import com.junefw.infra.common.constants.Constants;
 import com.junefw.infra.common.util.UtilDateTime;
 import com.junefw.infra.common.util.UtilMail;
 import com.junefw.infra.common.util.UtilRegMod;
-import com.junefw.infra.common.util.UtilUpload;
 
 
 @Service
@@ -111,7 +108,6 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 //				dao.insertAddress(dto);
 //			}
 			
-//			UtilMail.sendMail();
 	    	
 			Thread thread = new Thread(new Runnable() {
 				@Override
