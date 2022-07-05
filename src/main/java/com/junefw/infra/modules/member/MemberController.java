@@ -353,6 +353,27 @@ public class MemberController extends BaseController {
     }
 	
 	
+	@RequestMapping(value = "memberAjaxList")
+	public String memberAjaxList(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
+
+		search(vo);
+
+		return "xdmin/member/memberAjaxList";
+	}
+	
+	
+	@RequestMapping(value = "memberAjaxLita")
+	public String memberAjaxLita(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
+		
+		search(vo);
+
+		if (vo.getTotalRows() > 0) {
+			List<Member> list = service.selectList(vo);
+			model.addAttribute("list", list);
+		}
+
+		return "xdmin/member/memberAjaxLita";
+	}
 	
 
 //	구글api를 이용하여 주소값을 던지면 위도 경도를 받아오는 정적 함수
