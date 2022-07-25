@@ -3,6 +3,15 @@ package com.junefw.infra.modules.nationality;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,26 +30,31 @@ public class NationalityController extends BaseController {
 	@Autowired
 	NationalityServiceImpl service;
 
+	public void setSearchAndPaging(NationalityVo vo) throws Exception {
+		
+		vo.setShOptionDate(vo.getShOptionDate() == null ? 2 : vo.getShOptionDate());
+		vo.setShDateStart(vo.getShDateStart() == null || vo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(vo.getShDateStart()));
+		vo.setShDateEnd(vo.getShDateEnd() == null || vo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(vo.getShDateEnd()));
+
+		vo.setParamsPaging(service.selectOneCount(vo));
+		
+	}
+	
+	
 	@RequestMapping(value = "nationalityList")
 	public String nationalityList(@ModelAttribute("vo") NationalityVo vo, Model model) throws Exception {
 
-		vo.setShOptionDate(vo.getShOptionDate() == null ? 1 : vo.getShOptionDate());
-		vo.setShDateStart(vo.getShDateStart() == null
-				? UtilDateTime.calculateDayString(UtilDateTime.nowLocalDateTime(), Constants.DATE_INTERVAL)
-				: UtilDateTime.add00TimeString(vo.getShDateStart()));
-		vo.setShDateEnd(vo.getShDateEnd() == null ? UtilDateTime.nowString()
-				: UtilDateTime.addNowTimeString(vo.getShDateEnd()));
-
-		vo.setParamsPaging(service.selectOneCount(vo));
-
+		setSearchAndPaging(vo);
+		
 		if (vo.getTotalRows() > 0) {
 			List<Nationality> list = service.selectList(vo);
 			model.addAttribute("list", list);
 		}
 
-		return "xdmin/nationality/nationalityList";
+		return "infra/modules/nationality/admin/nationalityList";
 	}
 
+	
 	@RequestMapping(value = "nationalityForm")
 	public String nationalityForm(@ModelAttribute("vo") NationalityVo vo, Model model) throws Exception {
 
@@ -51,8 +65,9 @@ public class NationalityController extends BaseController {
 			model.addAttribute("item", item);
 		}
 
-		return "xdmin/nationality/nationalityForm";
+		return "infra/modules/nationality/admin/nationalityForm";
 	}
+	
 
 	@SuppressWarnings(value = { "all" })
 	@RequestMapping(value = "nationalityInst")
@@ -71,6 +86,7 @@ public class NationalityController extends BaseController {
 		}
 	}
 	
+	
 	@SuppressWarnings(value = { "all" })
 	@RequestMapping(value = "nationalityUpdt")
 	public String nationalityUpdt(NationalityVo vo, Nationality dto, RedirectAttributes redirectAttributes) throws Exception {
@@ -86,6 +102,7 @@ public class NationalityController extends BaseController {
 		}
 	}
 
+	
 	@RequestMapping(value = "nationalityUele")
 	public String nationalityUele(NationalityVo vo, Nationality dto, RedirectAttributes redirectAttributes) throws Exception {
 
@@ -96,6 +113,7 @@ public class NationalityController extends BaseController {
 		return "redirect:/nationality/nationalityList";
 	}
 
+	
 	@RequestMapping(value = "nationalityDele")
 	public String nationalityDele(NationalityVo vo, RedirectAttributes redirectAttributes) throws Exception {
 
@@ -106,6 +124,7 @@ public class NationalityController extends BaseController {
 		return "redirect:/nationality/nationalityList";
 	}
 
+	
 	@RequestMapping(value = "nationalityMultiUele")
 	public String nationalityMultiUele(NationalityVo vo, Nationality dto, RedirectAttributes redirectAttributes) throws Exception {
 
@@ -119,6 +138,7 @@ public class NationalityController extends BaseController {
 		return "redirect:/nationality/nationalityList";
 	}
 
+	
 	@RequestMapping(value = "nationalityMultiDele")
 	public String nationalityMultiDele(NationalityVo vo, RedirectAttributes redirectAttributes) throws Exception {
 
@@ -130,5 +150,75 @@ public class NationalityController extends BaseController {
 
 		return "redirect:/nationality/nationalityList";
 	}
+	
+
+	@RequestMapping("excelDownload")
+    public void excelDownload(NationalityVo vo, HttpServletResponse httpServletResponse) throws Exception {
+		
+		setSearchAndPaging(vo);
+
+		if (vo.getTotalRows() > 0) {
+			List<Nationality> list = service.selectList(vo);
+			
+//			Workbook workbook = new HSSFWorkbook();	// for xls
+	        Workbook workbook = new XSSFWorkbook();
+	        Sheet sheet = workbook.createSheet("첫번째 시트");
+	        CellStyle cellStyle = workbook.createCellStyle();        
+	        Row row = null;
+	        Cell cell = null;
+	        int rowNum = 0;
+			
+	        sheet.setColumnWidth(0, 2100);
+	        sheet.setColumnWidth(1, 3100);
+
+//	        Header
+	        String[] tableHeader = {"번호","이름","아이디","생년월일","수정일"};
+
+	        row = sheet.createRow(rowNum++);
+			for(int i=0; i<tableHeader.length; i++) {
+				cell = row.createCell(i);
+	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	        	cell.setCellStyle(cellStyle);
+				cell.setCellValue(tableHeader[i]);
+			}
+
+	        // Body
+	        for (int i=0; i<list.size(); i++) {
+	            row = sheet.createRow(rowNum++);
+	            
+//	            cell = row.createCell(0);
+//	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+//	        	cell.setCellStyle(cellStyle);
+//	            cell.setCellValue(Integer.parseInt(list.get(i).getIfmmSeq()));
+//	            
+//	            cell = row.createCell(1);
+//	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+//	        	cell.setCellStyle(cellStyle);
+//	        	cell.setCellValue(list.get(i).getIfmmName());
+//	        	
+//	            cell = row.createCell(2);
+//	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+//	        	cell.setCellStyle(cellStyle);
+//	        	cell.setCellValue(list.get(i).getIfmmId());
+//	        	
+//	            cell = row.createCell(3);
+//	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+//	        	cell.setCellStyle(cellStyle);
+//	            cell.setCellValue(list.get(i).getIfmmDob());
+//	            
+//	            cell = row.createCell(4);
+//	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+//	        	cell.setCellStyle(cellStyle);
+//	            cell.setCellValue(dateTimeToString(list.get(i).getRegDateTime()));
+	        }
+
+	        httpServletResponse.setContentType("ms-vnd/excel");
+//	        httpServletResponse.setHeader("Content-Disposition", "attachment;filename=example.xls");	// for xls
+	        httpServletResponse.setHeader("Content-Disposition", "attachment;filename=example.xlsx");
+
+	        workbook.write(httpServletResponse.getOutputStream());
+	        workbook.close();
+		}
+    }
 
 }

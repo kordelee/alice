@@ -1,4 +1,4 @@
-package com.junefw.infra.modules.code;
+package com.junefw.infra.modules.codegroup;
 
 import java.util.List;
 
@@ -23,21 +23,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.junefw.infra.common.base.BaseController;
 import com.junefw.infra.common.constants.Constants;
 import com.junefw.infra.common.util.UtilDateTime;
-import com.junefw.infra.modules.nationality.Code;
-import com.junefw.infra.modules.nationality.CodeServiceImpl;
-import com.junefw.infra.modules.nationality.CodeVo;
 
 @Controller
 @RequestMapping(value="/code/")
-public class CodeController extends BaseController{
+public class CodeGroupController extends BaseController{
 	
 	@Autowired
-	CodeServiceImpl service;
+	CodeGroupServiceImpl service;
+
 	
-	
-//	codeGroup
-	
-	public void setSearchAndPaging(CodeVo vo) throws Exception {
+	public void setSearchAndPaging(CodeGroupVo vo) throws Exception {
 		
 		vo.setShOptionDate(vo.getShOptionDate() == null ? 2 : vo.getShOptionDate());
 		vo.setShDateStart(vo.getShDateStart() == null || vo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(vo.getShDateStart()));
@@ -48,124 +43,124 @@ public class CodeController extends BaseController{
 	}
 	
 	
-	@RequestMapping(value = "nationalityList")
-	public String nationalityList(@ModelAttribute("vo") CodeVo vo, Model model) throws Exception {
+	@RequestMapping(value = "codeGroupList")
+	public String codeGroupList(@ModelAttribute("vo") CodeGroupVo vo, Model model) throws Exception {
 
 		setSearchAndPaging(vo);
 		
 		if (vo.getTotalRows() > 0) {
-			List<Code> list = service.selectList(vo);
+			List<CodeGroup> list = service.selectList(vo);
 			model.addAttribute("list", list);
 		}
 
-		return "infra/modules/nationality/admin/nationalityList";
+		return "infra/modules/codeGroup/admin/codeGroupList";
 	}
 
 	
-	@RequestMapping(value = "nationalityForm")
-	public String nationalityForm(@ModelAttribute("vo") CodeVo vo, Model model) throws Exception {
+	@RequestMapping(value = "codeGroupForm")
+	public String codeGroupForm(@ModelAttribute("vo") CodeGroupVo vo, Model model) throws Exception {
 
-		if (vo.getIfnaSeq().equals("0") || vo.getIfnaSeq().equals("")) {
+		if (vo.getIfcgSeq().equals("0") || vo.getIfcgSeq().equals("")) {
 			//	insert
 		} else {
-			Code item = service.selectOne(vo);
+			CodeGroup item = service.selectOne(vo);
 			model.addAttribute("item", item);
 		}
 
-		return "infra/modules/nationality/admin/nationalityForm";
+		return "infra/modules/codeGroup/admin/codeGroupForm";
 	}
 	
 
 	@SuppressWarnings(value = { "all" })
-	@RequestMapping(value = "nationalityInst")
-	public String nationalityInst(CodeVo vo, Code dto, RedirectAttributes redirectAttributes) throws Exception {
+	@RequestMapping(value = "codeGroupInst")
+	public String codeGroupyInst(CodeGroupVo vo, CodeGroup dto, RedirectAttributes redirectAttributes) throws Exception {
 
 		service.insert(dto);
 	
-		vo.setIfnaSeq(dto.getIfnaSeq());
+		vo.setIfcgSeq(dto.getIfcgSeq());
 		
 		redirectAttributes.addFlashAttribute("vo", vo);
 
 		if (Constants.INSERT_AFTER_TYPE == 1) {
-			return "redirect:/nationality/nationalityForm";
+			return "redirect:/codeGroup/codeGroupForm";
 		} else {
-			return "redirect:/nationality/nationalityList";
+			return "redirect:/codeGroup/codeGroupList";
 		}
 	}
 	
 	
 	@SuppressWarnings(value = { "all" })
-	@RequestMapping(value = "nationalityUpdt")
-	public String nationalityUpdt(CodeVo vo, Code dto, RedirectAttributes redirectAttributes) throws Exception {
+	@RequestMapping(value = "codeGroupUpdt")
+	public String codeGroupUpdt(CodeGroupVo vo, CodeGroup dto, RedirectAttributes redirectAttributes) throws Exception {
 
 		service.update(dto);
 
 		redirectAttributes.addFlashAttribute("vo", vo);
 
 		if (Constants.UPDATE_AFTER_TYPE == 1) {
-			return "redirect:/nationality/nationalityForm";
+			return "redirect:/codeGroup/codeGroupForm";
 		} else {
-			return "redirect:/nationality/nationalityList";
+			return "redirect:/codeGroup/codeGroupList";
 		}
 	}
 
 	
-	@RequestMapping(value = "nationalityUele")
-	public String nationalityUele(CodeVo vo, Code dto, RedirectAttributes redirectAttributes) throws Exception {
+	@RequestMapping(value = "codeGroupUele")
+	public String codeGroupUele(CodeGroupVo vo, RedirectAttributes redirectAttributes) throws Exception {
 
-		service.uelete(dto);
+		service.uelete(vo);
 
 		redirectAttributes.addFlashAttribute("vo", vo);
 
-		return "redirect:/nationality/nationalityList";
+		return "redirect:/codeGroup/codeGroupList";
 	}
 
 	
-	@RequestMapping(value = "nationalityDele")
-	public String nationalityDele(CodeVo vo, RedirectAttributes redirectAttributes) throws Exception {
+	@RequestMapping(value = "codeGroupDele")
+	public String nationalityDele(CodeGroupVo vo, RedirectAttributes redirectAttributes) throws Exception {
 
 		service.delete(vo);
 
 		redirectAttributes.addFlashAttribute("vo", vo);
 
-		return "redirect:/nationality/nationalityList";
+		return "redirect:/codeGroup/codeGroupList";
 	}
 
 	
-	@RequestMapping(value = "nationalityMultiUele")
-	public String nationalityMultiUele(CodeVo vo, Code dto, RedirectAttributes redirectAttributes) throws Exception {
-
-		for (String checkboxSeq : vo.getCheckboxSeqArray()) {
-			dto.setIfnaSeq(checkboxSeq);
-			service.uelete(dto);
-		}
-
-		redirectAttributes.addFlashAttribute("vo", vo);
-
-		return "redirect:/nationality/nationalityList";
-	}
-
-	
-	@RequestMapping(value = "nationalityMultiDele")
-	public String nationalityMultiDele(CodeVo vo, RedirectAttributes redirectAttributes) throws Exception {
-
-		for (String checkboxSeq : vo.getCheckboxSeqArray()) {
-			vo.setIfnaSeq(checkboxSeq);
-		}
-
-		redirectAttributes.addFlashAttribute("vo", vo);
-
-		return "redirect:/nationality/nationalityList";
-	}
+//	@RequestMapping(value = "nationalityMultiUele")
+//	public String nationalityMultiUele(CodeGroupVo vo, CodeGroup dto, RedirectAttributes redirectAttributes) throws Exception {
+//
+//		for (String checkboxSeq : vo.getCheckboxSeqArray()) {
+//			dto.setIfnaSeq(checkboxSeq);
+//			service.uelete(dto);
+//		}
+//
+//		redirectAttributes.addFlashAttribute("vo", vo);
+//
+//		return "redirect:/nationality/nationalityList";
+//	}
+//
+//	
+//	@RequestMapping(value = "nationalityMultiDele")
+//	public String nationalityMultiDele(CodeGroupVo vo, RedirectAttributes redirectAttributes) throws Exception {
+//
+//		for (String checkboxSeq : vo.getCheckboxSeqArray()) {
+//			vo.setIfnaSeq(checkboxSeq);
+//		}
+//
+//		redirectAttributes.addFlashAttribute("vo", vo);
+//
+//		return "redirect:/nationality/nationalityList";
+//	}
 	
 
 	@RequestMapping("excelDownload")
-    public void excelDownload(CodeVo vo, HttpServletResponse httpServletResponse) throws Exception {
+    public void excelDownload(CodeGroupVo vo, HttpServletResponse httpServletResponse) throws Exception {
 		
 		setSearchAndPaging(vo);
 
 		if (vo.getTotalRows() > 0) {
-			List<Code> list = service.selectList(vo);
+			List<CodeGroup> list = service.selectList(vo);
 			
 //			Workbook workbook = new HSSFWorkbook();	// for xls
 	        Workbook workbook = new XSSFWorkbook();

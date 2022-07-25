@@ -39,13 +39,13 @@ public class MemberController extends BaseController {
 	@Autowired
 	MemberServiceImpl service;
 
-	public void search(MemberVo vo) throws Exception {
+	public void setSearchAndPaging(MemberVo vo) throws Exception {
 		vo.setShOptionDate(vo.getShOptionDate() == null ? 1 : vo.getShOptionDate());
 		vo.setShDateStart(vo.getShDateStart() == null
 				? UtilDateTime.calculateDayString(UtilDateTime.nowLocalDateTime(), Constants.DATE_INTERVAL)
 				: UtilDateTime.add00TimeString(vo.getShDateStart()));
 		vo.setShDateEnd(vo.getShDateEnd() == null ? UtilDateTime.nowString()
-				: UtilDateTime.addNowTimeString(vo.getShDateEnd()));
+				: UtilDateTime.add59TimeString(vo.getShDateEnd()));
 
 		vo.setParamsPaging(service.selectOneCount(vo));
 	}
@@ -54,7 +54,7 @@ public class MemberController extends BaseController {
 	@RequestMapping(value = "memberList")
 	public String memberList(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
 
-		search(vo);
+		setSearchAndPaging(vo);
 
 		if (vo.getTotalRows() > 0) {
 			List<Member> list = service.selectList(vo);
@@ -62,7 +62,8 @@ public class MemberController extends BaseController {
 			model.addAttribute("list", list);
 		}
 
-		return "xdmin/member/memberList";
+//		return "xdmin/member/memberList";
+		return "infra/modules/member/admin/memberList";
 	}
 
 	@RequestMapping(value = "memberForm")
@@ -81,7 +82,7 @@ public class MemberController extends BaseController {
 //		model.addAttribute("codeGender", CodeServiceImpl.selectListCachedCode("3"));
 //		model.addAttribute("codeTelecom", CodeServiceImpl.selectListCachedCode("10"));
 
-		return "xdmin/member/memberForm";
+		return "infra/modules/member/admin/memberForm";
 	}
 
 	@SuppressWarnings(value = { "all" })
@@ -252,13 +253,13 @@ public class MemberController extends BaseController {
 	@RequestMapping(value = "findIdPwdForm")
 	public String findIdPwdForm() throws Exception {
 
-		return "xdmin/member/findIdPwdForm";
+		return "infra/modules/member/admin/findIdPwdForm";
 	}
 
 	@RequestMapping(value = "changePwdForm")
 	public String changePwdForm() throws Exception {
 
-		return "xdmin/member/changePwdForm";
+		return "infra/modules/member/admin/changePwdForm";
 	}
 
 	@ResponseBody
@@ -279,14 +280,14 @@ public class MemberController extends BaseController {
 			model.addAttribute("list", list);
 			
 			
-		return "xdmin/member/memberOracleList";
+		return "infra/modules/member/admin/memberOracleList";
 	}
 	
 	
 	@RequestMapping("excelDownload")
     public void excelDownload(MemberVo vo, HttpServletResponse httpServletResponse) throws Exception {
 		
-		search(vo);
+		setSearchAndPaging(vo);
 
 		if (vo.getTotalRows() > 0) {
 			List<Member> list = service.selectList(vo);
@@ -356,23 +357,23 @@ public class MemberController extends BaseController {
 	@RequestMapping(value = "memberAjaxList")
 	public String memberAjaxList(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
 
-		search(vo);
+		setSearchAndPaging(vo);
 
-		return "xdmin/member/memberAjaxList";
+		return "infra/modules/member/admin/memberAjaxList";
 	}
 	
 	
 	@RequestMapping(value = "memberAjaxLita")
 	public String memberAjaxLita(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
 		
-		search(vo);
+		setSearchAndPaging(vo);
 
 		if (vo.getTotalRows() > 0) {
 			List<Member> list = service.selectList(vo);
 			model.addAttribute("list", list);
 		}
 
-		return "xdmin/member/memberAjaxLita";
+		return "infra/modules/member/admin/memberAjaxLita";
 	}
 	
 
