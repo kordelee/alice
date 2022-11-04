@@ -25,6 +25,7 @@
 	<context:component-scan base-package="com.junefw" />
 	
 	<!-- session interceptor s 2022.03.13 for logincheck -->
+<!-- 	
 	<interceptors>
 		<interceptor>
 			<mapping path="/**"/>
@@ -36,7 +37,8 @@
 			<exclude-mapping path="/rest/**" />
 			<beans:bean id="checkLoginSessionInterception" class="com.junefw.infra.common.interceptor.CheckLoginSessionInterception"/>
 		</interceptor>
-	</interceptors>	
+	</interceptors>
+	 -->
 	<!-- session interceptor e 2022.03.13 for logincheck -->
 	
 	<!-- fileUpload s 2022.03.30 --> 

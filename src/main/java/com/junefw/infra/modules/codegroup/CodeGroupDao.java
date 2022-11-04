@@ -15,7 +15,7 @@ public class CodeGroupDao {
 	@Resource(name = "sqlSession")
 	private SqlSession sqlSession;
 	
-	private static String namespace = "com.junefw.infra.modules.code.CodeGroupMpp";
+	private static String namespace = "com.junefw.infra.modules.codegroup.CodeGroupMpp";
 
 	public int selectOneCount(CodeGroupVo vo) { return sqlSession.selectOne(namespace + ".selectOneCount", vo); }
 	public List<CodeGroup> selectList(CodeGroupVo vo){ return sqlSession.selectList(namespace + ".selectList", vo); }

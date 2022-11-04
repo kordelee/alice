@@ -3,7 +3,6 @@ package com.junefw.infra.modules.codegroup;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.junefw.infra.common.base.BaseController;
@@ -25,7 +23,7 @@ import com.junefw.infra.common.constants.Constants;
 import com.junefw.infra.common.util.UtilDateTime;
 
 @Controller
-@RequestMapping(value="/code/")
+@RequestMapping(value="/codeGroup/")
 public class CodeGroupController extends BaseController{
 	
 	@Autowired
@@ -53,7 +51,7 @@ public class CodeGroupController extends BaseController{
 			model.addAttribute("list", list);
 		}
 
-		return "infra/modules/codeGroup/admin/codeGroupList";
+		return "infra/modules/codeGroup/dmin/codeGroupList";
 	}
 
 	
@@ -67,7 +65,7 @@ public class CodeGroupController extends BaseController{
 			model.addAttribute("item", item);
 		}
 
-		return "infra/modules/codeGroup/admin/codeGroupForm";
+		return "infra/modules/codeGroup/dmin/codeGroupForm";
 	}
 	
 
